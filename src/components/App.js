@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
 import Particles from 'react-particles-js';
-import logo from '../logo.svg';
-import Login from './Login';
+import Routes from './Router';
+import { app, auth, localKey } from '../base';
 
 class App extends Component {
+  state = {
+    uid: null,
+  }
+  componentDidMount() {
+    auth.onAuthStateChanged(user => {
+      if(user) {
+        window.localStorage.setItem(localKey, user.uid);
+        this.setState({ uid: user.uid });
+      } else {
+        window.localStorage.removeItem(localKey);
+        this.setState({ uid: null });
+      }
+    })
+  }
   render() {
     return (
       <div>
@@ -65,7 +79,7 @@ class App extends Component {
             }}
           />
           <div className="landing">
-            <Login />
+            <Routes />
           </div>
         </div>
       </div>

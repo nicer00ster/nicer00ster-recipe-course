@@ -1,25 +1,33 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect, withRouter, Link } from 'react-router-dom';
+import firebase from 'firebase';
+import { app, isAuthenticated } from '../base';
 import App from './App';
+import Dashboard from './Dashboard';
+import Account from './Account';
+import Login from './Login';
 
-const Routing = () => (
-  <Router>
-    <div>
-      <ul className="navbar">
-        <li className="navbar__item">
-          <Link to="/">Home</Link>
-        </li>
-        <li className="navbar__item">
-          <Link to="/recipes">Recipes</Link>
-        </li>
-        <li className="navbar__item">
-          <Link to="/logout">Sign Out</Link>
-        </li>
-      </ul>
-      <hr/>
-      <Route exact path="/" component={App} />
-    </div>
-  </Router>
+
+// App hub, must be authenticated with Firebase to view
+const Protected = ({ component: Component, ...rest }) => (
+  <Route { ...rest } render={(props) => (
+    isAuthenticated()
+     ? <Component { ...props } />
+     : <Redirect to={{
+       pathname: '/',
+       state: { from: props.location }
+     }}/>
+  )} />
 )
 
-export default Routing;
+export default function Routes() {
+  return (
+    <Router>
+      <div>
+        <Route exact path="/" component={Login} />
+        <Route path="/account" component={Account} />
+        <Protected path="/dashboard" component={Dashboard} />
+      </div>
+    </Router>
+  )
+}
