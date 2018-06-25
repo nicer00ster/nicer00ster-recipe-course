@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import search from '../icons/search.svg';
+import settings from '../icons/settings.svg';
+import signout from '../icons/signout.svg';
 
 const Nav = props =>
   <div className="landing__dashboard--nav">
@@ -7,13 +10,13 @@ const Nav = props =>
       Welcome, {props.email}
     </div>
     <div className="landing__dashboard--nav_item">
-      <Link to="/search">Find Recipe</Link>
+      <Link to="/search"><img src={search} alt=""/><div>Search</div></Link>
     </div>
     <div className="landing__dashboard--nav_item">
-      <Link to="/settings">Account</Link>
+      <Link to="/settings"><img src={settings} alt=""/><div>Settings</div></Link>
     </div>
     <div className="landing__dashboard--nav_item">
-      <Link onClick={props.signOut} to="/">Log Out</Link>
+      <Link onClick={props.signOut} to="/"><img src={signout} alt=""/><div>Log Out</div></Link>
     </div>
   </div>
 
