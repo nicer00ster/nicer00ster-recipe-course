@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Particles from 'react-particles-js';
 import Routes from './Router';
-import { app, auth, localKey } from '../base';
+import { auth, localKey } from '../base';
 
 class App extends Component {
   state = {

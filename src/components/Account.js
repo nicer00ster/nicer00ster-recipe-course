@@ -1,9 +1,7 @@
 import React from 'react';
-import firebase from 'firebase';
-import { app, auth } from '../base';
-import { Link, Redirect } from 'react-router-dom';
+import { auth } from '../base';
+import { Link } from 'react-router-dom';
 
-// Create account component
 class Account extends React.Component {
   constructor(props) {
     super(props);

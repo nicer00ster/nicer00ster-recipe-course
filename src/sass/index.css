@@ -32,6 +32,7 @@ body {
   background: linear-gradient(to left, #c6ffdd, #fbd786, #f7797d); }
 
 .landing {
+  font-family: 'Gudea', sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -39,8 +40,7 @@ body {
   overflow: hidden;
   height: 100vh;
   width: 100vw;
-  max-width: 100%;
-  font-family: 'Gudea', sans-serif; }
+  max-width: 100%; }
 
 #particles canvas {
   position: absolute;
@@ -164,3 +164,16 @@ body {
   height: 70vh;
   width: 70vw;
   border: 2px solid #999; }
+
+.dash__modal {
+  font-family: 'Gudea', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+  width: 100%;
+  background: linear-gradient(to left, #c6ffdd, #fbd786, #f7797d); }
+
+.dash__close {
+  cursor: pointer; }

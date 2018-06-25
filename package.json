@@ -10,6 +10,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-particles-js": "^2.2.0",
+    "react-responsive-modal": "^3.0.3",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
     "react-transition-group": "^2.3.1"

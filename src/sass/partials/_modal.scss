@@ -1,0 +1,16 @@
+.dash__overlay {
+
+}
+.dash__modal {
+  font-family: 'Gudea', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+  width: 100%;
+  background: $megatron;
+}
+.dash__close {
+  cursor: pointer;
+}

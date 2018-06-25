@@ -1,6 +1,5 @@
 import React from 'react';
-import firebase from 'firebase';
-import { app, auth, isAuthenticated } from '../base';
+import { auth } from '../base';
 import { Link, Redirect } from 'react-router-dom';
 
 class Login extends React.Component {
