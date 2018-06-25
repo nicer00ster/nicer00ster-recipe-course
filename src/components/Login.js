@@ -13,10 +13,13 @@ class Login extends React.Component {
     }
   }
   componentDidMount() {
-    isAuthenticated()
-    ? this.props.history.push('/dashboard')
-    : console.log('not logged in');
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        this.props.history.push("/dashboard")
+      }
+    });
   }
+
   handleEmail(e) {
     this.setState({
       email: e.target.value
@@ -31,34 +34,34 @@ class Login extends React.Component {
     e.preventDefault();
     const { email, password } = this.state;
     auth.signInWithEmailAndPassword(email, password)
-      .catch((error) => {
+      .catch(error => {
       console.log(error);
       if(error) {
-        return <Redirect push to="/login" />
+        console.error(error);
       }
-    }).then((res) => {
+    }).then(res => {
       console.log(res);
       this.setState({ redirected: true });
-      if(res.user) {
-         this.props.history.push('/dashboard');
-      }
     })
   }
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/' } }
     const { redirected }  = this.state;
-    if(redirected === true) {
-      return <Redirect to='/dashboard' />
-    }
     return (
       <div>
+        {redirected && (
+          <Redirect to={from || '/dashboard'} />
+        )}
+        {/* {from && (
+          <p>You must be logged in to view the page at {from.pathname}</p>
+        )} */}
         <form onSubmit={(e) => this.handleLogin(e)} className="landing__login">
           <div className="landing__login--title">
             REACT RECIPES!
           </div>
           <h4>Log in to get started</h4>
           <div className="landing__login--name">
-            <input onChange={(e) => this.handleEmail(e)} placeholder="Username" type="text" name="name" />
+            <input onChange={(e) => this.handleEmail(e)} placeholder="Email" type="text" name="name" />
           </div>
           <div className="landing__login--password">
             <input onChange={(e) => this.handlePassword(e)} placeholder="Password" type="password" name="password"/>

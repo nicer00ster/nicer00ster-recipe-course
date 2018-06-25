@@ -16,11 +16,11 @@ class Account extends React.Component {
     const { email, password } = this.state;
     e.preventDefault();
     auth.createUserWithEmailAndPassword(email, password)
-      .catch(function(error) {
-        console.log(error);
-    }).then(function(res) {
+      .catch(error => {
+        console.error(error);
+    }).then(res => {
       console.log(res);
-      return <Redirect to="/dashboard" />
+      this.props.history.push('/');
     })
   }
   handleEmail(e) {
@@ -41,7 +41,7 @@ class Account extends React.Component {
         </div>
         <h4>Create an account</h4>
         <div className="landing__account--name">
-          <input onChange={(e) => this.handleEmail(e)} placeholder="Username" type="text" name="name" />
+          <input onChange={(e) => this.handleEmail(e)} placeholder="Email" type="text" name="name" />
         </div>
         <div className="landing__account--password">
           <input onChange={(e) => this.handlePassword(e)} placeholder="Password" type="password" name="password"/>
