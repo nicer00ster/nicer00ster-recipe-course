@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-responsive-modal';
 import Nav from './Nav';
+import { APP_ID, APP_KEY } from '../private.js';
 import { auth } from '../base';
 
 class Dashboard extends React.Component {
@@ -8,9 +9,13 @@ class Dashboard extends React.Component {
     super(props);
     this.onOpenModal = this.onOpenModal.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.state = {
       email: '',
       search: '',
+      loading: false,
+      searchResults: null,
       modalOpen: false,
     }
   }
@@ -29,21 +34,65 @@ class Dashboard extends React.Component {
       })
     })
   }
+  handleSearch(e) {
+    this.setState({ search: e.target.value })
+  }
+  onSearchSubmit(e) {
+    // 1. Prevent page from reloading
+    e.preventDefault();
+    // 2. Render loading indicator
+    this.setState({ loading: true });
+    // 3. Fetch the results of the search
+    fetch(`https://api.edamam.com/search?q=${this.state.search}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=10`)
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      if(data['count'] === 0 ) {
+        this.setState({
+          noResults: true,
+          loading: false
+        });
+      } else {
+        this.setState({
+          searchResults: data['hits'],
+          loading: false
+        });
+      }
+    }, err => {
+      console.error(err);
+    })
+  }
+  onOpenModal(e) {
+    e.preventDefault();
+    this.setState({ modalOpen: true })
+  }
+  onCloseModal() {
+    this.setState({ modalOpen: false })
+  }
   signOut() {
     auth.signOut()
     .then(() => {
       console.log('signed out!');
     })
   }
-  onOpenModal(e) {
-    e.preventDefault();
-    this.setState({ openModal: true })
-  }
-  onCloseModal() {
-    this.setState({ openModal: false })
-  }
   render() {
-    const { openModal } = this.state;
+    const { email, loading, modalOpen, noResults, searchResults } = this.state;
+    // Render the container of modal depending on what happens after submitting a search
+    let searchContainer;
+    if(loading) {
+      searchContainer = (<div>Loading...</div>);
+    } else if(noResults) {
+      searchContainer = (<div>No results found for your search. =\</div>)
+    } else if(searchResults) {
+      searchContainer = (<div>{searchResults.map((item, key) => {
+        return (
+          <div key={key}>
+            <h2>{item.recipe.label}</h2>
+          </div>
+        )
+      })}</div>)
+    }
     return (
       <div className="landing__dashboard">
         <Nav
@@ -53,17 +102,22 @@ class Dashboard extends React.Component {
         />
         {/* Recipes */}
         <Modal
-          open={openModal}
+          open={modalOpen}
           onClose={this.onCloseModal}
+          closeIconSvgPath={''}
+          closeIconSize={48}
           center
           classNames={{
             overlay: 'dash__overlay',
             modal: 'dash__modal',
             closeButton: 'dash__close',
-            closeIcon: ''
+            closeIcon: 'dash__icon'
           }}>
-          <h2>Search for a recipe!</h2>
-          <hr/>
+          <h1>Search for a recipe!</h1>
+          <form onSubmit={(e) => this.onSearchSubmit(e)}>
+            <input onChange={(e) => this.handleSearch(e)} type="search" placeholder="Search"/>
+          </form>
+          {searchContainer}
         </Modal>
       </div>
     )
