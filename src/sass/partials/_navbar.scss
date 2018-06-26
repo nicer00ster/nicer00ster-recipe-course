@@ -19,18 +19,18 @@
       text-align: center;
       text-decoration: none;
       text-transform: uppercase;
+      & > div, img {
+        transition: all .25s;
+        margin: .25rem;
+      }
       &:hover {
         & > img {
-          transition: all .25s;
           transform: scale(1.2);
         }
         & > div {
-          transition: all .25s;
+          font-weight: 600;
           letter-spacing: 2px;
         }
-      }
-      & > div {
-        margin: .5rem;
       }
     }
   }

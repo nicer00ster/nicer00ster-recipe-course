@@ -1,13 +1,16 @@
 import React from 'react';
 import { auth } from '../base';
 import { Link, Redirect } from 'react-router-dom';
+import Loading from './Loading';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
+    // this.renderCurrentState = this.renderCurrentState.bind(this);
     this.state = {
       email: '',
       password: '',
+      loading: false,
       redirected: false
     }
   }
@@ -31,7 +34,8 @@ class Login extends React.Component {
   }
   handleLogin(e) {
     e.preventDefault();
-    const { email, password } = this.state;
+    const { email, password, loading } = this.state;
+    this.setState({ loading: true })
     auth.signInWithEmailAndPassword(email, password)
       .catch(error => {
       console.log(error);
@@ -40,38 +44,67 @@ class Login extends React.Component {
       }
     }).then(res => {
       console.log(res);
-      this.setState({ redirected: true });
+      this.setState({
+        redirected: true,
+        loading: false
+      });
     })
   }
+
   render() {
     const { from } = this.props.location.state || { from: { pathname: '/' } }
-    const { redirected }  = this.state;
+    const { redirected, loading }  = this.state;
     return (
       <div>
         {redirected && (
           <Redirect to={from || '/dashboard'} />
         )}
-        {/* {from && (
-          <p>You must be logged in to view the page at {from.pathname}</p>
-        )} */}
-        <form onSubmit={(e) => this.handleLogin(e)} className="landing__login">
-          <div className="landing__login--title">
-            REACT RECIPES!
-          </div>
-          <h4>Log in to get started</h4>
-          <div className="landing__login--name">
-            <input onChange={(e) => this.handleEmail(e)} placeholder="Email" type="text" name="name" />
-          </div>
-          <div className="landing__login--password">
-            <input onChange={(e) => this.handlePassword(e)} placeholder="Password" type="password" name="password"/>
-          </div>
-          <input className="landing__login--submit" type="submit" value="Log In" />
-          <div>
-            <span className="landing__login--account">No account? Create one <Link to="/account">here!</Link></span>
-          </div>
-        </form>
+        {loading && (
+          <Loading />
+        )}
+        <div>
+          <form onSubmit={(e) => this.handleLogin(e)} className="landing__login">
+            <div className="landing__login--title">
+              REACT RECIPES!
+            </div>
+            <h4>Log in to get started</h4>
+            <div className="landing__login--name">
+              <input onChange={(e) => this.handleEmail(e)} placeholder="Email" type="text" name="name" />
+            </div>
+            <div className="landing__login--password">
+              <input onChange={(e) => this.handlePassword(e)} placeholder="Password" type="password" name="password"/>
+            </div>
+            <input className="landing__login--submit" type="submit" value="Log In" />
+            <div>
+              <span className="landing__login--account">No account? Create one <Link to="/account">here!</Link></span>
+            </div>
+          </form>
+        </div>
       </div>
     )
+    // return (
+    //   <div>
+    //     {redirected && (
+    //       <Redirect to={from || '/dashboard'} />
+    //     )}
+    //     <form onSubmit={(e) => this.handleLogin(e)} className="landing__login">
+    //       <div className="landing__login--title">
+    //         REACT RECIPES!
+    //       </div>
+    //       <h4>Log in to get started</h4>
+    //       <div className="landing__login--name">
+    //         <input onChange={(e) => this.handleEmail(e)} placeholder="Email" type="text" name="name" />
+    //       </div>
+    //       <div className="landing__login--password">
+    //         <input onChange={(e) => this.handlePassword(e)} placeholder="Password" type="password" name="password"/>
+    //       </div>
+    //       <input className="landing__login--submit" type="submit" value="Log In" />
+    //       <div>
+    //         <span className="landing__login--account">No account? Create one <Link to="/account">here!</Link></span>
+    //       </div>
+    //     </form>
+    //   </div>
+    // )
   }
 }
 

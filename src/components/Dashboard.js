@@ -1,16 +1,20 @@
 import React from 'react';
 import Modal from 'react-responsive-modal';
+import Loading from './Loading';
 import Nav from './Nav';
+import Container from './Container';
 import { APP_ID, APP_KEY } from '../private.js';
 import { auth } from '../base';
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
+    this.searchRef = React.createRef();
     this.onOpenModal = this.onOpenModal.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
+    this.signOut = this.signOut.bind(this);
     this.state = {
       email: '',
       search: '',
@@ -20,6 +24,7 @@ class Dashboard extends React.Component {
     }
   }
   componentDidMount() {
+    this.setState({ loading: true })
     this.handleUser();
   }
   handleUser() {
@@ -27,15 +32,18 @@ class Dashboard extends React.Component {
       auth.onAuthStateChanged(user => {
         if(user) {
           console.log(user);
-          this.setState({ email: user.email })
+          this.setState({ email: user.email, loading: false })
         } else {
+          this.setState({ loading: false })
           console.error('No user logged in.');
         }
       })
     })
   }
   handleSearch(e) {
-    this.setState({ search: e.target.value })
+    // Prevent whitespace in search bar
+    let search = e.target.value.trim();
+    this.setState({ search })
   }
   onSearchSubmit(e) {
     // 1. Prevent page from reloading
@@ -62,18 +70,27 @@ class Dashboard extends React.Component {
     }, err => {
       console.error(err);
     })
+    .then(() => {
+      this.setState({ search: '' })
+      this.searchRef.reset();
+    })
   }
   onOpenModal(e) {
     e.preventDefault();
     this.setState({ modalOpen: true })
   }
   onCloseModal() {
-    this.setState({ modalOpen: false })
+    this.setState({
+      modalOpen: false,
+      loading: false,
+      searchResults: ''
+    })
   }
   signOut() {
-    auth.signOut()
-    .then(() => {
-      console.log('signed out!');
+    this.setState({
+      loading: true
+    }, () => {
+      auth.signOut();
     })
   }
   render() {
@@ -81,24 +98,19 @@ class Dashboard extends React.Component {
     // Render the container of modal depending on what happens after submitting a search
     let searchContainer;
     if(loading) {
-      searchContainer = (<div>Loading...</div>);
+      searchContainer = (<Loading />);
     } else if(noResults) {
-      searchContainer = (<div>No results found for your search. =\</div>)
+      searchContainer = (<div className="landing__dashboard--error">No results found for your search.</div>)
     } else if(searchResults) {
-      searchContainer = (<div>{searchResults.map((item, key) => {
-        return (
-          <div key={key}>
-            <h2>{item.recipe.label}</h2>
-          </div>
-        )
-      })}</div>)
+      searchContainer = (<Container recipes={searchResults} />)
     }
     return (
       <div className="landing__dashboard">
         <Nav
           signOut={this.signOut}
           onOpenModal={this.onOpenModal}
-          email={this.state.email}
+          email={email}
+          loading={loading}
         />
         {/* Recipes */}
         <Modal
@@ -114,7 +126,7 @@ class Dashboard extends React.Component {
             closeIcon: 'dash__icon'
           }}>
           <h1>Search for a recipe!</h1>
-          <form onSubmit={(e) => this.onSearchSubmit(e)}>
+          <form ref={el => this.searchRef = el} onSubmit={(e) => this.onSearchSubmit(e)}>
             <input onChange={(e) => this.handleSearch(e)} type="search" placeholder="Search"/>
           </form>
           {searchContainer}

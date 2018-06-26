@@ -5,7 +5,7 @@ import { auth, localKey } from '../base';
 
 class App extends Component {
   state = {
-    uid: null,
+    uid: null
   }
   componentDidMount() {
     auth.onAuthStateChanged(user => {
