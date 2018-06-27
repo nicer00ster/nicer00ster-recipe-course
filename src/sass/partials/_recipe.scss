@@ -65,7 +65,7 @@
   &:hover {
     transform: scale(1.1);
     &:before {
-      background: transparent;
+      opacity: .01;
       clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2vw), 0% 100%);
     }
     & img {

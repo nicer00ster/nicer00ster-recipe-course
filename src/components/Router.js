@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import { AnimatedSwitch } from 'react-router-transition';
 import Dashboard from './Dashboard';
 import Account from './Account';
+import Loading from './Loading';
 import Login from './Login';
 import Settings from './Settings';
 
@@ -32,7 +33,7 @@ function Landing({ component: Component, authed, ...rest }) {
 
 
 // Router with protected route (dashboard)
-const Routes = ({ authed }) => {
+const Routes = ({ authed, loading }) => {
   return (
     <Router>
         <Route
@@ -42,10 +43,10 @@ const Routes = ({ authed }) => {
               atLeave={{ opacity: 1 }}
               atActive={{ opacity: 1 }}
               className="switch-wrapper">
-              <Landing authed={authed} exact path="/" component={Login} />
-              <Landing authed={authed} exact path="/account" component={Account} />
-              <Protected authed={authed} exact path="/settings" component={Settings} />
-              <Protected authed={authed} exact path="/dashboard" component={Dashboard} />
+              <Landing authed={authed} loading={loading} exact path="/" component={Login} />
+              <Landing authed={authed} loading={loading} exact path="/account" component={Account} />
+              <Protected authed={authed} loading={loading} exact path="/settings" component={Settings} />
+              <Protected authed={authed} loading={loading} exact path="/dashboard" component={Dashboard} />
               <Route render={() => <div>Not Found</div>} />
             </AnimatedSwitch>
           )}/>

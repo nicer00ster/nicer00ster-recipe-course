@@ -4,7 +4,7 @@ import Loading from './Loading';
 import Nav from './Nav';
 import Container from './Container';
 import { APP_ID, APP_KEY } from '../private.js';
-import { auth } from '../base';
+import { auth, database } from '../base';
 import { logout } from '../auth';
 
 class Dashboard extends React.Component {
@@ -14,46 +14,44 @@ class Dashboard extends React.Component {
     this.onOpenModal = this.onOpenModal.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
     this.onSignOut = this.onSignOut.bind(this);
-    // this.handleUser = this.handleUser.bind(this);
-    // this.handleSearch = this.handleSearch.bind(this);
-    // this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.state = {
       email: '',
       search: '',
-      loading: false,
       searchResults: null,
       modalOpen: false,
+      displayName: ''
     }
   }
-  // componentDidMount() {
-  //   this.handleUser();
-  // }
-  // componentWillUnmount() {
-  //   this.handleUser = undefined;
-  // }
-  // handleUser() {
-  //   return new Promise((resolve, reject) => {
-  //     auth.onAuthStateChanged(user => {
-  //       if(user) {
-  //         console.log(user);
-  //         this.setState({ email: user.email, loading: false })
-  //       } else {
-  //         console.error('No user logged in.');
-  //         this.setState({ loading: false })
-  //       }
-  //     })
-  //   })
-  // }
+  componentDidMount() {
+    const user = auth.currentUser;
+    const ref = database.ref(`/users/${user.uid}/account/`);
+    ref.once('value')
+    .then(snap => {
+      console.log(snap.val());
+      this.setState({
+        displayName: snap.val().displayName
+      })
+    })
+
+    // if(user) {
+    //   user.updateProfile({
+    //     displayName: ,
+    //
+    //   })
+    // }
+    console.log(user);
+  }
   handleSearch(e) {
     // Prevent whitespace in search bar
     let search = e.target.value.trim();
     this.setState({ search })
   }
   onSearchSubmit(e) {
+    const { loading } = this.props;
     // 1. Prevent page from reloading
     e.preventDefault();
     // 2. Render loading indicator
-    this.setState({ loading: true });
+    loading()
     // 3. Fetch the results of the search
     fetch(`https://api.edamam.com/search?q=${this.state.search}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=10`)
     .then(res => {
@@ -63,13 +61,13 @@ class Dashboard extends React.Component {
       if(data['count'] === 0 ) {
         this.setState({
           noResults: true,
-          loading: false
         });
+        loading();
       } else {
         this.setState({
           searchResults: data['hits'],
-          loading: false
         });
+        loading();
       }
     }, err => {
       console.error(err);
@@ -86,18 +84,18 @@ class Dashboard extends React.Component {
   onCloseModal() {
     this.setState({
       modalOpen: false,
-      loading: false,
       searchResults: ''
     })
   }
   onSignOut() {
-    this.setState({ loading: true });
+    this.props.loading()
     setTimeout(() => {
+      this.props.loading()
       logout();
-    }, 5000);
+    }, 1500);
   }
   render() {
-    const { email, loading, modalOpen, noResults, searchResults } = this.state;
+    const { email, loading, modalOpen, noResults, searchResults, displayName } = this.state;
     // Render the container of modal depending on what happens after submitting a search
     let searchContainer;
     if(loading) {
@@ -112,8 +110,7 @@ class Dashboard extends React.Component {
         <Nav
           signOut={this.onSignOut}
           onOpenModal={this.onOpenModal}
-          email={email}
-          loading={loading}
+          displayName={displayName}
         />
         {/* Recipes */}
         <Modal

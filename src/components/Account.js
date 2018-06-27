@@ -16,12 +16,13 @@ class Account extends React.Component {
   handleAccount(e) {
     e.preventDefault();
     const { username, email, password } = this.state;
+    this.props.loading();
     authenticate(email, password)
     .catch(err => {
       console.error(err);
     })
     .then(res => {
-      saveUser(res.user, username);
+       saveUser(res.user, username);
     })
   }
   handleUsername(e) {

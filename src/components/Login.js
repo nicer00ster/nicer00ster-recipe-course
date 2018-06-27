@@ -7,29 +7,12 @@ import Form from './Form';
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    // this.renderCurrentState = this.renderCurrentState.bind(this);
-    // this.handleLogin = this.handleLogin.bind(this);
     this.state = {
       email: '',
       password: '',
-      loading: false,
       redirected: false
     }
   }
-  // componentDidMount() {
-  //   auth.onAuthStateChanged(user => {
-  //     if (user) {
-  //       this.props.history.push("/dashboard")
-  //     }
-  //   });
-  // }
-  // componentWillUnmount() {
-  //   auth.onAuthStateChanged(user => {
-  //     if(user) {
-  //       console.log(`Redirecting ${user.email}`);
-  //     }
-  //   })
-  // }
 
   handleEmail(e) {
     this.setState({
@@ -42,8 +25,8 @@ class Login extends React.Component {
     })
   }
   handleLogin(e) {
-    const { email, password, loading } = this.state;
-    this.setState({ loading: true })
+    const { email, password } = this.state;
+    this.props.loading();
     auth.signInWithEmailAndPassword(email, password)
     .catch(error => {
       if(error) {
@@ -54,22 +37,17 @@ class Login extends React.Component {
     .then(res => {
       console.log(res);
       this.setState({
-        redirected: true,
-        loading: false
+        redirected: true
       }, () => {
-        this.props.history.push('/dashboard');
+        this.props.loading() && this.props.history.push('/dashboard');
       });
     })
     e.preventDefault();
   }
 
   render() {
-    const { loading }  = this.state;
     return (
       <div>
-        {loading && (
-          <Loading />
-        )}
         <Form
           title={'REACT RECIPES!'}
           subTitle={'Log in to get started'}

@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Form = ({ location, className, title, subTitle, onSubmit,
                 handleUsername, handleEmail, handlePassword, message,
-                redirect, link, button }) => {
-  return (
+                redirect, link, button }) => (
     <div>
       <form onSubmit={onSubmit} className={`landing__${className}`}>
         <div className={`landing__${className}--title`}>
@@ -28,7 +27,6 @@ const Form = ({ location, className, title, subTitle, onSubmit,
         </div>
       </form>
     </div>
-  )
-}
+)
 
 export default Form;

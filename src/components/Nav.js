@@ -7,11 +7,11 @@ import signout from '../icons/signout.svg';
 
 // Example of a presentational component. Notice how we aren't running any javascript prior
 // to rendering the component.
-const Nav = ({ email, onOpenModal, signOut }) => (
+const Nav = ({ displayName, onOpenModal, signOut }) => (
     <div>
       <div className="landing__dashboard--nav">
         <div className="landing__dashboard--nav_welcome">
-          Welcome back, {email}
+          Welcome back, {displayName}
         </div>
         <div className="landing__dashboard--nav_item">
           <Link onClick={onOpenModal} to="/search"><img src={search} alt=""/><div>Search</div></Link>
