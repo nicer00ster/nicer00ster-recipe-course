@@ -16,20 +16,20 @@ class Login extends React.Component {
       redirected: false
     }
   }
-  componentDidMount() {
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        this.props.history.push("/dashboard")
-      }
-    });
-  }
-  componentWillUnmount() {
-    auth.onAuthStateChanged(user => {
-      if(user) {
-        console.log(`Redirecting ${user.email}`);
-      }
-    })
-  }
+  // componentDidMount() {
+  //   auth.onAuthStateChanged(user => {
+  //     if (user) {
+  //       this.props.history.push("/dashboard")
+  //     }
+  //   });
+  // }
+  // componentWillUnmount() {
+  //   auth.onAuthStateChanged(user => {
+  //     if(user) {
+  //       console.log(`Redirecting ${user.email}`);
+  //     }
+  //   })
+  // }
 
   handleEmail(e) {
     this.setState({
@@ -81,6 +81,7 @@ class Login extends React.Component {
           redirect={'/account'}
           link={'here!'}
           button={'Log In'}
+          location={this.props.location}
         />
       </div>
     )

@@ -4,7 +4,8 @@ import Loading from './Loading';
 import Nav from './Nav';
 import Container from './Container';
 import { APP_ID, APP_KEY } from '../private.js';
-import { auth, isAuthenticated } from '../base';
+import { auth } from '../base';
+import { logout } from '../auth';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -12,9 +13,9 @@ class Dashboard extends React.Component {
     this.searchRef = React.createRef();
     this.onOpenModal = this.onOpenModal.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
-    this.signOut = this.signOut.bind(this);
-    // this.handleSearch = this.handleSearch.bind(this);
+    this.onSignOut = this.onSignOut.bind(this);
     // this.handleUser = this.handleUser.bind(this);
+    // this.handleSearch = this.handleSearch.bind(this);
     // this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.state = {
       email: '',
@@ -24,25 +25,25 @@ class Dashboard extends React.Component {
       modalOpen: false,
     }
   }
-  componentDidMount() {
-    this.handleUser();
-  }
-  componentWillUnmount() {
-    this.handleUser = undefined;
-  }
-  handleUser() {
-    return new Promise((resolve, reject) => {
-      auth.onAuthStateChanged(user => {
-        if(user) {
-          console.log(user);
-          this.setState({ email: user.email, loading: false })
-        } else {
-          console.error('No user logged in.');
-          this.setState({ loading: false })
-        }
-      })
-    })
-  }
+  // componentDidMount() {
+  //   this.handleUser();
+  // }
+  // componentWillUnmount() {
+  //   this.handleUser = undefined;
+  // }
+  // handleUser() {
+  //   return new Promise((resolve, reject) => {
+  //     auth.onAuthStateChanged(user => {
+  //       if(user) {
+  //         console.log(user);
+  //         this.setState({ email: user.email, loading: false })
+  //       } else {
+  //         console.error('No user logged in.');
+  //         this.setState({ loading: false })
+  //       }
+  //     })
+  //   })
+  // }
   handleSearch(e) {
     // Prevent whitespace in search bar
     let search = e.target.value.trim();
@@ -89,9 +90,11 @@ class Dashboard extends React.Component {
       searchResults: ''
     })
   }
-  signOut() {
-    auth.signOut();
-    this.props.history.push('/');
+  onSignOut() {
+    this.setState({ loading: true });
+    setTimeout(() => {
+      logout();
+    }, 5000);
   }
   render() {
     const { email, loading, modalOpen, noResults, searchResults } = this.state;
@@ -107,7 +110,7 @@ class Dashboard extends React.Component {
     return (
       <div className="landing__dashboard">
         <Nav
-          signOut={this.signOut}
+          signOut={this.onSignOut}
           onOpenModal={this.onOpenModal}
           email={email}
           loading={loading}

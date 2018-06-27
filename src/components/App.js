@@ -2,23 +2,39 @@ import React, { Component } from 'react';
 import Particles from 'react-particles-js';
 import Routes from './Router';
 import { auth, localKey } from '../base';
+import { logout } from '../auth';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+  }
   state = {
-    uid: null
+    uid: null,
+    authed: false,
+    loading: true
   }
   componentDidMount() {
-    auth.onAuthStateChanged(user => {
+    this.removeListener = auth.onAuthStateChanged(user => {
       if(user) {
         window.localStorage.setItem(localKey, user.uid);
-        this.setState({ uid: user.uid });
+        this.setState({
+          authed: true,
+          loading: false,
+          uid: user.uid
+        })
       } else {
         window.localStorage.removeItem(localKey);
-        this.setState({ uid: null });
+        this.setState({
+          authed: false,
+          loading: false,
+          uid: null
+        })
       }
     })
   }
-
+  componentWillUnmount() {
+    this.removeListener();
+  }
   render() {
     return (
         <div id="particles">
@@ -79,7 +95,11 @@ class App extends Component {
             }}
           />
           <div className="landing">
-            <Routes />
+            <Routes
+              authed={this.state.authed}
+              loading={this.state.loading}
+              logout={this.handleLogout}
+            />
           </div>
         </div>
     );
