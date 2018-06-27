@@ -7,26 +7,34 @@
   }
 }
 
+// .switch-wrapper {
+//   position: relative;
+// }
+//
+// .switch-wrapper > div {
+//   position: absolute;
+// }
+
 // Animations for fading between components
-.fade-enter {
-  opacity: 0;
-  z-index: 1;
-}
-.fade-exit {
-  opacity: 0;
-  z-index: 1;
-}
-.fade-exit-active {
-  display: none;
-}
-.fade-enter-active {
-  display: none;
-}
-.fade-exit.fade-exit-active {
-  opacity: 1;
-  transition: opacity 250ms ease-in;
-}
-.fade-enter.fade-enter-active {
-  opacity: 1;
-  transition: opacity 250ms ease-out;
-}
+// .fade-enter {
+//   opacity: 0;
+//   z-index: 1;
+// }
+// .fade-exit {
+//   opacity: 0;
+//   z-index: 1;
+// }
+// .fade-exit-active {
+//   display: none;
+// }
+// .fade-enter-active {
+//   display: none;
+// }
+// .fade-exit.fade-exit-active {
+//   opacity: 1;
+//   transition: opacity 250ms ease-in;
+// }
+// .fade-enter.fade-enter-active {
+//   opacity: 1;
+//   transition: opacity 250ms ease-out;
+// }

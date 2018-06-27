@@ -18,10 +18,9 @@ class App extends Component {
       }
     })
   }
-  
+
   render() {
     return (
-      <div>
         <div id="particles">
           <Particles
             params={{
@@ -83,7 +82,6 @@ class App extends Component {
             <Routes />
           </div>
         </div>
-      </div>
     );
   }
 }

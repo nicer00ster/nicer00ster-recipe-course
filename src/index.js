@@ -4,4 +4,7 @@ import App from './components/App';
 import './sass/index.css';
 import 'normalize.css';
 
-ReactDOM.render(<App />, document.querySelector('#root'));
+ReactDOM.render(
+    <App />,
+  document.querySelector('#root')
+);

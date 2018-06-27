@@ -3,8 +3,9 @@
   justify-content: center;
   &_welcome {
     flex: 3;
-    color: #f3f3f3;
+    color: #1f222e;
     font-size: 18px;
+    text-transform: uppercase;
     margin: 1rem;
   }
   &_item {

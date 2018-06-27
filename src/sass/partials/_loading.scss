@@ -5,16 +5,15 @@
   top: 0;
   left: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   overflow: hidden;
-  background: rgba(46, 46, 49, .4);
+  background: rgba(46, 46, 49, .5);
   width: 100vw;
   height: 100vh;
   z-index: 9999;
   & img {
     animation: fade 1s forwards infinite;
-    transform: translateY(-16rem);
+    transform: translateY(-4rem);
   }
 }
 

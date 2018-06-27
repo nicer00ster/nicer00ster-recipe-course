@@ -5,30 +5,7 @@
   100% {
     transform: translateX(-50%) translateY(-50%) rotate(185deg); } }
 
-.fade-enter {
-  opacity: 0;
-  z-index: 1; }
-
-.fade-exit {
-  opacity: 0;
-  z-index: 1; }
-
-.fade-exit-active {
-  display: none; }
-
-.fade-enter-active {
-  display: none; }
-
-.fade-exit.fade-exit-active {
-  opacity: 1;
-  transition: opacity 250ms ease-in; }
-
-.fade-enter.fade-enter-active {
-  opacity: 1;
-  transition: opacity 250ms ease-out; }
-
 body {
-  overflow-y: hidden;
   background-image: url("../icons/megatron-geometric.svg");
   background-position: center;
   background-repeat: no-repeat;
@@ -66,7 +43,7 @@ body {
     color: #c6ffdd;
     text-shadow: 0 20px 25px #2e2e31, 0 40px 60px #2e2e31;
     font-weight: bold;
-    font-size: 36px;
+    font-size: 32px;
     transform: translateX(0%) translateY(-25%); }
     .landing__login--title:before, .landing__login--title:after, .landing__account--title:before, .landing__account--title:after {
       content: '';
@@ -140,8 +117,9 @@ body {
   justify-content: center; }
   .landing__dashboard--nav_welcome {
     flex: 3;
-    color: #f3f3f3;
+    color: #1f222e;
     font-size: 18px;
+    text-transform: uppercase;
     margin: 1rem; }
   .landing__dashboard--nav_item {
     display: flex;
@@ -183,8 +161,8 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  border-top: 2px solid #c6ffdd;
-  border-radius: 2px;
+  border-top: 4px solid #f7797d;
+  border-radius: 4px;
   color: #fafbfc;
   background-color: #fefefe;
   background-image: url("../icons/food.svg");
@@ -247,10 +225,11 @@ body {
     width: 100%;
     top: 0;
     right: 0;
-    background: linear-gradient(45deg, #c6ffdd 0%, rgba(198, 255, 221, 0) 70%), linear-gradient(135deg, #f7797d 10%, rgba(247, 121, 125, 0) 80%), linear-gradient(225deg, #c6ffdd 10%, rgba(198, 255, 221, 0) 80%), linear-gradient(315deg, #fbd786 100%, rgba(251, 215, 134, 0) 70%);
+    background: linear-gradient(45deg, #fbd786 0%, rgba(251, 215, 134, 0) 70%), linear-gradient(135deg, #f7797d 10%, rgba(247, 121, 125, 0) 80%), linear-gradient(225deg, #c6ffdd 10%, rgba(198, 255, 221, 0) 80%), linear-gradient(315deg, #fbd786 100%, rgba(251, 215, 134, 0) 70%);
     opacity: 0.6;
     z-index: 1;
-    clip-path: polygon(0 0, 100% 0, 100% calc(60% - 2vw), 0% 60%); }
+    clip-path: polygon(0 0, 100% 0, 100% calc(60% - 2vw), 0% 60%);
+    transition: all .75s ease; }
   .recipe__label {
     flex: 1;
     margin: .5rem;
@@ -261,7 +240,8 @@ body {
     letter-spacing: 4px;
     z-index: 2;
     position: relative;
-    color: #2e3d49; }
+    color: #2e3d49;
+    transition: all .75s; }
   .recipe__image {
     flex: 1;
     clip-path: polygon(0 0, 100% 0, 100% calc(60% - 2vw), 0% 60%);
@@ -269,7 +249,8 @@ body {
     height: 100%;
     object-fit: cover;
     position: absolute;
-    filter: grayscale(150%); }
+    filter: grayscale(150%);
+    transition: all .75s; }
   .recipe__source {
     margin: 1rem;
     position: relative;
@@ -278,24 +259,21 @@ body {
   .recipe:hover {
     transform: scale(1.1); }
     .recipe:hover:before {
-      transition: all .75s;
-      background: transparent; }
+      background: transparent;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2vw), 0% 100%); }
     .recipe:hover img {
       filter: contrast(100%);
-      transition: all .75s ease;
       clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2vw), 0% 100%); }
     .recipe:hover h4 {
       color: #fbfbfb;
-      letter-spacing: 2px;
-      transition: all .75s; }
+      letter-spacing: 2px; }
 
 .recipes__container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   height: 100%;
-  width: 100%;
-  border: 1px solid white; }
+  width: 100%; }
 
 .loading__container {
   position: fixed;
@@ -304,16 +282,15 @@ body {
   top: 0;
   left: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   overflow: hidden;
-  background: rgba(46, 46, 49, 0.4);
+  background: rgba(46, 46, 49, 0.5);
   width: 100vw;
   height: 100vh;
   z-index: 9999; }
   .loading__container img {
     animation: fade 1s forwards infinite;
-    transform: translateY(-16rem); }
+    transform: translateY(-4rem); }
 
 @keyframes fade {
   0% {

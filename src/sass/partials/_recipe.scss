@@ -24,13 +24,14 @@
     top: 0;
     right: 0;
     background:
-      linear-gradient(45deg, rgba(198,255,221, 1) 0%, rgba(198,255,221, 0) 70%),
+      linear-gradient(45deg, rgba(251,215,134, 1) 0%, rgba(251,215,134, 0) 70%),
       linear-gradient(135deg, rgba(247,121,125, 1) 10%, rgba(247,121,125, 0) 80%),
       linear-gradient(225deg, rgba(198,255,221, 1) 10%, rgba(198,255,221, 0) 80%),
       linear-gradient(315deg, rgba(251,215,134, 1) 100%, rgba(251,215,134, 0) 70%);
     opacity: 0.6;
     z-index: 1;
     clip-path: polygon(0 0, 100% 0, 100% calc(60% - 2vw), 0% 60%);
+    transition: all .75s ease;
   }
   &__label {
     flex: 1;
@@ -43,6 +44,7 @@
     z-index: 2;
     position: relative;
     color: #2e3d49;
+    transition: all .75s;
   }
   &__image {
     flex: 1;
@@ -52,6 +54,7 @@
     object-fit: cover;
     position: absolute;
     filter: grayscale(150%);
+    transition: all .75s;
   }
   &__source {
     margin: 1rem;
@@ -62,18 +65,16 @@
   &:hover {
     transform: scale(1.1);
     &:before {
-      transition: all .75s;
       background: transparent;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2vw), 0% 100%);
     }
     & img {
       filter: contrast(100%);
-      transition: all .75s ease;
       clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2vw), 0% 100%);
     }
     & h4 {
       color: #fbfbfb;
       letter-spacing: 2px;
-      transition: all .75s;
     }
   }
 }

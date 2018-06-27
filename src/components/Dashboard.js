@@ -4,7 +4,7 @@ import Loading from './Loading';
 import Nav from './Nav';
 import Container from './Container';
 import { APP_ID, APP_KEY } from '../private.js';
-import { auth } from '../base';
+import { auth, isAuthenticated } from '../base';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -12,10 +12,10 @@ class Dashboard extends React.Component {
     this.searchRef = React.createRef();
     this.onOpenModal = this.onOpenModal.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-    this.handleUser = this.handleUser.bind(this);
-    this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.signOut = this.signOut.bind(this);
+    // this.handleSearch = this.handleSearch.bind(this);
+    // this.handleUser = this.handleUser.bind(this);
+    // this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.state = {
       email: '',
       search: '',
@@ -37,8 +37,8 @@ class Dashboard extends React.Component {
           console.log(user);
           this.setState({ email: user.email, loading: false })
         } else {
-          this.setState({ loading: false })
           console.error('No user logged in.');
+          this.setState({ loading: false })
         }
       })
     })
@@ -91,6 +91,7 @@ class Dashboard extends React.Component {
   }
   signOut() {
     auth.signOut();
+    this.props.history.push('/');
   }
   render() {
     const { email, loading, modalOpen, noResults, searchResults } = this.state;

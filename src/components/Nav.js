@@ -15,7 +15,7 @@ class Nav extends React.Component {
         )}
         <div className="landing__dashboard--nav">
           <div className="landing__dashboard--nav_welcome">
-            Welcome, {email}
+            Welcome back, {email}
           </div>
           <div className="landing__dashboard--nav_item">
             <Link onClick={onOpenModal} to="/search"><img src={search} alt=""/><div>Search</div></Link>
