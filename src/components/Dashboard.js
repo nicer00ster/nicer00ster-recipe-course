@@ -13,6 +13,7 @@ class Dashboard extends React.Component {
     this.onOpenModal = this.onOpenModal.bind(this);
     this.onCloseModal = this.onCloseModal.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleUser = this.handleUser.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.signOut = this.signOut.bind(this);
     this.state = {
@@ -24,8 +25,10 @@ class Dashboard extends React.Component {
     }
   }
   componentDidMount() {
-    this.setState({ loading: true })
     this.handleUser();
+  }
+  componentWillUnmount() {
+    this.handleUser = undefined;
   }
   handleUser() {
     return new Promise((resolve, reject) => {
@@ -71,8 +74,8 @@ class Dashboard extends React.Component {
       console.error(err);
     })
     .then(() => {
-      this.setState({ search: '' })
       this.searchRef.reset();
+      this.setState({ search: '' })
     })
   }
   onOpenModal(e) {
@@ -87,11 +90,7 @@ class Dashboard extends React.Component {
     })
   }
   signOut() {
-    this.setState({
-      loading: true
-    }, () => {
-      auth.signOut();
-    })
+    auth.signOut();
   }
   render() {
     const { email, loading, modalOpen, noResults, searchResults } = this.state;

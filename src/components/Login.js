@@ -7,6 +7,7 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     // this.renderCurrentState = this.renderCurrentState.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
     this.state = {
       email: '',
       password: '',
@@ -21,6 +22,13 @@ class Login extends React.Component {
       }
     });
   }
+  componentWillUnmount() {
+    auth.onAuthStateChanged(user => {
+      if(user) {
+        console.log(`Redirecting ${user.email}`);
+      }
+    })
+  }
 
   handleEmail(e) {
     this.setState({
@@ -33,37 +41,43 @@ class Login extends React.Component {
     })
   }
   handleLogin(e) {
-    e.preventDefault();
     const { email, password, loading } = this.state;
     this.setState({ loading: true })
     auth.signInWithEmailAndPassword(email, password)
-      .catch(error => {
+    .catch(error => {
       console.log(error);
       if(error) {
         console.error(error);
       }
-    }).then(res => {
+    })
+    .then(res => {
       console.log(res);
       this.setState({
         redirected: true,
         loading: false
+      }, () => {
+        this.props.history.push('/dashboard');
       });
     })
+    e.preventDefault();
   }
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/' } }
+    // const { from } = this.props.location.state || { from: { pathname: '/' } }
     const { redirected, loading }  = this.state;
+    // if(redirected) {
+    //   return <Redirect to={from} />
+    // }
     return (
       <div>
-        {redirected && (
+        {/* {redirected && (
           <Redirect to={from || '/dashboard'} />
-        )}
+        )} */}
         {loading && (
           <Loading />
         )}
         <div>
-          <form onSubmit={(e) => this.handleLogin(e)} className="landing__login">
+          <form onSubmit={this.handleLogin} className="landing__login">
             <div className="landing__login--title">
               REACT RECIPES!
             </div>
