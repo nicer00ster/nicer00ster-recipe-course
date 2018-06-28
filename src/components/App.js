@@ -51,6 +51,12 @@ class App extends Component {
       hasError: !this.state.hasError,
       errorMsg: errorMsg
     })
+    setTimeout(() => {
+      this.setState({
+        hasError: !this.state.hasError,
+        errorMsg: null
+      })
+    }, 5000)
   }
   render() {
     const { authed, loading, hasError, errorMsg } = this.state
@@ -119,7 +125,8 @@ class App extends Component {
             { hasError
               ? <Error
                 errorMsg={errorMsg}
-                handleError={this.handleError} />
+                handleError={this.handleError}
+                hasError={hasError}/>
               : null }
               <Routes
                 authed={authed}

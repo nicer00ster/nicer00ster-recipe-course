@@ -1,7 +1,6 @@
 import React from 'react';
 import { auth } from '../base';
 import Form from './Form';
-import Error from './Error';
 
 class Login extends React.Component {
   constructor(props) {
@@ -32,7 +31,7 @@ class Login extends React.Component {
       return;
     })
     .then(() => {
-      return this.props.loading()
+      return this.props.loading();
     })
   }
 

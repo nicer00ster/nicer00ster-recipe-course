@@ -1,6 +1,4 @@
 .dash__overlay {
-  // height: 100%;
-  // width: 100%;
   overflow-y: hidden;
 }
 .dash__modal {
@@ -52,6 +50,9 @@
     &:focus {
       border: 3px solid $green;
     }
+    &:hover {
+      background: rgba(0,0,0,.65);
+    }
   }
 }
 .dash__close {
@@ -65,36 +66,5 @@
   transition: all .25s;
   &:hover {
     transform: scale(1.2);
-  }
-}
-
-.error__overlay {
-  background: rgba(0,0,0,0);
-  display: flex;
-  justify-content: flex-start;
-  width: 25%;
-}
-.error__modal {
-  border-top: 4px solid $pink;
-  border-radius: 4px;
-  font-family: 'Gudea', sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 1rem;
-}
-.error__close {
-  color: #fff;
-  outline: none;
-  cursor: pointer;
-}
-.error__icon {
-  background-image: url('../icons/delete.svg');
-  color: #fff;
-  transition: all .25s;
-  &:hover {
-    transform: scale(1.1);
   }
 }

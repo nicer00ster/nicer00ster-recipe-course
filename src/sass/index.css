@@ -5,6 +5,22 @@
   100% {
     transform: translateX(-50%) translateY(-50%) rotate(185deg); } }
 
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-2px, 0, 0); }
+  20%, 80% {
+    transform: translate3d(4px, 0, 0); }
+  30%, 50%, 70% {
+    transform: translate3d(-8px, 0, 0); }
+  40%, 60% {
+    transform: translate3d(8px, 0, 0); } }
+
+@keyframes fadeout {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
 body {
   background-image: url("../icons/megatron-geometric.svg");
   background-position: center;
@@ -205,6 +221,8 @@ body {
     outline: none; }
     .dash__modal > form > span input:focus {
       border: 3px solid #c6ffdd; }
+    .dash__modal > form > span input:hover {
+      background: rgba(0, 0, 0, 0.65); }
 
 .dash__close {
   color: #fff;
@@ -217,35 +235,6 @@ body {
   transition: all .25s; }
   .dash__icon:hover {
     transform: scale(1.2); }
-
-.error__overlay {
-  background: rgba(0, 0, 0, 0);
-  display: flex;
-  justify-content: flex-start;
-  width: 25%; }
-
-.error__modal {
-  border-top: 4px solid #f7797d;
-  border-radius: 4px;
-  font-family: 'Gudea', sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 1rem; }
-
-.error__close {
-  color: #fff;
-  outline: none;
-  cursor: pointer; }
-
-.error__icon {
-  background-image: url("../icons/delete.svg");
-  color: #fff;
-  transition: all .25s; }
-  .error__icon:hover {
-    transform: scale(1.1); }
 
 .recipe {
   display: flex;
@@ -365,3 +354,38 @@ body {
     opacity: 1; }
   100% {
     opacity: 0; } }
+
+.error__overlay {
+  background: rgba(0, 0, 0, 0);
+  display: flex;
+  justify-content: flex-start;
+  width: 25%; }
+
+.error__modal {
+  background-image: url("../icons/error.svg");
+  background-color: #fbfbfb;
+  font-family: 'Gudea', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-top: 4px solid #f7797d;
+  border-radius: 4px;
+  width: 100%;
+  margin: 1rem;
+  animation: 1s forwards alternate cubic-bezier(0.9, 0.2, 0.3, 1) shake, 0.75s forwards alternate ease-out fadeout 3.5s;
+  transition: transform 1000ms ease; }
+
+.error__close {
+  color: #fff;
+  outline: none;
+  cursor: pointer; }
+
+.error__container {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 4px;
+  margin: .5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: .5px .5px 2px #1f222e;
+  color: #1f222e; }

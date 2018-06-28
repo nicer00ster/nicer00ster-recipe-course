@@ -1,0 +1,36 @@
+.error__overlay {
+  background: rgba(0,0,0,0);
+  display: flex;
+  justify-content: flex-start;
+  width: 25%;
+}
+.error__modal {
+  background-image: url('../icons/error.svg');
+  background-color: #fbfbfb;
+  font-family: 'Gudea', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-top: 4px solid $pink;
+  border-radius: 4px;
+  width: 100%;
+  margin: 1rem;
+  animation: 1s forwards alternate cubic-bezier(0.9, 0.2, 0.3, 1.0) shake,
+            .75s forwards alternate ease-out fadeout 3.5s;
+  transition: transform 1000ms ease;
+}
+.error__close {
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+}
+.error__container {
+  background: rgba(255,255,255,0.8);
+  border-radius: 4px;
+  margin: .5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: .5px .5px 2px #1f222e;
+  color: #1f222e;
+}
