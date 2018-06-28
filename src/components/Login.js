@@ -1,8 +1,7 @@
 import React from 'react';
 import { auth } from '../base';
-import { Link } from 'react-router-dom';
-import Loading from './Loading';
 import Form from './Form';
+import Error from './Error';
 
 class Login extends React.Component {
   constructor(props) {
@@ -24,19 +23,17 @@ class Login extends React.Component {
     })
   }
   handleLogin(e) {
+    e.preventDefault();
     const { email, password } = this.state;
     this.props.loading();
     auth.signInWithEmailAndPassword(email, password)
-    .catch(error => {
-      if(error) {
-        console.error(error);
-      }
+    .catch(err => {
+      this.props.error(err.message);
       return;
     })
     .then(() => {
       return this.props.loading()
     })
-    e.preventDefault();
   }
 
   render() {

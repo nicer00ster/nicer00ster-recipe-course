@@ -1,7 +1,5 @@
 import React from 'react';
-import { auth } from '../base';
 import { authenticate, saveUser } from '../auth';
-import { Link } from 'react-router-dom';
 import Form from './Form';
 
 class Account extends React.Component {
@@ -16,13 +14,15 @@ class Account extends React.Component {
   handleAccount(e) {
     e.preventDefault();
     const { username, email, password } = this.state;
-    this.props.loading();
     authenticate(email, password)
     .catch(err => {
-      console.error(err);
+      this.props.error(err.message);
     })
     .then(res => {
-       saveUser(res.user, username);
+      if(res) {
+        this.props.loading();
+        saveUser(res.user, username)
+      }
     })
   }
   handleUsername(e) {
@@ -41,7 +41,6 @@ class Account extends React.Component {
     })
   }
   render() {
-    const { email, password } = this.state;
     return (
       <div>
         <Form

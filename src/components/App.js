@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import Particles from 'react-particles-js';
 import Routes from './Router';
-import { auth, localKey } from '../base';
-import { logout } from '../auth';
 import Loading from './Loading';
+import Error from './Error';
+import { auth, localKey } from '../base';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.handleLoad = this.handleLoad.bind(this);
+    this.handleError = this.handleError.bind(this);
     this.state = {
       uid: null,
       authed: false,
-      loading: false
+      loading: false,
+      hasError: false,
+      errorMsg: null
     }
   }
   componentDidMount() {
@@ -32,6 +35,7 @@ class App extends Component {
           uid: null
         })
       }
+      return;
     })
   }
   componentWillUnmount() {
@@ -42,7 +46,14 @@ class App extends Component {
       loading: !this.state.loading
     });
   }
+  handleError(errorMsg) {
+    this.setState({
+      hasError: !this.state.hasError,
+      errorMsg: errorMsg
+    })
+  }
   render() {
+    const { authed, loading, hasError, errorMsg } = this.state
     return (
         <div id="particles">
           <Particles
@@ -102,11 +113,19 @@ class App extends Component {
             }}
           />
           <div className="landing">
-            {this.state.loading ? <Loading /> : null}
-            <Routes
-              authed={this.state.authed}
-              loading={this.handleLoad}
-            />
+            { loading
+              ? <Loading />
+              : null }
+            { hasError
+              ? <Error
+                errorMsg={errorMsg}
+                handleError={this.handleError} />
+              : null }
+              <Routes
+                authed={authed}
+                loading={this.handleLoad}
+                error={this.handleError}
+                errorMsg={errorMsg} />
           </div>
         </div>
     );

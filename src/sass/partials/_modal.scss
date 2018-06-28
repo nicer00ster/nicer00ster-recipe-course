@@ -1,5 +1,7 @@
 .dash__overlay {
-
+  // height: 100%;
+  // width: 100%;
+  overflow-y: hidden;
 }
 .dash__modal {
   font-family: 'Gudea', sans-serif;
@@ -7,24 +9,37 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow-y: hidden;
   width: 100%;
+  max-height: 90%;
   border-top: 4px solid $pink;
   border-radius: 4px;
   color: #fafbfc;
   background-color: #fefefe;
   background-image: url('../icons/food.svg');
   box-shadow: 0px .8rem 2rem #111;
-  & h1 {
+  & h2 {
+    flex: 1;
     color: #1f222e;
     font-weight: 100;
   }
-  & > form {
-    width: 50%;
-    margin: 1rem;
+  & img {
+    flex: 1;
   }
-  & > form > input {
+  & form {
+    flex: 1;
+    width: 75%;
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & > span {
+      width: 100%;
+    }
+  }
+  & > form >  span input {
     width: 100%;
-    height: 40px;
+    height: 50px;
     border-radius: 50px;
     background: rgba(46, 46, 49, .9);
     padding: 10px 50px;
@@ -50,5 +65,36 @@
   transition: all .25s;
   &:hover {
     transform: scale(1.2);
+  }
+}
+
+.error__overlay {
+  background: rgba(0,0,0,0);
+  display: flex;
+  justify-content: flex-start;
+  width: 25%;
+}
+.error__modal {
+  border-top: 4px solid $pink;
+  border-radius: 4px;
+  font-family: 'Gudea', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 1rem;
+}
+.error__close {
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+}
+.error__icon {
+  background-image: url('../icons/delete.svg');
+  color: #fff;
+  transition: all .25s;
+  &:hover {
+    transform: scale(1.1);
   }
 }

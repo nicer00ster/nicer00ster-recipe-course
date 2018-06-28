@@ -1,5 +1,4 @@
 import React from 'react';
-import Loading from './Loading';
 import { Link } from 'react-router-dom';
 import search from '../icons/search.svg';
 import settings from '../icons/settings.svg';

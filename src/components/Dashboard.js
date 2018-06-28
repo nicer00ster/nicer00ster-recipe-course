@@ -1,11 +1,11 @@
 import React from 'react';
 import Modal from 'react-responsive-modal';
-import Loading from './Loading';
 import Nav from './Nav';
 import Container from './Container';
 import { APP_ID, APP_KEY } from '../private.js';
 import { auth, database } from '../base';
 import { logout } from '../auth';
+import search from '../icons/search.svg';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -18,6 +18,7 @@ class Dashboard extends React.Component {
       email: '',
       search: '',
       searchResults: null,
+      noResults: false,
       modalOpen: false,
       displayName: ''
     }
@@ -46,7 +47,7 @@ class Dashboard extends React.Component {
     // 2. Render loading indicator
     loading()
     // 3. Fetch the results of the search
-    fetch(`https://api.edamam.com/search?q=${this.state.search}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=10`)
+    fetch(`https://api.edamam.com/search?q=${this.state.search}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=25`)
     .then(res => {
       return res.json();
     })
@@ -77,6 +78,7 @@ class Dashboard extends React.Component {
   onCloseModal() {
     this.setState({
       modalOpen: false,
+      noResults: false,
       searchResults: ''
     })
   }
@@ -88,12 +90,10 @@ class Dashboard extends React.Component {
     }, 1500);
   }
   render() {
-    const { email, loading, modalOpen, noResults, searchResults, displayName } = this.state;
+    const { modalOpen, noResults, searchResults, displayName } = this.state;
     // Render the container of modal depending on what happens after submitting a search
     let searchContainer;
-    if(loading) {
-      searchContainer = (<Loading />);
-    } else if(noResults) {
+    if(noResults) {
       searchContainer = (<div className="landing__dashboard--error">No results found for your search.</div>)
     } else if(searchResults) {
       searchContainer = (<Container recipes={searchResults} />)
@@ -118,9 +118,12 @@ class Dashboard extends React.Component {
             closeButton: 'dash__close',
             closeIcon: 'dash__icon'
           }}>
-          <h1>Search for a recipe!</h1>
+          <h2>Search for a recipe!</h2>
           <form ref={el => this.searchRef = el} onSubmit={(e) => this.onSearchSubmit(e)}>
-            <input onChange={(e) => this.handleSearch(e)} type="search" placeholder="Search"/>
+            <img src={search} alt="Search"/>
+            <span>
+              <input onChange={(e) => this.handleSearch(e)} type="search" placeholder="Search"/>
+            </span>
           </form>
           {searchContainer}
         </Modal>

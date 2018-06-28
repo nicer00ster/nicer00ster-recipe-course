@@ -83,6 +83,8 @@ body {
       transition: all .25s; }
       .landing__login--email > input:focus, .landing__login--password > input:focus, .landing__login--username > input:focus, .landing__account--email > input:focus, .landing__account--password > input:focus, .landing__account--username > input:focus {
         border: 2px solid #c6ffdd; }
+      .landing__login--email > input:hover, .landing__login--password > input:hover, .landing__login--username > input:hover, .landing__account--email > input:hover, .landing__account--password > input:hover, .landing__account--username > input:hover {
+        background: rgba(0, 0, 0, 0.2); }
   .landing__login--submit, .landing__account--submit {
     text-transform: uppercase;
     margin: 1rem;
@@ -146,6 +148,7 @@ body {
 .landing__dashboard {
   height: 70vh;
   width: 70vw;
+  min-width: 450px;
   border: 1px solid #999;
   border-radius: 2px;
   background: #fbfbfb;
@@ -155,28 +158,42 @@ body {
     font-weight: 800;
     color: #1f222e; }
 
+.dash__overlay {
+  overflow-y: hidden; }
+
 .dash__modal {
   font-family: 'Gudea', sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow-y: hidden;
   width: 100%;
+  max-height: 90%;
   border-top: 4px solid #f7797d;
   border-radius: 4px;
   color: #fafbfc;
   background-color: #fefefe;
   background-image: url("../icons/food.svg");
   box-shadow: 0px .8rem 2rem #111; }
-  .dash__modal h1 {
+  .dash__modal h2 {
+    flex: 1;
     color: #1f222e;
     font-weight: 100; }
-  .dash__modal > form {
-    width: 50%;
-    margin: 1rem; }
-  .dash__modal > form > input {
+  .dash__modal img {
+    flex: 1; }
+  .dash__modal form {
+    flex: 1;
+    width: 75%;
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .dash__modal form > span {
+      width: 100%; }
+  .dash__modal > form > span input {
     width: 100%;
-    height: 40px;
+    height: 50px;
     border-radius: 50px;
     background: rgba(46, 46, 49, 0.9);
     padding: 10px 50px;
@@ -186,7 +203,7 @@ body {
     font-size: 14px;
     transition: all .25s;
     outline: none; }
-    .dash__modal > form > input:focus {
+    .dash__modal > form > span input:focus {
       border: 3px solid #c6ffdd; }
 
 .dash__close {
@@ -201,13 +218,42 @@ body {
   .dash__icon:hover {
     transform: scale(1.2); }
 
+.error__overlay {
+  background: rgba(0, 0, 0, 0);
+  display: flex;
+  justify-content: flex-start;
+  width: 25%; }
+
+.error__modal {
+  border-top: 4px solid #f7797d;
+  border-radius: 4px;
+  font-family: 'Gudea', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 1rem; }
+
+.error__close {
+  color: #fff;
+  outline: none;
+  cursor: pointer; }
+
+.error__icon {
+  background-image: url("../icons/delete.svg");
+  color: #fff;
+  transition: all .25s; }
+  .error__icon:hover {
+    transform: scale(1.1); }
+
 .recipe {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 140px;
-  height: 160px;
+  width: 160px;
+  height: 180px;
   position: relative;
   overflow: hidden;
   list-style: none;
@@ -233,6 +279,7 @@ body {
     transition: all .75s ease; }
   .recipe__label {
     flex: 1;
+    word-break: break-word;
     margin: .5rem;
     line-height: 1rem;
     text-align: center;
@@ -274,7 +321,26 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   height: 100%;
-  width: 100%; }
+  width: 100%;
+  overflow-y: scroll;
+  box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  padding: .5rem;
+  margin: 1rem; }
+
+::-webkit-scrollbar {
+  width: 6px; }
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
+  border-radius: 6px; }
+
+::-webkit-scrollbar-thumb {
+  background: #f7797d;
+  border-radius: 6px; }
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffc2c4; }
 
 .loading__container {
   position: fixed;
