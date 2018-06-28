@@ -12,7 +12,7 @@ class App extends Component {
     this.state = {
       uid: null,
       authed: false,
-      loading: true
+      loading: false
     }
   }
   componentDidMount() {

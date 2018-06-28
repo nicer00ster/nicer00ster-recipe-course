@@ -9,8 +9,7 @@ class Login extends React.Component {
     super(props);
     this.state = {
       email: '',
-      password: '',
-      redirected: false
+      password: ''
     }
   }
 
@@ -34,13 +33,8 @@ class Login extends React.Component {
       }
       return;
     })
-    .then(res => {
-      console.log(res);
-      this.setState({
-        redirected: true
-      }, () => {
-        this.props.loading() && this.props.history.push('/dashboard');
-      });
+    .then(() => {
+      return this.props.loading()
     })
     e.preventDefault();
   }

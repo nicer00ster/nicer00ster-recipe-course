@@ -32,13 +32,6 @@ class Dashboard extends React.Component {
         displayName: snap.val().displayName
       })
     })
-
-    // if(user) {
-    //   user.updateProfile({
-    //     displayName: ,
-    //
-    //   })
-    // }
     console.log(user);
   }
   handleSearch(e) {

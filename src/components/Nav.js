@@ -11,7 +11,7 @@ const Nav = ({ displayName, onOpenModal, signOut }) => (
     <div>
       <div className="landing__dashboard--nav">
         <div className="landing__dashboard--nav_welcome">
-          Welcome back, {displayName}
+          {displayName}
         </div>
         <div className="landing__dashboard--nav_item">
           <Link onClick={onOpenModal} to="/search"><img src={search} alt=""/><div>Search</div></Link>
