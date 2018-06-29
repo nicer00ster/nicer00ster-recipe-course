@@ -59,7 +59,8 @@ class Dashboard extends React.Component {
         loading();
       } else {
         this.setState({
-          searchResults: data['hits'],
+          noResults: false,
+          searchResults: data['hits']
         });
         loading();
       }

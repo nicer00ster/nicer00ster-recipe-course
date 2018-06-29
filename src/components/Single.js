@@ -1,5 +1,10 @@
 import React from 'react';
+import Chart from './Chart';
 import Modal from 'react-responsive-modal';
+import bookmark from '../icons/bookmark.svg';
+import facebook from '../icons/facebook.svg';
+import instagram from '../icons/instagram.svg';
+import twitter from '../icons/twitter.svg';
 
 class Single extends React.Component {
   constructor(props) {
@@ -18,12 +23,25 @@ class Single extends React.Component {
     })
   }
   render() {
+    const { recipe } = this.props;
+
+    let ingredients;
+    ingredients = recipe.ingredients.map((item, key) => {
+      return (
+        <label className="single__ingredients-item" key={key}>
+          {item.text}
+          <input type="checkbox"/>
+          <span className="checkmark"></span>
+        </label>
+      )
+    })
     return (
       <div>
          <Modal
           open={this.state.openModal}
           onClose={this.handleModal}
           closeIconSvgPath={''}
+          closeOnOverlayClick={false}
           closeIconSize={48}
           classNames={{
             overlay: 'recipe__single-overlay',
@@ -31,11 +49,24 @@ class Single extends React.Component {
             closeButton: 'recipe__single-close',
             closeIcon: 'recipe__single-icon',
           }}>
-          {/* // closeOnOverlayClick={false}> */}
-          <div className="recipe__single">
-            <img className="recipe__single-image" src={this.props.image} alt={this.props.label} />
-            <h4 className="recipe__single-label">{this.props.label}</h4>
-            <h6 className="recipe__single-source">{this.props.source}</h6>
+          <div className="single">
+            <h4 className="single__label">{recipe.label}</h4>
+            <img className="single__image" src={recipe.image} alt={recipe.label} />
+            <div className="single__section">
+              <ul className="single__ingredients">
+                <h3>Ingredients</h3>
+                {ingredients}
+              </ul>
+              <Chart calories={recipe.calories} digest={recipe.digest} yield={recipe.yield} />
+            </div>
+            <div className="social">
+              <img className="social__bookmark" src={bookmark} alt="Bookmark" />
+              <img className="social__facebook" src={facebook} alt="Facebook" />
+              <img className="social__instagram" src={instagram} alt="Instagram" />
+              <img className="social__twitter" src={twitter} alt="Twitter" />
+            </div>
+            <a className="single__source" target="_blank" href={recipe.url}>Get Recipe!</a>
+            <h6 className="single__source">{recipe.source}</h6>
           </div>
         </Modal>
       </div>

@@ -5,13 +5,7 @@ const Container = props => {
   let eachRecipe;
   eachRecipe = props.recipes.map((item, key) => {
     return (
-      <Recipe
-        key={key}
-        label={item.recipe.label}
-        image={item.recipe.image}
-        url={item.recipe.url}
-        source={item.recipe.source}
-      />
+      <Recipe key={key} recipe={item.recipe} />
     )
   });
   return (
