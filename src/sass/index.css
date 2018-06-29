@@ -305,6 +305,81 @@ body {
       color: #fbfbfb;
       letter-spacing: 2px; }
 
+.recipe__single {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  margin: .5rem;
+  border-top: 2px solid #f7797d;
+  border-radius: 4px;
+  background: #fbfbfb;
+  box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, 0.2); }
+  .recipe__single:before {
+    display: block;
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    opacity: 0.6;
+    z-index: 1;
+    clip-path: polygon(0 0, 100% 0, 100% calc(60% - 2vw), 0% 60%); }
+  .recipe__single-label {
+    flex: 1;
+    word-break: break-word;
+    margin: .5rem;
+    line-height: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 4px;
+    z-index: 2;
+    position: absolute;
+    color: #2e3d49; }
+  .recipe__single-image {
+    flex: 1;
+    width: 100%;
+    height: 50%;
+    position: relative; }
+  .recipe__single-source {
+    margin: 1rem;
+    position: relative;
+    align-self: flex-end;
+    color: #2e3d49; }
+  .recipe__single-overlay {
+    height: 100%; }
+  .recipe__single-modal {
+    font-family: 'Gudea', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    max-height: 90%;
+    border-top: 4px solid #f7797d;
+    border-radius: 4px;
+    color: #fafbfc;
+    background-color: #fefefe;
+    box-shadow: 0px .8rem 2rem #111; }
+  .recipe__single-close {
+    color: #fff;
+    outline: none;
+    cursor: pointer; }
+  .recipe__single-icon {
+    background-image: url("../icons/delete.svg");
+    color: #fff;
+    transition: all .25s; }
+    .recipe__single-icon:hover {
+      transform: scale(1.2); }
+
 .recipes__container {
   display: flex;
   flex-wrap: wrap;
