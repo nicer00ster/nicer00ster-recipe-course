@@ -1,6 +1,4 @@
 body {
-  // overflow-y: hidden;
-  // background: $megatron;
   background-image: url('../icons/megatron-geometric.svg');
   background-position: center;
   background-repeat: no-repeat;
@@ -21,11 +19,9 @@ body {
     width: 70vw;
     min-width: 450px;
     overflow-y: hidden;
-    border: 1px solid #999;
+    background: linear-gradient(to bottom right, rgba(251,251,251,0.7) -100%, rgba(251,251,251,0.9) 100%);
     border-radius: 2px;
-    background: #fbfbfb;
     box-shadow: 0px .8rem 2rem #111;
-    background: repeating-linear-gradient(135deg, rgba(251,251,251,0.9), rgba(251,251,251,0.9) 24px, #ECECEC 24px, rgba(251,251,251,0.9) 25px, rgba(251,251,251,0.95) 25px, rgba(251,251,251,0.95) 100px, #ECECEC 100px, #ECECEC 101px);
     &--error {
       text-transform: uppercase;
       font-weight: 800;

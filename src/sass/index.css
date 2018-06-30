@@ -167,11 +167,9 @@ body {
     width: 70vw;
     min-width: 450px;
     overflow-y: hidden;
-    border: 1px solid #999;
+    background: linear-gradient(to bottom right, rgba(251, 251, 251, 0.7) -100%, rgba(251, 251, 251, 0.9) 100%);
     border-radius: 2px;
-    background: #fbfbfb;
-    box-shadow: 0px .8rem 2rem #111;
-    background: repeating-linear-gradient(135deg, rgba(251, 251, 251, 0.9), rgba(251, 251, 251, 0.9) 24px, #ECECEC 24px, rgba(251, 251, 251, 0.9) 25px, rgba(251, 251, 251, 0.95) 25px, rgba(251, 251, 251, 0.95) 100px, #ECECEC 100px, #ECECEC 101px); }
+    box-shadow: 0px .8rem 2rem #111; }
     .landing__dashboard--error {
       text-transform: uppercase;
       font-weight: 800;
@@ -196,7 +194,7 @@ body {
   width: 100%;
   max-height: 90%;
   border-top: 4px solid #f7797d;
-  border-radius: 4px;
+  border-radius: 2px;
   color: #fafbfc;
   background-color: #fefefe;
   background-image: url("../icons/food.svg");
@@ -257,7 +255,7 @@ body {
   width: 100%;
   height: 90%;
   overflow-y: hidden;
-  border-radius: 4px;
+  border-radius: 2px;
   color: #fbfbfb;
   background-color: transparent;
   box-shadow: none; }
@@ -356,7 +354,7 @@ body {
   height: 100%;
   position: absolute;
   overflow: hidden;
-  border-top: 3px solid #f7797d;
+  border-top: 8px solid #f7797d;
   border-radius: 4px;
   background: #fbfbfb;
   box-shadow: 0px .8rem 2rem #111; }
@@ -471,13 +469,13 @@ body {
   bottom: 0;
   margin-bottom: 3rem;
   width: 100%; }
-  .social__bookmark, .social__facebook, .social__twitter, .social__more {
+  .social__bookmark, .social__facebook, .social__twitter, .social__more, .social__delete {
     transition: all .25s;
     cursor: pointer;
     filter: drop-shadow(0px 2px 2px #1f222e); }
-    .social__bookmark:hover, .social__facebook:hover, .social__twitter:hover, .social__more:hover {
+    .social__bookmark:hover, .social__facebook:hover, .social__twitter:hover, .social__more:hover, .social__delete:hover {
       transform: scale(1.25); }
-  .social__bookmark {
+  .social__bookmark, .social__delete {
     margin-right: 3rem; }
 
 @media all and (max-width: 745px) {
@@ -510,6 +508,14 @@ body {
   padding: .5rem;
   margin: 1rem;
   height: 70%; }
+  .recipes__container-empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 1.5vw;
+    color: #2e3d49;
+    font-weight: 100; }
 
 ::-webkit-scrollbar {
   width: 6px; }
@@ -540,41 +546,6 @@ body {
   z-index: 9999; }
   .loading__container img {
     animation: fade 1s forwards infinite; }
-
-.error__overlay {
-  background: rgba(0, 0, 0, 0);
-  display: flex;
-  justify-content: flex-start;
-  width: 25%; }
-
-.error__modal {
-  background-image: url("../icons/error.svg");
-  background-color: #fbfbfb;
-  font-family: 'Gudea', sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  border-top: 4px solid #f7797d;
-  border-radius: 4px;
-  width: 100%;
-  margin: 1rem;
-  animation: 1s forwards alternate cubic-bezier(0.9, 0.2, 0.3, 1) shake, 0.75s forwards alternate ease-out fadeout 3.5s;
-  transition: transform 1000ms ease; }
-
-.error__close {
-  color: #fff;
-  outline: none;
-  cursor: pointer; }
-
-.error__container {
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 4px;
-  margin: .5rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: .5px .5px 2px #1f222e;
-  color: #1f222e; }
 
 .bookmarks {
   margin: 1rem;

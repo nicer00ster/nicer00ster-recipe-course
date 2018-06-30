@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Particles from 'react-particles-js';
+import Notifications, { notify } from 'react-notify-toast';
 import Routes from './Router';
 import Loading from './Loading';
-import Error from './Error';
 import { auth, localKey } from '../base';
 
 class App extends Component {
@@ -53,10 +53,10 @@ class App extends Component {
     })
     setTimeout(() => {
       this.setState({
-        hasError: !this.state.hasError,
+        hasError: false,
         errorMsg: null
       })
-    }, 5000)
+    }, 2500)
   }
   render() {
     const { authed, loading, hasError, errorMsg } = this.state
@@ -123,11 +123,9 @@ class App extends Component {
               ? <Loading />
               : null }
             { hasError
-              ? <Error
-                errorMsg={errorMsg}
-                handleError={this.handleError}
-                hasError={hasError}/>
+              ? notify.show(`Oh no! 😱 ${errorMsg}`, 'error', 3500)
               : null }
+              <Notifications options={{ zIndex: 9999 }}/>
               <Routes
                 authed={authed}
                 loading={this.handleLoad}

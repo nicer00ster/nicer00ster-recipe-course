@@ -10,6 +10,12 @@ const Container = props => {
   });
   return (
     <div className="recipes__container">
+      {props.recipes.length === 0
+        ? <div className="recipes__container-empty">
+            Your recipes will show up here once you've added some.
+          </div>
+        : null
+      }
       {eachRecipe}
     </div>
   )

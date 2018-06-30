@@ -2,10 +2,11 @@ import React from 'react';
 import Modal from 'react-responsive-modal';
 import Nav from './Nav';
 import Container from './Container';
+import search from '../icons/search.svg';
+import { notify } from 'react-notify-toast';
 import { APP_ID, APP_KEY } from '../private.js';
 import { auth, database } from '../base';
 import { logout } from '../auth';
-import search from '../icons/search.svg';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -83,8 +84,6 @@ class Dashboard extends React.Component {
         });
         loading();
       }
-    }, err => {
-      console.error(err);
     })
     .then(() => {
       this.searchRef.reset();
@@ -107,6 +106,7 @@ class Dashboard extends React.Component {
     setTimeout(() => {
       this.props.loading()
       logout();
+      notify.show('Come back soon! 🖐️', 500)
     }, 1500);
   }
   render() {

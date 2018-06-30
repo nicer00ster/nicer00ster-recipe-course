@@ -15,6 +15,7 @@ const Ingredients = props => {
   return (
     <ul className="single__ingredients">
       <h3>Ingredients</h3>
+      <h4>Makes {props.recipe.yield} servings</h4>
       {ingredients}
     </ul>
   )

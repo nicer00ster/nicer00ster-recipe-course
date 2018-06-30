@@ -1,6 +1,7 @@
 import React from 'react';
-import { auth } from '../base';
 import Form from './Form';
+import { notify } from 'react-notify-toast';
+import { auth } from '../base';
 
 class Login extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class Login extends React.Component {
       return;
     })
     .then(() => {
+      notify.show('Woo! 🍔😍', 'success', 3000);
       return this.props.loading();
     })
   }

@@ -2,11 +2,12 @@ import React from 'react';
 import Chart from './Chart';
 import Ingredients from './Ingredients';
 import Modal from 'react-responsive-modal';
-import { saveRecipe } from '../auth';
+import { saveRecipe, deleteRecipe } from '../auth';
 import bookmark from '../icons/bookmark.svg';
 import facebook from '../icons/facebook.svg';
 import twitter from '../icons/twitter.svg';
 import more from '../icons/more.svg';
+import trash from '../icons/trash.svg';
 
 class Single extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Single extends React.Component {
   }
   componentDidMount() {
     this.setState({ openModal: true })
-    console.log(window.location.pathname);
+    console.log(this.props.recipe)
   }
   handleModal() {
     this.setState({
@@ -26,7 +27,7 @@ class Single extends React.Component {
     })
   }
   render() {
-    const { recipe } = this.props;
+    const { recipe, uid } = this.props;
     return (
       <div>
          <Modal
@@ -49,8 +50,10 @@ class Single extends React.Component {
               <Chart calories={recipe.calories} digest={recipe.digest} yield={recipe.yield} />
             </div>
             <div className="social">
-              {window.location.pathname === '/dashboard'}
-              <img onClick={() => saveRecipe(this.props.uid, recipe)} className="social__bookmark" src={bookmark} alt="Bookmark" />
+              { recipe.key
+                ? <img onClick={() => deleteRecipe(uid, recipe.key) && this.handleModal()} className="social__delete" src={trash} alt="Bookmark" />
+                : <img onClick={() => saveRecipe(uid, recipe) && this.handleModal()} className="social__bookmark" src={bookmark} alt="Bookmark" />
+              }
               <div className="fb-share-button" data-href={recipe.url} data-layout="button" data-size="large" data-mobile-iframe="true">
                 <a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=${recipe.url}`} className="fb-xfbml-parse-ignore">
                 <img className="social__facebook" src={facebook} alt="Facebook" />

@@ -42,9 +42,11 @@ const Chart = props => {
   let caloriesInfo = null;
 
   if(props.calories && props.yield) {
-   caloriesInfo = (<p className="calories">{Math.round(props.calories/props.yield)} calories</p>);
+   caloriesInfo = (
+     <p>{Math.round(props.calories/props.yield)} calories</p>
+   );
   } else if(props.calories) {
-   caloriesInfo = (<p className="calories">{Math.round(props.calories)} calories</p>);
+   caloriesInfo = (<p>{Math.round(props.calories)} calories</p>);
   }
 
 
@@ -58,6 +60,7 @@ const Chart = props => {
      </div>
    );
   }
+
 
   return (
     <div className="single__facts">
