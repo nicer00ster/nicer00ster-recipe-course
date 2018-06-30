@@ -378,7 +378,7 @@ body {
     text-align: center;
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 2vw;
+    font-size: 2rem;
     letter-spacing: 4px;
     z-index: 1;
     position: relative;
@@ -399,7 +399,8 @@ body {
     z-index: 1; }
   .single__section {
     display: flex;
-    flex: 3;
+    flex-wrap: wrap;
+    flex: 2;
     width: 100%;
     height: 100%; }
   .single__facts, .single__ingredients {
@@ -413,6 +414,7 @@ body {
     color: #1f222e;
     height: 100%;
     width: 100%;
+    min-width: 250px;
     border-radius: 4px;
     background: #fbfbfb;
     box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, 0.2); }
@@ -463,7 +465,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-  flex-wrap: wrap;
+  height: 100%;
+  flex: 1;
   width: 100%; }
   .source__label, .source__button {
     margin: 1rem;
@@ -489,10 +492,13 @@ body {
 .social {
   display: flex;
   align-items: flex-end;
-  margin-bottom: -2rem;
+  justify-content: center;
+  position: fixed;
   flex: 1;
   z-index: 1;
-  height: 100%; }
+  bottom: 0;
+  margin-bottom: 3rem;
+  width: 100%; }
   .social__bookmark, .social__facebook, .social__twitter, .social__instagram {
     transition: all .25s;
     cursor: pointer;
@@ -502,15 +508,25 @@ body {
   .social__bookmark {
     margin-right: 3rem; }
 
-@media all and (max-width: 600px) {
-  .single__facts .chart {
-    width: 200px;
-    height: 100px; } }
+@media all and (max-width: 745px) {
+  .single {
+    overflow-y: scroll; }
+    .single__facts {
+      justify-content: center; }
+  .source {
+    display: none; }
+  .social {
+    margin-bottom: 0; } }
 
-@media all and (min-width: 601px) {
-  .single__facts .chart {
-    width: 300px;
-    height: 150px; } }
+@media all and (max-width: 450px) {
+  .landing__dashboard {
+    min-width: 95vw; }
+    .landing__dashboard--nav {
+      padding-left: 1rem;
+      padding-right: 1rem; }
+      .landing__dashboard--nav_item {
+        transform: scale(0.6);
+        margin: 0; } }
 
 .recipes__container {
   display: flex;
