@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from 'react-responsive-modal';
 import Nav from './Nav';
 import Container from './Container';
+import Bookmarks from './Bookmarks';
 import { APP_ID, APP_KEY } from '../private.js';
 import { auth, database } from '../base';
 import { logout } from '../auth';
@@ -17,20 +18,37 @@ class Dashboard extends React.Component {
     this.state = {
       email: '',
       search: '',
+      uid: null,
       searchResults: null,
       noResults: false,
       modalOpen: false,
-      displayName: ''
+      displayName: '',
+      bookmarks: null,
+      bookmarkKeys: []
     }
   }
   componentDidMount() {
+    // Fetching our users data & saved bookmarks
     const user = auth.currentUser;
     const ref = database.ref(`/users/${user.uid}/account/`);
     ref.once('value')
     .then(snap => {
       console.log(snap.val());
       this.setState({
-        displayName: snap.val().displayName
+        uid: user.uid,
+        displayName: snap.val().displayName,
+        bookmarks: snap.val().recipes
+      })
+    })
+    // Fetching the keys for each bookmark to display on dashboard
+    const keyRef = database.ref(`/users/${user.uid}/account/recipes`)
+    keyRef.on('value', (snap) => {
+      let childKey = [];
+      snap.forEach((child) => {
+        childKey.push(child.key)
+      })
+      this.setState({
+        bookmarkKeys: childKey
       })
     })
     console.log(user);
@@ -91,14 +109,15 @@ class Dashboard extends React.Component {
     }, 1500);
   }
   render() {
-    const { modalOpen, noResults, searchResults, displayName } = this.state;
+    const { modalOpen, noResults, searchResults, displayName, uid, bookmarks } = this.state;
     // Render the container of modal depending on what happens after submitting a search
     let searchContainer;
     if(noResults) {
       searchContainer = (<div className="landing__dashboard--error">No results found for your search.</div>)
     } else if(searchResults) {
-      searchContainer = (<Container recipes={searchResults} />)
+      searchContainer = (<Container uid={uid} recipes={searchResults} />)
     }
+
     return (
       <div className="landing__dashboard">
         <Nav
@@ -106,7 +125,9 @@ class Dashboard extends React.Component {
           onOpenModal={this.onOpenModal}
           displayName={displayName}
         />
-        {/* Recipes */}
+        <div className="bookmarks">
+          <Bookmarks bookmarks={bookmarks} keys={this.state.bookmarkKeys}/>
+        </div>
         <Modal
           open={modalOpen}
           onClose={this.onCloseModal}

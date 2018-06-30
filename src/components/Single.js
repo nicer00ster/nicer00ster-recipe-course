@@ -2,9 +2,11 @@ import React from 'react';
 import Chart from './Chart';
 import Ingredients from './Ingredients';
 import Modal from 'react-responsive-modal';
+import { saveRecipe } from '../auth';
 import bookmark from '../icons/bookmark.svg';
 import facebook from '../icons/facebook.svg';
 import twitter from '../icons/twitter.svg';
+import more from '../icons/more.svg';
 
 class Single extends React.Component {
   constructor(props) {
@@ -46,19 +48,18 @@ class Single extends React.Component {
               <Chart calories={recipe.calories} digest={recipe.digest} yield={recipe.yield} />
             </div>
             <div className="social">
-              <img className="social__bookmark" src={bookmark} alt="Bookmark" />
-              <div class="fb-share-button" data-href={recipe.url} data-layout="button" data-size="large" data-mobile-iframe="true">
+              <img onClick={() => saveRecipe(this.props.uid, recipe)} className="social__bookmark" src={bookmark} alt="Bookmark" />
+              <div className="fb-share-button" data-href={recipe.url} data-layout="button" data-size="large" data-mobile-iframe="true">
                 <a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=${recipe.url}`} class="fb-xfbml-parse-ignore">
                 <img className="social__facebook" src={facebook} alt="Facebook" />
                 </a>
               </div>
-              <a href={`http://twitter.com/home?status=Check out this awesome recipe! ${recipe.url}`}>
+              <a target="_blank" href={`http://twitter.com/home?status=Check out this awesome recipe! ${recipe.url}`}>
                 <img className="social__twitter" src={twitter} alt="Twitter" />
               </a>
-            </div>
-            <div className="source">
-              <a className="source__button" target="_blank" href={recipe.url}>Get Recipe!</a>
-              <h6 className="source__label">{recipe.source}</h6>
+              <a target="_blank" href={recipe.url}>
+                <img className="social__more" src={more} alt="Original Recipe" />
+              </a>
             </div>
           </div>
         </Modal>

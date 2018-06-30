@@ -16,7 +16,7 @@ class Recipe extends React.Component {
     return (
       <div>
         { this.state.single === true
-         ? <Single recipe={recipe} />
+         ? <Single uid={this.props.uid} recipe={recipe} />
          : null
         }
         <li className="recipe" onClick={() => this.handleView()}>

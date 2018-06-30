@@ -16,6 +16,23 @@ export function resetPassword(email) {
   return auth.sendPasswordResetEmail(email);
 }
 
+export function saveRecipe(uid, recipe) {
+  const fresh = database.ref().child(`users/${uid}/account/recipes`).push().key;
+
+  const data = {
+    label: recipe.label,
+    image: recipe.image,
+    calories: recipe.calories,
+    digest: recipe.digest,
+    yield: recipe.yield,
+    url: recipe.url,
+    key: fresh
+  }
+
+  return database.ref().child(`users/${uid}/account/recipes/` + fresh).update(data);
+}
+
+
 export function saveUser(user, displayName) {
   return database.ref().child(`users/${user.uid}/account`)
   .set({
