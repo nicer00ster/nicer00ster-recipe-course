@@ -18,6 +18,7 @@ class Single extends React.Component {
   }
   componentDidMount() {
     this.setState({ openModal: true })
+    console.log(window.location.pathname);
   }
   handleModal() {
     this.setState({
@@ -48,9 +49,10 @@ class Single extends React.Component {
               <Chart calories={recipe.calories} digest={recipe.digest} yield={recipe.yield} />
             </div>
             <div className="social">
+              {window.location.pathname === '/dashboard'}
               <img onClick={() => saveRecipe(this.props.uid, recipe)} className="social__bookmark" src={bookmark} alt="Bookmark" />
               <div className="fb-share-button" data-href={recipe.url} data-layout="button" data-size="large" data-mobile-iframe="true">
-                <a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=${recipe.url}`} class="fb-xfbml-parse-ignore">
+                <a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=${recipe.url}`} className="fb-xfbml-parse-ignore">
                 <img className="social__facebook" src={facebook} alt="Facebook" />
                 </a>
               </div>

@@ -2,7 +2,6 @@ import React from 'react';
 import Modal from 'react-responsive-modal';
 import Nav from './Nav';
 import Container from './Container';
-import Bookmarks from './Bookmarks';
 import { APP_ID, APP_KEY } from '../private.js';
 import { auth, database } from '../base';
 import { logout } from '../auth';
@@ -23,8 +22,7 @@ class Dashboard extends React.Component {
       noResults: false,
       modalOpen: false,
       displayName: '',
-      bookmarks: null,
-      bookmarkKeys: []
+      bookmarks: null
     }
   }
   componentDidMount() {
@@ -36,23 +34,26 @@ class Dashboard extends React.Component {
       console.log(snap.val());
       this.setState({
         uid: user.uid,
-        displayName: snap.val().displayName,
-        bookmarks: snap.val().recipes
+        displayName: snap.val().displayName
       })
     })
     // Fetching the keys for each bookmark to display on dashboard
     const keyRef = database.ref(`/users/${user.uid}/account/recipes`)
     keyRef.on('value', (snap) => {
-      let childKey = [];
-      snap.forEach((child) => {
-        childKey.push(child.key)
+      let bookmarkArray = [];
+      snap.forEach(child => {
+        const item = child.val();
+        item.key = child.key;
+        bookmarkArray.push(item);
       })
+      console.log(bookmarkArray);
       this.setState({
-        bookmarkKeys: childKey
+        bookmarks: bookmarkArray
       })
     })
     console.log(user);
   }
+
   handleSearch(e) {
     // Prevent whitespace in search bar
     let search = e.target.value.trim();
@@ -109,7 +110,14 @@ class Dashboard extends React.Component {
     }, 1500);
   }
   render() {
-    const { modalOpen, noResults, searchResults, displayName, uid, bookmarks } = this.state;
+    const {
+      modalOpen,
+      noResults,
+      searchResults,
+      displayName,
+      uid,
+      bookmarks
+    } = this.state;
     // Render the container of modal depending on what happens after submitting a search
     let searchContainer;
     if(noResults) {
@@ -126,7 +134,7 @@ class Dashboard extends React.Component {
           displayName={displayName}
         />
         <div className="bookmarks">
-          <Bookmarks bookmarks={bookmarks} keys={this.state.bookmarkKeys}/>
+          {bookmarks ? <Container uid={uid} recipes={bookmarks} /> : null }
         </div>
         <Modal
           open={modalOpen}
