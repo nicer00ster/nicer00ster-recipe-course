@@ -106,7 +106,6 @@ class Dashboard extends React.Component {
     setTimeout(() => {
       this.props.loading()
       logout();
-      notify.show('Come back soon! 🖐️', 500)
     }, 1500);
   }
   render() {

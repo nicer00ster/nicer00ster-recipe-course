@@ -2,6 +2,7 @@ import React from 'react';
 import Form from './Form';
 import { notify } from 'react-notify-toast';
 import { auth } from '../base';
+import { login } from '../auth';
 
 class Login extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class Login extends React.Component {
     e.preventDefault();
     const { email, password } = this.state;
     this.props.loading();
-    auth.signInWithEmailAndPassword(email, password)
+    login(email, password)
     .catch(err => {
       this.props.error(err.message);
       return;

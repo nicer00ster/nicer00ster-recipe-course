@@ -6,10 +6,11 @@ export function authenticate(email, password) {
 }
 
 export function login(email, password) {
-  return auth.signInwithEmailAndPassword(email, password);
+  return auth.signInWithEmailAndPassword(email, password);
 }
 
 export function logout() {
+  notify.show('Come back soon! 🖐️', 500);
   return auth.signOut();
 }
 

@@ -1,13 +1,16 @@
 {
   "name": "recipe-course",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "autoprefixer": "^8.6.4",
     "chart.js": "^2.7.2",
     "firebase": "^5.1.0",
     "node-sass-chokidar": "^1.3.0",
     "normalize.css": "^8.0.0",
     "npm-run-all": "^4.1.3",
+    "postcss": "^6.0.23",
+    "postcss-js": "^1.0.1",
     "react": "^16.4.1",
     "react-chartjs-2": "^2.7.2",
     "react-dom": "^16.4.1",
@@ -16,14 +19,15 @@
     "react-responsive-modal": "^3.0.3",
     "react-router-dom": "^4.3.1",
     "react-router-transition": "^1.2.1",
-    "react-scripts": "1.1.4",
-    "react-transition-group": "^2.3.1"
+    "react-scripts": "1.1.4"
   },
   "scripts": {
-    "build-css": "node-sass-chokidar src/ -o src/",
+    "post-css": "postcss src/sass/index.css -o src/sass/bundle.css -u autoprefixer",
+    "post-css-watch": "postcss src/sass/index.css -o src/sass/bundle.css -u autoprefixer -w",
+    "build-css": "node-sass-chokidar src/ -o src/ && npm run post-css",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
-    "start": "npm-run-all -p watch-css start-js",
+    "start": "npm-run-all -p watch-css post-css-watch start-js",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
