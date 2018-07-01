@@ -6,12 +6,58 @@
   left: 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
   overflow: hidden;
   background: rgba(46, 46, 49, .5);
   width: 100vw;
   height: 100vh;
   z-index: 9999;
-  & img {
+  & .loading {
     animation: fade 1s forwards infinite;
   }
+}
+
+.loading {
+  position: relative;
+}
+.loading > div {
+position: absolute;
+transform: translate(-50%, -50%);
+width: 40px;
+height: 40px;
+}
+.loading div > div {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+background: #f00;
+position: absolute;
+top: 100px;
+left: 32px;
+animation: circle 1s cubic-bezier(0, 0.5, 0.5, 1) infinite forwards;
+}
+.loading div:nth-child(1) div {
+animation: circle2 1s cubic-bezier(0, 0.5, 0.5, 1) infinite forwards;
+background: #fbd786;
+}
+.loading div:nth-child(2) div {
+animation-delay: -0.5s;
+background: #f7797d;
+}
+.loading div:nth-child(3) div {
+animation-delay: -0.25s;
+background: #fbd786;
+}
+.loading div:nth-child(4) div {
+animation-delay: 0s;
+background: #c6ffdd;
+}
+.loading div:nth-child(5) div {
+animation: circle3 1s cubic-bezier(0, 0.5, 0.5, 1) infinite forwards;
+background: #fbd786;
+}
+.loading {
+width: 200px !important;
+height: 200px !important;
+transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
 }

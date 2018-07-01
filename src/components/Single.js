@@ -1,13 +1,13 @@
 import React from 'react';
+import { saveRecipe, deleteRecipe } from '../auth';
 import Chart from './Chart';
 import Ingredients from './Ingredients';
 import Modal from 'react-responsive-modal';
-import { saveRecipe, deleteRecipe } from '../auth';
-import bookmark from '../icons/bookmark.svg';
-import facebook from '../icons/facebook.svg';
-import twitter from '../icons/twitter.svg';
-import more from '../icons/more.svg';
-import trash from '../icons/trash.svg';
+import bookmark from '../svg/bookmark.svg';
+import facebook from '../svg/facebook.svg';
+import twitter from '../svg/twitter.svg';
+import more from '../svg/more.svg';
+import trash from '../svg/trash.svg';
 
 class Single extends React.Component {
   constructor(props) {

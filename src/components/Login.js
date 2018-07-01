@@ -26,7 +26,8 @@ class Login extends React.Component {
   handleLogin(e) {
     e.preventDefault();
     const { email, password } = this.state;
-    this.props.loading();
+    const { loading } = this.props;
+    loading();
     login(email, password)
     .catch(err => {
       this.props.error(err.message);
@@ -34,7 +35,7 @@ class Login extends React.Component {
     })
     .then(() => {
       notify.show('Woo! 🍔😍', 'success', 3000);
-      return this.props.loading();
+      return loading();
     })
   }
 

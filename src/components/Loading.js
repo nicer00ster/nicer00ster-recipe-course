@@ -3,7 +3,33 @@ import loading from '../icons/loading.svg';
 
 const Loading = () => (
   <div className="loading__container">
-    <img src={loading} alt="Loading..." />
+      <div className="loading">
+        <div>
+          <div>
+
+          </div>
+        </div>
+        <div>
+          <div>
+
+          </div>
+        </div>
+        <div>
+          <div>
+
+          </div>
+        </div>
+        <div>
+          <div>
+
+          </div>
+        </div>
+        <div>
+          <div>
+
+          </div>
+        </div>
+      </div>
   </div>
 )
 

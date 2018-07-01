@@ -13,7 +13,7 @@ class App extends Component {
     this.state = {
       uid: null,
       authed: false,
-      loading: false,
+      loading: true,
       hasError: false,
       errorMsg: null
     }
@@ -125,7 +125,7 @@ class App extends Component {
             { hasError
               ? notify.show(`Oh no! 😱 ${errorMsg}`, 'error', 3500)
               : null }
-              <Notifications options={{ zIndex: 9999 }}/>
+              <Notifications options={{ zIndex: 9999, fontSize: '32px' }}/>
               <Routes
                 authed={authed}
                 loading={this.handleLoad}

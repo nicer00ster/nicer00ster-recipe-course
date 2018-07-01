@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-responsive-modal';
 import Nav from './Nav';
 import Container from './Container';
-import search from '../icons/search.svg';
+import search from '../svg/search.svg';
 import { notify } from 'react-notify-toast';
 import { APP_ID, APP_KEY } from '../private.js';
 import { auth, database } from '../base';

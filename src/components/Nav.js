@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import search from '../icons/search.svg';
-import settings from '../icons/settings.svg';
-import signout from '../icons/signout.svg';
+import search from '../svg/search.svg';
+import settings from '../svg/settings.svg';
+import signout from '../svg/signout.svg';
 
 // Example of a presentational component. Notice how we aren't running any javascript prior
 // to rendering the component.
