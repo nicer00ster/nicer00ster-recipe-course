@@ -1,5 +1,5 @@
 body {
-  background-image: url('../icons/megatron-geometric.svg');
+  background-image: url('../svg/megatron-geometric.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -19,7 +19,8 @@ body {
     width: 70vw;
     min-width: 450px;
     overflow-y: hidden;
-    background: linear-gradient(to bottom right, rgba(251,251,251,0.7) -100%, rgba(251,251,251,0.9) 100%);
+    background-color: rgba(251,251,251,0.85);
+    background-image: url('../svg/food.svg');
     border-radius: 2px;
     box-shadow: 0px .8rem 2rem #111;
     &--error {

@@ -1,5 +1,5 @@
 import React from 'react';
-import loading from '../icons/loading.svg';
+import loading from '../svg/loading.svg';
 
 const Loading = () => (
   <div className="loading__container">

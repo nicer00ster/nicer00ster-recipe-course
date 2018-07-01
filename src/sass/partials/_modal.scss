@@ -13,8 +13,8 @@
   border-top: 4px solid $pink;
   border-radius: 2px;
   color: #fafbfc;
-  background-color: #fefefe;
-  background-image: url('../icons/food.svg');
+  background-color: rgba(251,251,251,0.85);
+  background-image: url('../svg/food.svg');
   box-shadow: 0px .8rem 2rem #111;
   & h2 {
     flex: 1;
@@ -61,7 +61,7 @@
   cursor: pointer;
 }
 .dash__icon {
-  background-image: url('../icons/delete.svg');
+  background-image: url('../svg/delete.svg');
   color: #fff;
   transition: all .25s;
   &:hover {
@@ -94,7 +94,7 @@
     cursor: pointer;
   }
   &-icon {
-    background-image: url('../icons/delete.svg');
+    background-image: url('../svg/delete.svg');
     color: #fff;
     margin: 1.25rem;
     position: relative;

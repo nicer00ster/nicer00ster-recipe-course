@@ -7,6 +7,20 @@
     font-size: 18px;
     text-transform: uppercase;
     margin: 1rem;
+    & div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100px;
+      flex: 1;
+      cursor: pointer;
+      & div {
+        flex: 1;
+      }
+      & img {
+        flex: 1;
+      }
+    }
   }
   &_item {
     display: flex;
