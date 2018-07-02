@@ -1,7 +1,6 @@
 import React from 'react';
 import Form from './Form';
 import { notify } from 'react-notify-toast';
-import { auth } from '../base';
 import { login } from '../auth';
 
 class Login extends React.Component {

@@ -1,7 +1,7 @@
-.landing__dashboard--nav {
+.navbar {
   display: flex;
   justify-content: center;
-  &_welcome {
+  &__profile {
     flex: 3;
     color: #1f222e;
     font-size: 18px;
@@ -14,6 +14,31 @@
       width: 100px;
       flex: 1;
       cursor: pointer;
+      & .user__default {
+        flex: 1;
+        height: 80px;
+        width: 80px;
+        display: inline-block;
+        padding: 120px 0 0 0;
+        overflow: hidden;
+        box-sizing: border-box;
+        background: url('../svg/user.svg') center center no-repeat transparent;
+        border-radius: 20px;
+        background-size: 150px 100px;
+        cursor: pointer;
+      }
+      & .user__image {
+        flex: 1;
+        height: 80px;
+        width: 80px;
+        display: inline-block;
+        padding: 120px 0 0 0;
+        overflow: hidden;
+        box-sizing: border-box;
+        background: url('https://firebasestorage.googleapis.com/v0/b/react-recipes-2a68e.appspot.com/o/images%2FYX4mPVO5QLd2oT9Kxt0fbf01Bb42?alt=media&token=46ed5b95-0dd4-4952-bd55-1670e7512d5e') center center no-repeat transparent;
+        border-radius: 20px;
+        background-size: 150px 100px;
+      }
       & div {
         flex: 1;
       }
@@ -22,7 +47,7 @@
       }
     }
   }
-  &_item {
+  &__item {
     display: flex;
     flex-direction: column;
     justify-content: center;

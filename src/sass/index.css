@@ -150,27 +150,50 @@
 .landing__account--title:before, .landing__account--title:after {
   animation: 1s forwards reverse cubic-bezier(0.9, 0.2, 0.3, 1) turnt; }
 
-.landing__dashboard--nav {
+.navbar {
   display: flex;
   justify-content: center; }
-  .landing__dashboard--nav_welcome {
+  .navbar__profile {
     flex: 3;
     color: #1f222e;
     font-size: 18px;
     text-transform: uppercase;
     margin: 1rem; }
-    .landing__dashboard--nav_welcome div {
+    .navbar__profile div {
       display: flex;
       flex-direction: column;
       align-items: center;
       width: 100px;
       flex: 1;
       cursor: pointer; }
-      .landing__dashboard--nav_welcome div div {
+      .navbar__profile div .user__default {
+        flex: 1;
+        height: 80px;
+        width: 80px;
+        display: inline-block;
+        padding: 120px 0 0 0;
+        overflow: hidden;
+        box-sizing: border-box;
+        background: url("../svg/user.svg") center center no-repeat transparent;
+        border-radius: 20px;
+        background-size: 150px 100px;
+        cursor: pointer; }
+      .navbar__profile div .user__image {
+        flex: 1;
+        height: 80px;
+        width: 80px;
+        display: inline-block;
+        padding: 120px 0 0 0;
+        overflow: hidden;
+        box-sizing: border-box;
+        background: url("https://firebasestorage.googleapis.com/v0/b/react-recipes-2a68e.appspot.com/o/images%2FYX4mPVO5QLd2oT9Kxt0fbf01Bb42?alt=media&token=46ed5b95-0dd4-4952-bd55-1670e7512d5e") center center no-repeat transparent;
+        border-radius: 20px;
+        background-size: 150px 100px; }
+      .navbar__profile div div {
         flex: 1; }
-      .landing__dashboard--nav_welcome div img {
+      .navbar__profile div img {
         flex: 1; }
-  .landing__dashboard--nav_item {
+  .navbar__item {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -178,17 +201,17 @@
     flex: 1;
     list-style: none;
     margin: 1rem; }
-    .landing__dashboard--nav_item > a {
+    .navbar__item > a {
       color: #1f222e;
       text-align: center;
       text-decoration: none;
       text-transform: uppercase; }
-      .landing__dashboard--nav_item > a > div, .landing__dashboard--nav_item > a img {
+      .navbar__item > a > div, .navbar__item > a img {
         transition: all .25s;
         margin: .25rem; }
-      .landing__dashboard--nav_item > a:hover > img {
+      .navbar__item > a:hover > img {
         transform: scale(1.2); }
-      .landing__dashboard--nav_item > a:hover > div {
+      .navbar__item > a:hover > div {
         font-weight: 600;
         letter-spacing: 2px; }
 

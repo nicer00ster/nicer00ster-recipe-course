@@ -3,9 +3,8 @@ import Modal from 'react-responsive-modal';
 import Nav from './Nav';
 import Container from './Container';
 import search from '../svg/search.svg';
-import { notify } from 'react-notify-toast';
 import { APP_ID, APP_KEY } from '../private.js';
-import { auth, database } from '../base';
+import { auth, database, storage } from '../base';
 import { logout } from '../auth';
 
 class Dashboard extends React.Component {
@@ -54,7 +53,9 @@ class Dashboard extends React.Component {
     })
     console.log(user);
   }
+  handlePictureChange(e) {
 
+  }
   handleSearch(e) {
     // Prevent whitespace in search bar
     let search = e.target.value.trim();
@@ -131,6 +132,7 @@ class Dashboard extends React.Component {
           signOut={this.onSignOut}
           onOpenModal={this.onOpenModal}
           displayName={displayName}
+          uid={uid}
         />
         <div className="bookmarks">
           {bookmarks ? <Container uid={uid} recipes={bookmarks} /> : null }

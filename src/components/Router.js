@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import { AnimatedSwitch } from 'react-router-transition';
 import Dashboard from './Dashboard';
-import Account from './Account';
+import Register from './Register';
 import Login from './Login';
 import Settings from './Settings';
 
@@ -53,7 +53,7 @@ const Routes = ({ authed, loading, error, errorMsg }) => {
         atActive={{ opacity: 1 }}
         className="switch-wrapper">
         <Landing authed={authed} error={error} errorMsg={errorMsg} loading={loading} exact path="/" component={Login} />
-        <Landing authed={authed} error={error} errorMsg={errorMsg} loading={loading} exact path="/account" component={Account} />
+        <Landing authed={authed} error={error} errorMsg={errorMsg} loading={loading} exact path="/account" component={Register} />
         <Protected authed={authed} error={error} errorMsg={errorMsg} loading={loading} exact path="/settings" component={Settings} />
         <Protected authed={authed} error={error} errorMsg={errorMsg} loading={loading} exact path="/dashboard" component={Dashboard} />
         <Route render={() => <div>Not Found</div>} />

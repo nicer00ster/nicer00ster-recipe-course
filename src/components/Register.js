@@ -1,8 +1,8 @@
 import React from 'react';
-import { authenticate, saveUser } from '../auth';
+import { register, saveUser } from '../auth';
 import Form from './Form';
 
-class Account extends React.Component {
+class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,7 +14,7 @@ class Account extends React.Component {
   handleAccount(e) {
     e.preventDefault();
     const { username, email, password } = this.state;
-    authenticate(email, password)
+    register(email, password)
     .catch(err => {
       this.props.error(err.message);
     })
@@ -62,4 +62,4 @@ class Account extends React.Component {
   }
 }
 
-export default Account;
+export default Register;

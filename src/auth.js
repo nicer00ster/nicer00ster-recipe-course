@@ -1,7 +1,7 @@
-import { database, auth } from './base';
+import { database, auth, storage } from './base';
 import { notify } from 'react-notify-toast';
 
-export function authenticate(email, password) {
+export function register(email, password) {
   return auth.createUserWithEmailAndPassword(email, password);
 }
 
@@ -51,5 +51,14 @@ export function saveUser(user, displayName) {
     email: user.email,
     uid: user.uid,
     displayName
+  })
+}
+
+export function changeProfilePicture(uid, file) {
+  const image = new File([file], "file", { type: 'image/png', lastModified: Date.now() })
+  storage.child(`images/${uid}/`).put(image)
+  .then(snapshot => {
+    notify.show('Lookin\' sexy! 😘', 'success', 3000);
+    console.log('Uploaded file successfully!');
   })
 }
