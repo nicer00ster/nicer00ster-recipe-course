@@ -1,9 +1,11 @@
 import React from 'react';
+import { auth } from '../base';
 import { Link } from 'react-router-dom';
 import { changeProfilePicture } from '../auth';
 import search from '../svg/search.svg';
 import settings from '../svg/settings.svg';
 import signout from '../svg/signout.svg';
+import user from '../svg/user.svg';
 
 // Example of a presentational component. Notice how we aren't running any javascript prior
 // to rendering the component.
@@ -12,11 +14,19 @@ const Nav = ({ displayName, onOpenModal, signOut, uid }) => (
       <div className="navbar">
         <div className="navbar__profile">
           <div>
-            {}
-            <input className="user__image" onChange={(e) => changeProfilePicture(uid, e.target.files[0])} type="file"/>
-            <div>
+            <label for="avatar">
+              { auth.currentUser.photoURL === null
+                ? <img className="user__image" src={user} alt="Placeholder avatar" />
+                : <img className="user__image" src={auth.currentUser.photoURL} alt={`Picture of ${auth.currentUser.displayName}`}/>
+              }
+              <input
+                onChange={(e) => changeProfilePicture(uid, e.target.files[0])}
+                id="avatar"
+                style={{visibility: 'hidden'}}
+                type="file"
+              />
               {displayName}
-            </div>
+            </label>
           </div>
         </div>
         <div className="navbar__item">

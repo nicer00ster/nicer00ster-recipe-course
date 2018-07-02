@@ -160,39 +160,19 @@
     text-transform: uppercase;
     margin: 1rem; }
     .navbar__profile div {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100px;
-      flex: 1;
-      cursor: pointer; }
-      .navbar__profile div .user__default {
-        flex: 1;
-        height: 80px;
-        width: 80px;
-        display: inline-block;
-        padding: 120px 0 0 0;
-        overflow: hidden;
-        box-sizing: border-box;
-        background: url("../svg/user.svg") center center no-repeat transparent;
-        border-radius: 20px;
-        background-size: 150px 100px;
-        cursor: pointer; }
+      width: 200px;
+      flex: 1; }
+      .navbar__profile div label {
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; }
       .navbar__profile div .user__image {
         flex: 1;
-        height: 80px;
-        width: 80px;
-        display: inline-block;
-        padding: 120px 0 0 0;
-        overflow: hidden;
-        box-sizing: border-box;
-        background: url("../svg/user.svg") center center no-repeat transparent;
-        border-radius: 20px;
-        background-size: 150px 100px; }
-      .navbar__profile div div {
-        flex: 1; }
-      .navbar__profile div img {
-        flex: 1; }
+        height: 120px;
+        width: 120px;
+        border-radius: 50%; }
   .navbar__item {
     display: flex;
     flex-direction: column;
