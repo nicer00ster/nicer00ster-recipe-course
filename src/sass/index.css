@@ -152,7 +152,8 @@
 
 .navbar {
   display: flex;
-  justify-content: center; }
+  justify-content: center;
+  height: 150px; }
   .navbar__profile {
     flex: 3;
     color: #1f222e;
@@ -160,18 +161,20 @@
     text-transform: uppercase;
     margin: 1rem; }
     .navbar__profile div {
-      width: 200px;
+      width: 100%;
       flex: 1; }
       .navbar__profile div label {
         cursor: pointer;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center; }
+        width: 120px; }
+        .navbar__profile div label h6 {
+          margin: 0; }
       .navbar__profile div .user__image {
         flex: 1;
-        height: 120px;
-        width: 120px;
+        height: 80px;
+        width: 80px;
         border-radius: 50%; }
   .navbar__item {
     display: flex;
@@ -199,7 +202,8 @@ body {
   background-image: url("../svg/megatron-geometric.svg");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover; }
+  background-size: cover;
+  font-size: calc(1rem + ((1vw - .78rem) * 1.389)); }
 
 .landing {
   font-family: 'Gudea', sans-serif;
@@ -364,6 +368,7 @@ body {
     text-align: center;
     text-transform: uppercase;
     font-weight: 600;
+    line-height: 1;
     letter-spacing: 4px;
     z-index: 2;
     position: relative;
@@ -416,13 +421,11 @@ body {
     width: 100%;
     top: 0;
     right: 0;
-    background: linear-gradient(45deg, rgba(251, 215, 134, 0.8) 0%, rgba(251, 215, 134, 0) 70%), linear-gradient(135deg, rgba(247, 121, 125, 0.8) 10%, rgba(247, 121, 125, 0) 20%), linear-gradient(225deg, rgba(198, 255, 221, 0.8) 10%, rgba(198, 255, 221, 0) 80%), linear-gradient(315deg, rgba(251, 215, 134, 0.8) 100%, rgba(251, 215, 134, 0) 70%);
     opacity: 0.6;
-    z-index: 1;
-    clip-path: polygon(0 0, 100% 0, 100% calc(45% - 2vw), 0% 45%); }
+    z-index: 1; }
   .single__label {
-    flex: 1;
     width: 75%;
+    height: 100px;
     word-break: break-word;
     text-align: center;
     text-transform: uppercase;
@@ -449,7 +452,7 @@ body {
   .single__section {
     display: flex;
     flex-wrap: wrap;
-    flex: 2;
+    flex: 1;
     width: 100%;
     height: 100%; }
   .single__facts, .single__ingredients {
@@ -457,14 +460,14 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    flex: 2;
+    flex: 1;
     z-index: 1;
     margin: 1rem;
     color: #1f222e;
     height: 100%;
     width: 100%;
     min-width: 250px;
-    max-height: 400px;
+    max-height: 300px;
     border-radius: 4px;
     background: #fbfbfb;
     box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, 0.2); }
@@ -512,7 +515,7 @@ body {
 
 .social {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   position: fixed;
   flex: 1;
@@ -558,13 +561,13 @@ body {
   overflow-y: scroll;
   padding: .5rem;
   margin: 1rem;
-  height: 70%; }
+  height: 50%; }
   .recipes__container-empty {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    font-size: 1.5vw;
+    text-align: center;
     color: #2e3d49;
     font-weight: 100; }
 
@@ -654,7 +657,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 300px;
-  height: 50vh;
+  height: 70vh;
   border-radius: 2px;
   box-shadow: 0px .8rem 2rem #111;
   font-size: 1rem;
@@ -666,7 +669,7 @@ body {
     justify-content: center; }
     .settings form button {
       text-transform: uppercase;
-      margin: 1rem;
+      margin: .5rem;
       border-radius: 50px;
       background: transparent;
       padding: 10px 50px;

@@ -1,3 +1,4 @@
+import firebase from 'firebase';
 import { database, auth, storage } from './base';
 import { notify } from 'react-notify-toast';
 
@@ -45,7 +46,7 @@ export function deleteRecipe(uid, key) {
 
 
 export function saveUser(user, displayName) {
-  notify.show('Hey there newbie! 😄 Start searchin\' to get started!', 'success', 4500);
+  notify.show('Hey there newbie! 😄 Click search to get started!', 'success', 4500);
   return database.ref().child(`users/${user.uid}/account`)
   .set({
     email: user.email,
@@ -56,23 +57,20 @@ export function saveUser(user, displayName) {
 
 export function changeProfilePicture(uid, file) {
   const user = auth.currentUser;
-  const avatarRef = storage.ref(`images/${uid}.png`);
-  const image = new File([file], "file", { type: 'image/png', lastModified: Date.now() });
 
-  storage.ref(`images/${uid}/`).put(image)
+  storage.ref(`images/${uid}/`).put(file)
   .then(snap => {
     snap.ref.getDownloadURL()
     .then(url => {
       user.updateProfile({
         photoURL: url
       })
-      console.log(user);
+      notify.show('Lookin\' sexy! 😘', 'success', 3000);
     })
   })
+}
 
-
-  // .then(snapshot => {
-  //   notify.show('Lookin\' sexy! 😘', 'success', 3000);
-  //   console.log('Uploaded file successfully!');
-  // })
+export function updateSettings(uid, options) {
+  notify.show('Nice choice! 🤤', 'success', 3000);
+  return database.ref().child(`users/${uid}/account/settings`).update(options);
 }

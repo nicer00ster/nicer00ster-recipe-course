@@ -7,7 +7,8 @@ import Login from './Login';
 import Settings from './Settings';
 
 
-// Dashboard, must be authenticated with Firebase to view
+// Dashboard, must be authenticated with Firebase to view.
+// Otherwise, trying to direct to any other route will redirect you back at '/'
 const Protected = ({
     component: Component,
     authed,
@@ -26,7 +27,7 @@ const Protected = ({
   )
 }
 
-// Login/Register, if authenticatd redirect to dashboard
+// Login/Register, if authenticated redirect to dashboard
 const Landing = ({
     component: Component,
     authed,
@@ -50,8 +51,7 @@ const Routes = ({ authed, loading, error, errorMsg }) => {
       <AnimatedSwitch
         atEnter={{ opacity: 0 }}
         atLeave={{ opacity: 1 }}
-        atActive={{ opacity: 1 }}
-        className="switch-wrapper">
+        atActive={{ opacity: 1 }}>
         <Landing authed={authed} error={error} errorMsg={errorMsg} loading={loading} exact path="/" component={Login} />
         <Landing authed={authed} error={error} errorMsg={errorMsg} loading={loading} exact path="/account" component={Register} />
         <Protected authed={authed} error={error} errorMsg={errorMsg} loading={loading} exact path="/settings" component={Settings} />

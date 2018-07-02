@@ -1,6 +1,7 @@
 .navbar {
   display: flex;
   justify-content: center;
+  height: 150px;
   &__profile {
     flex: 3;
     color: #1f222e;
@@ -8,19 +9,22 @@
     text-transform: uppercase;
     margin: 1rem;
     & div {
-      width: 200px;
+      width: 100%;
       flex: 1;
       & label {
         cursor: pointer;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        width: 120px;
+        & h6 {
+          margin: 0;
+        }
       }
       & .user__image {
         flex: 1;
-        height: 120px;
-        width: 120px;
+        height: 80px;
+        width: 80px;
         border-radius: 50%;
         // border: 4px solid #2e3d49;
       }

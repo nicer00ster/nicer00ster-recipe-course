@@ -17,6 +17,7 @@ class Dashboard extends React.Component {
     this.state = {
       email: '',
       search: '',
+      settings: null,
       uid: null,
       searchResults: null,
       noResults: false,
@@ -34,7 +35,8 @@ class Dashboard extends React.Component {
       console.log(snap.val());
       this.setState({
         uid: user.uid,
-        displayName: snap.val().displayName
+        displayName: snap.val().displayName,
+        settings: snap.val().settings
       })
     })
     // Fetching the keys for each bookmark to display on dashboard
@@ -53,22 +55,21 @@ class Dashboard extends React.Component {
     })
     console.log(user);
   }
-  handlePictureChange(e) {
 
-  }
   handleSearch(e) {
     // Prevent whitespace in search bar
     let search = e.target.value.trim();
     this.setState({ search })
   }
   onSearchSubmit(e) {
+    const { search, settings } = this.state;
     const { loading } = this.props;
     // 1. Prevent page from reloading
     e.preventDefault();
     // 2. Render loading indicator
     loading()
     // 3. Fetch the results of the search
-    fetch(`https://api.edamam.com/search?q=${this.state.search}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=25`)
+    fetch(`https://api.edamam.com/search?q=${search}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=25${settings}`)
     .then(res => {
       return res.json();
     })

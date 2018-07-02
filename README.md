@@ -13,7 +13,7 @@ I will be creating a new repo with starter files and stepped solutions.
 React
 
 ```
-npm install -g create-react-app
+npm install -g postcss autoprefixer create-react-app
 
 ```
 

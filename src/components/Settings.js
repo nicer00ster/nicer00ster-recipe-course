@@ -1,24 +1,29 @@
 import React from 'react';
 import Option from './Option';
 import { Link } from 'react-router-dom';
+import { updateSettings } from '../auth';
+import { auth } from '../base';
 
 const filters = [
-  'Vegan Only',
+  'Vegan',
   'Vegetarian',
-  'Alcohol Free',
-  'Gluten Free',
-  'Wheat Free',
+  'Alcohol-Free',
+  'Gluten-Free',
+  'Wheat-Free',
   'Dairy Free',
-  'Egg Free',
-  'Nut Free',
-  'Fish Free',
+  'Egg-Free',
+  'Tree-Nut-Free',
+  'Fish-Free',
   'Kosher',
-  'No Sugar',
+  'Low-Sugar',
   'Paleo'
 ];
 
 class Settings extends React.Component {
-  componentWillMount = () => {
+  componentDidMount() {
+
+  }
+  componentWillMount() {
     this.selected = new Set();
   }
 
@@ -33,9 +38,12 @@ class Settings extends React.Component {
   handleSubmit = formSubmitEvent => {
     formSubmitEvent.preventDefault();
 
-    for(const checkbox of this.selected) {
-      console.log(checkbox, 'is selected.');
+    const settings = [];
+    for(const option of this.selected) {
+      return settings.push(option);
     }
+
+    updateSettings(auth.currentUser.uid, settings);
   }
 
 // Functions createOption and createOptions are presentational functions so we use parenthesis instead of brackets.

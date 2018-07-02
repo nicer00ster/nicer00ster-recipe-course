@@ -3,6 +3,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  font-size: calc(1rem + ((1vw - .78rem) * 1.389));
 }
 .landing {
   font-family: 'Gudea', sans-serif;
