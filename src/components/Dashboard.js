@@ -17,7 +17,7 @@ class Dashboard extends React.Component {
     this.state = {
       email: '',
       search: '',
-      settings: null,
+      settings: '',
       uid: null,
       searchResults: null,
       noResults: false,
@@ -26,6 +26,7 @@ class Dashboard extends React.Component {
       bookmarks: null
     }
   }
+
   componentDidMount() {
     // Fetching our users data & saved bookmarks
     const user = auth.currentUser;
@@ -55,7 +56,6 @@ class Dashboard extends React.Component {
     })
     console.log(user);
   }
-
   handleSearch(e) {
     // Prevent whitespace in search bar
     let search = e.target.value.trim();
@@ -69,10 +69,18 @@ class Dashboard extends React.Component {
     // 2. Render loading indicator
     loading()
     // 3. Fetch the results of the search
-    fetch(`https://api.edamam.com/search?q=${search}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=25${settings}`)
-    .then(res => {
-      return res.json();
-    })
+
+    const obj = settings.reduce((acc, cur, i) => {
+      acc[i] = cur;
+      return acc;
+    }, {});
+
+    const params = Object.keys(obj).map(key => 'health=' + obj[key]).join('&').toLowerCase();
+
+    fetch(`https://api.edamam.com/search?q=${search}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=25&${params}`)
+    // .then(res => {
+    //   return res.json();
+    // })
     .then(data => {
       if(data['count'] === 0 ) {
         this.setState({

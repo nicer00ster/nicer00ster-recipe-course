@@ -1,4 +1,3 @@
-import firebase from 'firebase';
 import { database, auth, storage } from './base';
 import { notify } from 'react-notify-toast';
 
@@ -46,7 +45,7 @@ export function deleteRecipe(uid, key) {
 
 
 export function saveUser(user, displayName) {
-  notify.show('Hey there newbie! 😄 Click search to get started!', 'success', 4500);
+  notify.show('Hey there newbie! 😄 Start searchin\' to get started!', 'success', 4500);
   return database.ref().child(`users/${user.uid}/account`)
   .set({
     email: user.email,
@@ -70,7 +69,7 @@ export function changeProfilePicture(uid, file) {
   })
 }
 
-export function updateSettings(uid, options) {
+export function updateSettings(uid, settings) {
   notify.show('Nice choice! 🤤', 'success', 3000);
-  return database.ref().child(`users/${uid}/account/settings`).update(options);
+  return database.ref().child(`users/${uid}/account/settings/`).update(settings);
 }
