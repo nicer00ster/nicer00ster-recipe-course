@@ -24,14 +24,16 @@ class Nav extends React.Component {
     const { uid } = this.props.uid;
     let reader = new FileReader();
     let file = e.target.files[0];
-    reader.onloadend = () => {
-      this.setState({
-        file,
-        render: reader.result
-      })
+    if(file) {
+      reader.onloadend = () => {
+        this.setState({
+          file,
+          render: reader.result
+        })
+      }
+      reader.readAsDataURL(file);
+      changeProfilePicture(uid, file);
     }
-    reader.readAsDataURL(file);
-    changeProfilePicture(uid, file);
   }
   render() {
     const { render } = this.state;

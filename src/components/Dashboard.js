@@ -78,9 +78,9 @@ class Dashboard extends React.Component {
     const params = Object.keys(obj).map(key => 'health=' + obj[key]).join('&').toLowerCase();
 
     fetch(`https://api.edamam.com/search?q=${search}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=25&${params}`)
-    // .then(res => {
-    //   return res.json();
-    // })
+    .then(res => {
+      return res.json();
+    })
     .then(data => {
       if(data['count'] === 0 ) {
         this.setState({

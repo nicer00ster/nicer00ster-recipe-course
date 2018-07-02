@@ -6,7 +6,7 @@ class Option extends React.Component {
   }
 
   toggleChange = () => {
-     const { handleChange, label } = this.props;
+     const { toggleCheckbox, label } = this.props;
 
      this.setState(({ isChecked }) => (
        {
@@ -14,7 +14,7 @@ class Option extends React.Component {
        }
      ));
 
-     handleChange(label);
+     toggleCheckbox(label);
    }
 
   render() {

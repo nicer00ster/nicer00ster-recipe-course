@@ -30,11 +30,13 @@
     text-align: center;
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 2rem;
     letter-spacing: 4px;
     z-index: 1;
     position: relative;
     color: #fbfbfb;
+    &:after {
+      font-size: 12px !important;
+    }
   }
   &__image {
     flex: 1;
@@ -71,7 +73,7 @@
     height: 100%;
     width: 100%;
     min-width: 250px;
-    max-height: 300px;
+    max-height: 75%;
     border-radius: 4px;
     background: #fbfbfb;
     box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
@@ -137,7 +139,7 @@
   flex: 1;
   z-index: 1;
   bottom: 0;
-  margin-bottom: 3rem;
+  padding-bottom: 3rem;
   width: 100%;
   &__bookmark, &__facebook, &__twitter, &__more, &__delete {
     transition: all .25s;
@@ -156,11 +158,8 @@
   .single {
     overflow-y: scroll;
     &__facts {
-      justify-content: center;
+      // justify-content: center;
     }
-  }
-  .source {
-    display: none;
   }
   .social {
     margin-bottom: 0;

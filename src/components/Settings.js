@@ -2,25 +2,29 @@ import React from 'react';
 import Option from './Option';
 import { Link } from 'react-router-dom';
 import { updateSettings } from '../auth';
-import { auth } from '../base';
+import { auth, database } from '../base';
 
 const filters = [
-  'Balanced',
-  'High-Protein',
-  'Alcohol-Free',
-  'Low-Fat',
-  'Low-Carb',
   'Vegetarian',
   'Vegan',
+  'Alcohol-Free',
   'Peanut-Free',
-  'Tree-Nut-Free',
   'Sugar-Conscious'
 ];
 
 class Settings extends React.Component {
-  // componentDidMount() {
-  //
-  // }
+  componentDidMount() {
+    const ref = database.ref().child(`users/${auth.currentUser.uid}/account/settings`);
+    ref.on('value', snap => {
+      snap.val().map(val => {
+        console.log(val);
+        console.log(filters.indexOf(val) > -1);
+        if(filters.indexOf(val) > -1) {
+          this.toggleCheckbox;
+        }
+      })
+    })
+  }
   componentWillMount() {
     this.selected = new Set();
   }
@@ -43,11 +47,13 @@ class Settings extends React.Component {
   }
 
 // Functions createOption and createOptions are presentational functions so we use parenthesis instead of brackets.
-  createOption = label => (
+  createOption = (label, checked) => (
     <Option
+      filters={filters}
       label={label}
-      handleChange={this.toggleCheckbox}
-      key={label} />
+      toggleCheckbox={this.toggleCheckbox}
+      key={label}
+    />
   )
 
   createOptions = () => (

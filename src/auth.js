@@ -70,6 +70,6 @@ export function changeProfilePicture(uid, file) {
 }
 
 export function updateSettings(uid, settings) {
-  notify.show('Nice choice! 🤤', 'success', 3000);
+  notify.show('👍', 'success', 3000);
   return database.ref().child(`users/${uid}/account/settings/`).update(settings);
 }
