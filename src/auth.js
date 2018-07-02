@@ -1,3 +1,4 @@
+import firebase from 'firebase';
 import { database, auth, storage } from './base';
 import { notify } from 'react-notify-toast';
 
@@ -55,10 +56,40 @@ export function saveUser(user, displayName) {
 }
 
 export function changeProfilePicture(uid, file) {
-  const image = new File([file], "file", { type: 'image/png', lastModified: Date.now() })
-  storage.child(`images/${uid}/`).put(image)
-  .then(snapshot => {
-    notify.show('Lookin\' sexy! 😘', 'success', 3000);
-    console.log('Uploaded file successfully!');
+  const image = new File([file], "file", { type: 'image/png', lastModified: Date.now() });
+
+  const task = storage.child(`images/${uid}/`).put(image);
+
+  task.on(firebase.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
+    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    console.log('Upload is ' + progress + '% done.');
+
+    switch(snapshot.state) {
+      case firebase.storage.TaskState.PAUSED:
+        console.log('Upload paused.');
+        break;
+      case firebase.storage.TaskState.RUNNING:
+        console.log('Upload is running.');
+        break;
+    }
+  }, error => {
+    switch(error.code) {
+      case 'storage/unauthorized':
+        break;
+      case 'storage/canceled':
+        break;
+      case 'storage/unknown':
+        break;
+    }
+  }, () => {
+    task.snapshot.ref.getDownloadURL()
+    .then((url) => {
+      console.log('File is available at', url);
+    })
   })
+
+  // .then(snapshot => {
+  //   notify.show('Lookin\' sexy! 😘', 'success', 3000);
+  //   console.log('Uploaded file successfully!');
+  // })
 }
