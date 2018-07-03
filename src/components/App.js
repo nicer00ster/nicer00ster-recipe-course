@@ -59,7 +59,13 @@ class App extends Component {
     }, 2500)
   }
   render() {
-    const { authed, loading, hasError, errorMsg } = this.state
+    const {
+      uid,
+      authed,
+      loading,
+      hasError,
+      errorMsg
+    } = this.state;
     return (
         <div id="particles">
           <Particles
@@ -127,6 +133,7 @@ class App extends Component {
               : null }
               <Notifications options={{ zIndex: 9999, fontSize: '32px' }}/>
               <Routes
+                uid={uid}
                 authed={authed}
                 loading={this.handleLoad}
                 error={this.handleError}

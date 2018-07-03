@@ -1,30 +1,36 @@
 import React from 'react';
 import { auth, database } from '../base';
+// import { toggleCheckbox } from '../helpers';
 
 
 class Option extends React.Component {
-  state = {
-    checked: false
+  constructor() {
+    super();
+    this.state = {
+      checked: false
+    }
   }
   componentDidMount() {
-    const { label, toggleCheckbox } = this.props;
+    const { label, selected, toggleCheckbox } = this.props;
     const ref = database.ref(`users/${auth.currentUser.uid}/account/settings`);
     ref.on('value', snap => {
       if(snap.val() !== null) {
         snap.val().map(val => {
           if(val === label) {
-            this.setState({ checked: true });
             toggleCheckbox(label);
+            this.setState({ checked: true })
           }
         })
       }
     })
   }
   toggleChange = () => {
+    const { checked } = this.state;
+    const { label, toggleCheckbox } = this.props;
     this.setState({
-      checked: !this.state.checked
+      checked: !checked
     })
-    this.props.toggleCheckbox(this.props.label)
+    toggleCheckbox(label);
   }
   render() {
     const { label } = this.props;

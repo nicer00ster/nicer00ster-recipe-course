@@ -11,6 +11,9 @@
   font-size: 1rem;
   background-color: rgba(251,251,251,0.9);
   background-image: url('../svg/food.svg');
+  & h2 {
+    font-weight: 100;
+  }
   & form {
     display: flex;
     flex-direction:column;

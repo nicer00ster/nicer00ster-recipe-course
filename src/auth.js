@@ -56,7 +56,6 @@ export function saveUser(user, displayName) {
 
 export function changeProfilePicture(uid, file) {
   const user = auth.currentUser;
-
   storage.ref(`images/${uid}/`).put(file)
   .then(snap => {
     snap.ref.getDownloadURL()
