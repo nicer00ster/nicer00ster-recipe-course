@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow-y: hidden;
+  overflow: hidden;
   width: 50%;
   max-height: 90%;
   border-top: 4px solid $pink;
@@ -85,7 +85,6 @@
     overflow-y:hidden;
     border-radius: 2px;
     color: #fbfbfb;
-    background-color: transparent;
     box-shadow: none;
   }
   &-close {

@@ -45,8 +45,8 @@ class Single extends React.Component {
           <div className="single">
             <div className="social">
               { recipe.key
-                ? <img onClick={() => deleteRecipe(uid, recipe.key) && this.handleModal()} className="social__delete" src={trash} alt="Bookmark" />
-                : <img onClick={() => saveRecipe(uid, recipe) && this.handleModal()} className="social__bookmark" src={bookmark} alt="Bookmark" />
+                ? <label><h6>Delete</h6><img onClick={() => deleteRecipe(uid, recipe.key) && this.handleModal()} className="social__delete" src={trash} alt="Bookmark" /></label>
+                : <label><h6>Bookmark</h6><img onClick={() => saveRecipe(uid, recipe) && this.handleModal()} className="social__bookmark" src={bookmark} alt="Bookmark" /></label>
               }
               <a target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=${recipe.url}`}>
                 <img className="social__facebook" src={facebook} alt="Facebook" />

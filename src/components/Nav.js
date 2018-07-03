@@ -12,13 +12,13 @@ class Nav extends React.Component {
     super(props);
     this.state = {
       file: '',
-      render: null
+      loadAvatar: null
     }
   }
   componentDidMount() {
     auth.currentUser.photoURL
-    ? this.setState({ render: auth.currentUser.photoURL })
-    : this.setState({ render: user })
+    ? this.setState({ loadAvatar: auth.currentUser.photoURL })
+    : this.setState({ loadAvatar: user })
   }
   handleChange(e) {
     const { uid } = this.props.uid;
@@ -28,7 +28,7 @@ class Nav extends React.Component {
       reader.onloadend = () => {
         this.setState({
           file,
-          render: reader.result
+          loadAvatar: reader.result
         })
       }
       reader.readAsDataURL(file);
@@ -38,40 +38,39 @@ class Nav extends React.Component {
   render() {
     const { render } = this.state;
     return (
-      <div>
-        <div className="navbar">
-          <div className="navbar__avatar">
-            <div>
-              <label htmlFor="avatar">
-                <img
-                  className="user__image"
-                  src={render}
-                  alt={`Avatar of ${auth.currentUser.displayName}`}/>
-                <input
-                  onChange={(e) => this.handleChange(e)}
-                  id="avatar"
-                  style={{ visibility: 'hidden' }}
-                  type="file"
-                />
-                <h6>{this.props.displayName}</h6>
-              </label>
-            </div>
+      <div className="navbar">
+        <div className="navbar__avatar">
+          <div>
+            <label htmlFor="avatar">
+              <h6 className="avatar__change">Change Avatar</h6>
+              <img
+                className="user__image"
+                src={render}
+                alt={`Avatar of ${auth.currentUser.displayName}`}/>
+              <input
+                onChange={(e) => this.handleChange(e)}
+                id="avatar"
+                style={{ visibility: 'hidden' }}
+                type="file"
+              />
+              <h6>{this.props.displayName}</h6>
+            </label>
           </div>
-          <div className="navbar__item">
-            <Link onClick={this.props.onOpenModal} to="/search"><img src={search} alt=""/>
-              <div>Search</div>
-            </Link>
-          </div>
-          <div className="navbar__item">
-            <Link to="/settings"><img src={settings} alt=""/>
-              <div>Settings</div>
-            </Link>
-          </div>
-          <div className="navbar__item">
-            <Link onClick={this.props.signOut} to="/"><img src={signout} alt=""/>
-              <div>Log Out</div>
-            </Link>
-          </div>
+        </div>
+        <div className="navbar__item">
+          <Link onClick={this.props.onOpenModal} to="/search"><img src={search} alt=""/>
+            <div>Search</div>
+          </Link>
+        </div>
+        <div className="navbar__item">
+          <Link to="/settings"><img src={settings} alt=""/>
+            <div>Settings</div>
+          </Link>
+        </div>
+        <div className="navbar__item">
+          <Link onClick={this.props.signOut} to="/"><img src={signout} alt=""/>
+            <div>Log Out</div>
+          </Link>
         </div>
       </div>
     )
