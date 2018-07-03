@@ -18,11 +18,11 @@ class Dashboard extends React.Component {
       email: '',
       search: '',
       settings: '',
+      displayName: '',
       uid: null,
       searchResults: null,
       noResults: false,
       modalOpen: false,
-      displayName: '',
       bookmarks: null
     }
   }
@@ -70,17 +70,19 @@ class Dashboard extends React.Component {
     loading()
     // 3. Fetch the results of the search
 
-    const obj = settings.reduce((acc, cur, i) => {
+    const obj = settings
+      ? settings.reduce((acc, cur, i) => {
       acc[i] = cur;
       return acc;
-    }, {});
+    }, {})
+      : null;
 
-    const params = Object.keys(obj).map(key => 'health=' + obj[key]).join('&').toLowerCase();
+    const params = obj !== null ? Object.keys(obj).map(key => 'health=' + obj[key]).join('&').toLowerCase() : null;
 
     fetch(`https://api.edamam.com/search?q=${search}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=25&${params}`)
-    // .then(res => {
-    //   return res.json();
-    // })
+    .then(res => {
+      return res.json();
+    })
     .then(data => {
       if(data['count'] === 0 ) {
         this.setState({
@@ -130,13 +132,13 @@ class Dashboard extends React.Component {
     // Render the container of modal depending on what happens after submitting a search
     let searchContainer;
     if(noResults) {
-      searchContainer = (<div className="landing__dashboard--error">No results found for your search.</div>)
+      searchContainer = (<div className="dashboard--error">No results found for your search.</div>)
     } else if(searchResults) {
       searchContainer = (<Container uid={uid} recipes={searchResults} />)
     }
 
     return (
-      <div className="landing__dashboard">
+      <div className="dashboard">
         <Nav
           signOut={this.onSignOut}
           onOpenModal={this.onOpenModal}
@@ -153,10 +155,10 @@ class Dashboard extends React.Component {
           closeIconSize={48}
           center
           classNames={{
-            overlay: 'dash__overlay',
-            modal: 'dash__modal',
-            closeButton: 'dash__close',
-            closeIcon: 'dash__icon'
+            overlay: 'search__overlay',
+            modal: 'search__modal',
+            closeButton: 'search__close',
+            closeIcon: 'search__icon'
           }}>
           <h2>Search for a recipe!</h2>
           <form ref={el => this.searchRef = el} onSubmit={(e) => this.onSearchSubmit(e)}>

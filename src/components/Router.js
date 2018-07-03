@@ -53,7 +53,7 @@ const Routes = ({ authed, loading, error, errorMsg }) => {
         atLeave={{ opacity: 1 }}
         atActive={{ opacity: 1 }}>
         <Landing authed={authed} error={error} errorMsg={errorMsg} loading={loading} exact path="/" component={Login} />
-        <Landing authed={authed} error={error} errorMsg={errorMsg} loading={loading} exact path="/account" component={Register} />
+        <Landing authed={authed} error={error} errorMsg={errorMsg} loading={loading} exact path="/register" component={Register} />
         <Protected authed={authed} error={error} errorMsg={errorMsg} loading={loading} exact path="/settings" component={Settings} />
         <Protected authed={authed} error={error} errorMsg={errorMsg} loading={loading} exact path="/dashboard" component={Dashboard} />
         <Route render={() => <div>Not Found</div>} />

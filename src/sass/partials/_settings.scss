@@ -4,16 +4,21 @@
   align-items:center;
   justify-content: center;
   width: 300px;
-  height: 70vh;
+  height: 60vh;
   border-radius: 2px;
   box-shadow: 0px .8rem 2rem #111;
+  border-top: 4px solid $pink;
   font-size: 1rem;
-  background-color: rgba(251,251,251,0.85);
+  background-color: rgba(251,251,251,0.9);
   background-image: url('../svg/food.svg');
   & form {
     display: flex;
     flex-direction:column;
     justify-content: center;
+    margin: 1rem;
+    & input {
+      margin: .25rem;
+    }
     & button {
       text-transform: uppercase;
       margin: .5rem;
@@ -23,7 +28,8 @@
       border: 2px solid $pink;
       color: $pink;
       text-transform: uppercase;
-      font-size: 11px;
+      font-size: 12px;
+      outline: none;
       cursor: pointer;
       transition: all .25s;
       &:hover {
@@ -31,5 +37,44 @@
         color: #fff;
       }
     }
+    & span {
+      padding-left: 1rem;
+    }
   }
+}
+
+input[type="checkbox"]{
+  appearance:none;
+  width:40px;
+  height:16px;
+  border:1px solid #aaa;
+  border-radius:2px;
+  background: #ffc2c4;
+  position:relative;
+  display:inline-block;
+  overflow:hidden;
+  vertical-align:middle;
+  transition: background 0.3s;
+  box-sizing:border-box;
+  outline: none;
+}
+input[type="checkbox"]:after{
+  content:'';
+  position:absolute;
+  top:-1px;
+  left:-1px;
+  width:14px;
+  height:14px;
+  background:white;
+  border:1px solid #aaa;
+  border-radius:2px;
+  transition: left 0.1s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+input[type="checkbox"]:checked{
+  background:#c6ffdd;
+  border-color:#ffc2c4;
+}
+input[type="checkbox"]:checked:after{
+  left:23px;
+  border-color:#ffc2c4;
 }

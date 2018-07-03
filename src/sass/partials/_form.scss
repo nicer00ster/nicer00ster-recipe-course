@@ -1,4 +1,4 @@
-.landing__login, .landing__account {
+.form__login, .form__account {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -96,7 +96,7 @@
   }
 }
 
-.landing__account {
+.form__account {
   &--title {
     &:before, &:after {
       animation: 1s forwards reverse cubic-bezier(0.9, 0.2, 0.3, 1.0) turnt;

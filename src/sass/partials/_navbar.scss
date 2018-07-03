@@ -2,7 +2,8 @@
   display: flex;
   justify-content: center;
   height: 150px;
-  &__profile {
+  overflow-x: hidden;
+  &__avatar {
     flex: 3;
     color: #1f222e;
     font-size: 18px;
@@ -18,6 +19,7 @@
         align-items: center;
         width: 120px;
         & h6 {
+          line-height: 0;
           margin: 0;
         }
       }
@@ -26,6 +28,12 @@
         height: 80px;
         width: 80px;
         border-radius: 50%;
+        border: 2px solid rgba(255,194,196,0.6);
+        transition: linear 0.25s;
+        &:hover {
+          transition: ease-out 0.2s;
+          border: 2px solid rgba(247,121,125,0.8);
+        }
         // border: 4px solid #2e3d49;
       }
     }

@@ -4,28 +4,19 @@ import { Link } from 'react-router-dom';
 import { updateSettings } from '../auth';
 import { auth } from '../base';
 
+// Filter options for searching
 const filters = [
-  'Balanced',
-  'High-Protein',
-  'Alcohol-Free',
-  'Low-Fat',
-  'Low-Carb',
   'Vegetarian',
   'Vegan',
+  'Alcohol-Free',
   'Peanut-Free',
-  'Tree-Nut-Free',
   'Sugar-Conscious'
 ];
 
-class Settings extends React.Component {
-  // componentDidMount() {
-  //
-  // }
-  componentWillMount() {
-    this.selected = new Set();
-  }
+const Settings = () => {
+  this.selected = new Set();
 
-  toggleCheckbox = label => {
+  const toggleCheckbox = label => {
     if(this.selected.has(label)) {
       this.selected.delete(label);
     } else {
@@ -33,38 +24,98 @@ class Settings extends React.Component {
     }
   }
 
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
     let settings = [];
     for(const option of this.selected) {
       settings.push(option);
     }
-    return updateSettings(auth.currentUser.uid, settings);
+    updateSettings(auth.currentUser.uid, settings);
   }
 
 // Functions createOption and createOptions are presentational functions so we use parenthesis instead of brackets.
-  createOption = label => (
+  const createOption = label => (
     <Option
       label={label}
-      handleChange={this.toggleCheckbox}
-      key={label} />
+      toggleCheckbox={toggleCheckbox}
+      key={label}
+      filters={filters}
+    />
   )
 
-  createOptions = () => (
-    filters.map(this.createOption)
+  const createOptions = () => (
+    filters.map(createOption)
   )
 
-  render() {
-    return (
-      <div className="settings">
-        <form onSubmit={this.handleSubmit}>
-          {this.createOptions()}
-          <button type="submit">Save</button>
-          <Link to="/dashboard"><button>Dashboard ➠</button></Link>
-        </form>
-      </div>
-    )
-  }
+  return (
+    <div className="settings">
+      <h2>Filters</h2>
+      <form onSubmit={handleSubmit}>
+        {createOptions()}
+        <button type="submit">Save</button>
+        <Link to="/dashboard"><button>Dashboard ➠</button></Link>
+      </form>
+    </div>
+  )
 }
+
+// class Settings extends React.Component {
+//   state = {
+//     filters: [
+//       'Vegetarian',
+//       'Vegan',
+//       'Alcohol-Free',
+//       'Peanut-Free',
+//       'Sugar-Conscious'
+//     ]
+//   }
+//   componentWillMount() {
+//     this.selected = new Set();
+//   }
+//
+//   toggleCheckbox = label => {
+//     if(this.selected.has(label)) {
+//       this.selected.delete(label);
+//     } else {
+//       this.selected.add(label);
+//     }
+//   }
+//
+//   handleSubmit = e => {
+//     e.preventDefault();
+//     let settings = [];
+//     for(const option of this.selected) {
+//       settings.push(option);
+//     }
+//     updateSettings(auth.currentUser.uid, settings);
+//   }
+//
+// // Functions createOption and createOptions are presentational functions so we use parenthesis instead of brackets.
+//   createOption = label => (
+//     <Option
+//       label={label}
+//       toggleCheckbox={this.toggleCheckbox}
+//       key={label}
+//       filters={this.state.filters}
+//     />
+//   )
+//
+//   createOptions = () => (
+//     this.state.filters.map(this.createOption)
+//   )
+//
+//   render() {
+//     return (
+//       <div className="settings">
+//         <h2>Filters</h2>
+//         <form onSubmit={this.handleSubmit}>
+//           {this.createOptions()}
+//           <button type="submit">Save</button>
+//           <Link to="/dashboard"><button>Dashboard ➠</button></Link>
+//         </form>
+//       </div>
+//     )
+//   }
+// }
 
 export default Settings;

@@ -3,7 +3,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  font-size: calc(1rem + ((1vw - .78rem) * 1.389));
+  // font-size: calc(1rem + ((1vw - .78rem) * 1.389));
 }
 .landing {
   font-family: 'Gudea', sans-serif;
@@ -15,20 +15,22 @@ body {
   height: 100vh;
   width: 100vw;
   max-width: 100%;
-  &__dashboard {
-    height: 70vh;
-    width: 70vw;
-    min-width: 450px;
-    overflow-y: hidden;
-    background-color: rgba(251,251,251,0.85);
-    background-image: url('../svg/food.svg');
-    border-radius: 2px;
-    box-shadow: 0px .8rem 2rem #111;
-    &--error {
-      text-transform: uppercase;
-      font-weight: 800;
-      color: #1f222e;
-    }
+}
+
+.dashboard {
+  height: 70vh;
+  width: 70vw;
+  min-width: 450px;
+  overflow-y: hidden;
+  background-color: rgba(251,251,251,0.9);
+  background-image: url('../svg/food.svg');
+  border-top: 4px solid $pink;
+  border-radius: 2px;
+  box-shadow: 0px .8rem 2rem #111;
+  &--error {
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #1f222e;
   }
 }
 

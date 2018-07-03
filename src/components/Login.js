@@ -49,7 +49,7 @@ class Login extends React.Component {
           handleEmail={(e) => this.handleEmail(e)}
           handlePassword={(e) => this.handlePassword(e)}
           message={`No account? Create one`}
-          redirect={'/account'}
+          redirect={'/register'}
           link={'here!'}
           button={'Log In'}
           location={this.props.location}

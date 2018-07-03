@@ -1,14 +1,14 @@
-.dash__overlay {
+.search__overlay {
   overflow-y: hidden;
 }
-.dash__modal {
+.search__modal {
   font-family: 'Gudea', sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow-y: hidden;
-  width: 100%;
+  width: 50%;
   max-height: 90%;
   border-top: 4px solid $pink;
   border-radius: 2px;
@@ -55,12 +55,12 @@
     }
   }
 }
-.dash__close {
+.search__close {
   color: #fff;
   outline: none;
   cursor: pointer;
 }
-.dash__icon {
+.search__icon {
   background-image: url('../svg/delete.svg');
   color: #fff;
   transition: all .25s;

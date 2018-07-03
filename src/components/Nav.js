@@ -24,31 +24,33 @@ class Nav extends React.Component {
     const { uid } = this.props.uid;
     let reader = new FileReader();
     let file = e.target.files[0];
-    reader.onloadend = () => {
-      this.setState({
-        file,
-        render: reader.result
-      })
+    if(file) {
+      reader.onloadend = () => {
+        this.setState({
+          file,
+          render: reader.result
+        })
+      }
+      reader.readAsDataURL(file);
+      changeProfilePicture(uid, file);
     }
-    reader.readAsDataURL(file);
-    changeProfilePicture(uid, file);
   }
   render() {
     const { render } = this.state;
     return (
       <div>
         <div className="navbar">
-          <div className="navbar__profile">
+          <div className="navbar__avatar">
             <div>
               <label htmlFor="avatar">
                 <img
                   className="user__image"
                   src={render}
-                  alt={`Picture of ${auth.currentUser.displayName}`}/>
+                  alt={`Avatar of ${auth.currentUser.displayName}`}/>
                 <input
                   onChange={(e) => this.handleChange(e)}
                   id="avatar"
-                  style={{visibility: 'hidden'}}
+                  style={{ visibility: 'hidden' }}
                   type="file"
                 />
                 <h6>{this.props.displayName}</h6>
