@@ -1,29 +1,19 @@
 import React from 'react';
 import Option from './Option';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { updateSettings } from '../auth';
 import { auth, database } from '../base';
 
-const filters = [
-  'Vegetarian',
-  'Vegan',
-  'Alcohol-Free',
-  'Peanut-Free',
-  'Sugar-Conscious'
-];
 
 class Settings extends React.Component {
-  componentDidMount() {
-    const ref = database.ref().child(`users/${auth.currentUser.uid}/account/settings`);
-    ref.on('value', snap => {
-      snap.val().map(val => {
-        console.log(val);
-        console.log(filters.indexOf(val) > -1);
-        if(filters.indexOf(val) > -1) {
-          this.toggleCheckbox;
-        }
-      })
-    })
+  state = {
+    filters: [
+      'Vegetarian',
+      'Vegan',
+      'Alcohol-Free',
+      'Peanut-Free',
+      'Sugar-Conscious'
+    ]
   }
   componentWillMount() {
     this.selected = new Set();
@@ -43,21 +33,22 @@ class Settings extends React.Component {
     for(const option of this.selected) {
       settings.push(option);
     }
-    return updateSettings(auth.currentUser.uid, settings);
+    updateSettings(auth.currentUser.uid, settings);
+    return <Redirect to="/dashboard" />
   }
 
 // Functions createOption and createOptions are presentational functions so we use parenthesis instead of brackets.
-  createOption = (label, checked) => (
+  createOption = label => (
     <Option
-      filters={filters}
       label={label}
       toggleCheckbox={this.toggleCheckbox}
       key={label}
+      filters={this.state.filters}
     />
   )
 
   createOptions = () => (
-    filters.map(this.createOption)
+    this.state.filters.map(this.createOption)
   )
 
   render() {

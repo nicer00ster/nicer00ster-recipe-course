@@ -71,5 +71,5 @@ export function changeProfilePicture(uid, file) {
 
 export function updateSettings(uid, settings) {
   notify.show('👍', 'success', 3000);
-  return database.ref().child(`users/${uid}/account/settings/`).update(settings);
+  return database.ref().child(`users/${uid}/account/settings/`).set(settings);
 }
