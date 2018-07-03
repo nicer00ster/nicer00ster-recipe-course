@@ -74,12 +74,9 @@
     height: 100%;
     width: 100%;
     min-width: 250px;
-<<<<<<< HEAD
     min-height: 300px;
     max-height: 100%;
-=======
     max-height: 75%;
->>>>>>> 21daff4120204dd82698ebae6520dabf50c85daf
     border-radius: 4px;
     background: #fbfbfb;
     box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
@@ -144,12 +141,9 @@
   position: relative;
   // flex: 1;
   z-index: 1;
-<<<<<<< HEAD
   // bottom: 0;
-=======
   bottom: 0;
   padding-bottom: 3rem;
->>>>>>> 21daff4120204dd82698ebae6520dabf50c85daf
   width: 100%;
   &__bookmark, &__facebook, &__twitter, &__more, &__delete {
     padding: .5rem;

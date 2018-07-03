@@ -69,11 +69,6 @@ export function changeProfilePicture(uid, file) {
 }
 
 export function updateSettings(uid, settings) {
-<<<<<<< HEAD
   notify.show('👍', 'success', 2500);
   return database.ref(`users/${uid}/account/settings/`).set(settings);
-=======
-  notify.show('👍', 'success', 3000);
-  return database.ref().child(`users/${uid}/account/settings/`).set(settings);
->>>>>>> 21daff4120204dd82698ebae6520dabf50c85daf
 }
