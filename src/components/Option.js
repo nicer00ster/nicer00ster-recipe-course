@@ -1,6 +1,5 @@
 import React from 'react';
 import { auth, database } from '../base';
-// import { toggleCheckbox } from '../helpers';
 
 
 class Option extends React.Component {

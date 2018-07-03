@@ -1,6 +1,5 @@
 import React from 'react';
 import Option from './Option';
-import { Link } from 'react-router-dom';
 import { auth } from '../base';
 import { updateSettings } from '../auth';
 
@@ -27,7 +26,10 @@ class Settings extends React.Component {
        console.log(option);
        settings.push(option);
      }
-     updateSettings(auth.currentUser.uid, settings);
+     updateSettings(auth.currentUser.uid, settings)
+     .then(() => {
+       return this.props.history.goBack();
+     })
    }
    toggleCheckbox = label => {
      if(this.selected.has(label)) {
@@ -52,8 +54,7 @@ class Settings extends React.Component {
         <h2>Filters</h2>
         <form onSubmit={this.handleSubmit}>
           {this.createOptions()}
-          <button type="submit">Save</button>
-          <Link to="/dashboard"><button>Dashboard ➠</button></Link>
+          <button type="submit">Save ➠</button>
         </form>
       </div>
     )

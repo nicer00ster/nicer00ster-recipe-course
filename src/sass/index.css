@@ -258,7 +258,7 @@ body {
   border-top: 4px solid #f7797d;
   border-radius: 2px;
   color: #fafbfc;
-  background-color: rgba(251, 251, 251, 0.85);
+  background-color: rgba(251, 251, 251, 0.95);
   background-image: url("../svg/food.svg");
   box-shadow: 0px .8rem 2rem #111; }
   .search__modal h2 {
@@ -433,6 +433,7 @@ body {
     z-index: 1; }
   .single__label {
     width: 75%;
+    flex: 1;
     height: 100px;
     word-break: break-word;
     text-align: center;
@@ -460,7 +461,7 @@ body {
   .single__section {
     display: flex;
     flex-wrap: wrap;
-    flex: 1;
+    flex: 4;
     width: 100%;
     height: 100%; }
   .single__facts, .single__ingredients {
@@ -475,7 +476,8 @@ body {
     height: 100%;
     width: 100%;
     min-width: 250px;
-    max-height: 75%;
+    min-height: 300px;
+    max-height: 100%;
     border-radius: 4px;
     background: #fbfbfb;
     box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, 0.2); }
@@ -523,21 +525,18 @@ body {
 
 .social {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  flex: 1;
+  position: relative;
   z-index: 1;
-  bottom: 0;
-  margin: 1rem;
   width: 100%; }
   .social__bookmark, .social__facebook, .social__twitter, .social__more, .social__delete {
+    padding: .5rem;
     transition: all .25s;
     cursor: pointer;
     filter: drop-shadow(0px 2px 2px #1f222e); }
     .social__bookmark:hover, .social__facebook:hover, .social__twitter:hover, .social__more:hover, .social__delete:hover {
       transform: scale(1.25); }
   .social__bookmark, .social__delete {
+    padding: 2rem;
     margin-right: 3rem; }
 
 @media all and (max-width: 745px) {
