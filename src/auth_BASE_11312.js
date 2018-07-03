@@ -19,7 +19,7 @@ export function resetPassword(email) {
 }
 
 export function saveRecipe(uid, recipe) {
-  const key = database.ref(`users/${uid}/account/recipes`).push().key;
+  const key = database.ref().child(`users/${uid}/account/recipes`).push().key;
   const data = {
     recipe: {
       label: recipe.label,
@@ -34,11 +34,11 @@ export function saveRecipe(uid, recipe) {
     }
   }
   notify.show('Nice choice! 🤤', 'success', 3000);
-  return database.ref(`users/${uid}/account/recipes/` + key).update(data);
+  return database.ref().child(`users/${uid}/account/recipes/` + key).update(data);
 }
 
 export function deleteRecipe(uid, key) {
-  const ref = database.ref(`users/${uid}/account/recipes/${key}`);
+  const ref = database.ref().child(`users/${uid}/account/recipes/${key}`);
   notify.show('Sayonara! ✌️', 'success', 3000);
   return ref.remove();
 }
@@ -46,7 +46,7 @@ export function deleteRecipe(uid, key) {
 
 export function saveUser(user, displayName) {
   notify.show('Hey there newbie! 😄 Start searchin\' to get started!', 'success', 4500);
-  return database.ref(`users/${user.uid}/account`)
+  return database.ref().child(`users/${user.uid}/account`)
   .set({
     email: user.email,
     uid: user.uid,
@@ -56,6 +56,7 @@ export function saveUser(user, displayName) {
 
 export function changeProfilePicture(uid, file) {
   const user = auth.currentUser;
+
   storage.ref(`images/${uid}/`).put(file)
   .then(snap => {
     snap.ref.getDownloadURL()
@@ -69,11 +70,6 @@ export function changeProfilePicture(uid, file) {
 }
 
 export function updateSettings(uid, settings) {
-<<<<<<< HEAD
-  notify.show('👍', 'success', 2500);
-  return database.ref(`users/${uid}/account/settings/`).set(settings);
-=======
-  notify.show('👍', 'success', 3000);
-  return database.ref().child(`users/${uid}/account/settings/`).set(settings);
->>>>>>> 21daff4120204dd82698ebae6520dabf50c85daf
+  notify.show('Nice choice! 🤤', 'success', 3000);
+  return database.ref().child(`users/${uid}/account/settings/`).update(settings);
 }

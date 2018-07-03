@@ -209,7 +209,12 @@ body {
   background-image: url("../svg/megatron-geometric.svg");
   background-position: center;
   background-repeat: no-repeat;
+<<<<<<< HEAD
   background-size: cover; }
+=======
+  background-size: cover;
+  font-size: calc(1rem + ((.88vw - .78rem) * 1.389)); }
+>>>>>>> 21daff4120204dd82698ebae6520dabf50c85daf
 
 .landing {
   font-family: 'Gudea', sans-serif;
@@ -243,7 +248,15 @@ body {
   height: 100%;
   z-index: -1; }
 
+<<<<<<< HEAD
 .search__overlay {
+=======
+@media all and (max-width: 900px) {
+  body {
+    font-size: calc(1.75rem + ((1vw - .78rem) * 1.389)); } }
+
+.dash__overlay {
+>>>>>>> 21daff4120204dd82698ebae6520dabf50c85daf
   overflow-y: hidden; }
 
 .search__modal {
@@ -439,11 +452,12 @@ body {
     text-align: center;
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 2rem;
     letter-spacing: 4px;
     z-index: 1;
     position: relative;
     color: #fbfbfb; }
+    .single__label:after {
+      font-size: 12px !important; }
   .single__image {
     flex: 1;
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2vw), 0% 100%);
@@ -476,8 +490,12 @@ body {
     height: 100%;
     width: 100%;
     min-width: 250px;
+<<<<<<< HEAD
     min-height: 300px;
     max-height: 100%;
+=======
+    max-height: 75%;
+>>>>>>> 21daff4120204dd82698ebae6520dabf50c85daf
     border-radius: 4px;
     background: #fbfbfb;
     box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, 0.2); }
@@ -527,6 +545,11 @@ body {
   display: flex;
   position: relative;
   z-index: 1;
+<<<<<<< HEAD
+=======
+  bottom: 0;
+  padding-bottom: 3rem;
+>>>>>>> 21daff4120204dd82698ebae6520dabf50c85daf
   width: 100%; }
   .social__bookmark, .social__facebook, .social__twitter, .social__more, .social__delete {
     padding: .5rem;
@@ -542,10 +565,6 @@ body {
 @media all and (max-width: 745px) {
   .single {
     overflow-y: scroll; }
-    .single__facts {
-      justify-content: center; }
-  .source {
-    display: none; }
   .social {
     margin-bottom: 0; } }
 
@@ -664,7 +683,11 @@ body {
   align-items: center;
   justify-content: center;
   width: 300px;
+<<<<<<< HEAD
   height: 60vh;
+=======
+  height: 50vh;
+>>>>>>> 21daff4120204dd82698ebae6520dabf50c85daf
   border-radius: 2px;
   box-shadow: 0px .8rem 2rem #111;
   border-top: 4px solid #f7797d;
