@@ -1,5 +1,4 @@
 # React Recipes
-!(https://raw.githubusercontent.com/nicer00ster/nicer00ster-recipe-course/blob/master/preview.png)
 Building a web app to use as my first course I'll be releasing within the next couple months on YouTube. Will be free. 🙋
 
 ## Getting Started
