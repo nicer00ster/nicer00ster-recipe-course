@@ -3,7 +3,7 @@ import Particles from 'react-particles-js';
 import Notifications, { notify } from 'react-notify-toast';
 import Routes from './Router';
 import Loading from './sfc/Loading';
-import { auth, localKey } from '../base';
+import { auth } from '../base';
 import { particleParams } from '../helpers';
 
 class App extends Component {
@@ -20,14 +20,12 @@ class App extends Component {
   componentDidMount() {
     this.removeListener = auth.onAuthStateChanged(user => {
       if(user) {
-        // window.localStorage.setItem(localKey, user.uid); // Uncomment these lines if you happen to need localStorage.
         this.setState({
           authed: true,
           loading: false,
           uid: user.uid
         })
       } else {
-        // window.localStorage.removeItem(localKey); // This one too.
         this.setState({
           authed: false,
           loading: false,

@@ -25,9 +25,7 @@ class Option extends React.Component {
   toggleChange = () => {
     const { checked } = this.state;
     const { label, toggleCheckbox } = this.props;
-    this.setState({
-      checked: !checked
-    })
+    this.setState({ checked: !checked });
     toggleCheckbox(label);
   }
   render() {
@@ -36,7 +34,7 @@ class Option extends React.Component {
     return (
       <div className="checkbox">
         <label>
-          <input type="checkbox"
+          <input
             type="checkbox"
             value={label}
             checked={checked}

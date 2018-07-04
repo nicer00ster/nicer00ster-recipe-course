@@ -4,7 +4,7 @@ import Nav from './Nav';
 import Container from './sfc/Container';
 import search from '../svg/search.svg';
 import { APP_ID, APP_KEY } from '../private.js';
-import { auth, database, storage } from '../base';
+import { auth, database } from '../base';
 import { logout } from '../auth';
 
 class Dashboard extends React.Component {
