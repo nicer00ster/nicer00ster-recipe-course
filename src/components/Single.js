@@ -1,7 +1,7 @@
 import React from 'react';
 import { saveRecipe, deleteRecipe } from '../auth';
-import Chart from './Chart';
-import Ingredients from './Ingredients';
+import Chart from './sfc/Chart';
+import Ingredients from './sfc/Ingredients';
 import Modal from 'react-responsive-modal';
 import bookmark from '../svg/bookmark.svg';
 import facebook from '../svg/facebook.svg';
@@ -10,9 +10,9 @@ import more from '../svg/more.svg';
 import trash from '../svg/trash.svg';
 
 class Single extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleModal = this.handleModal.bind(this);
+  constructor() {
+    super();
+    // this.handleModal = this.handleModal.bind(this);
     this.state = {
       openModal: false
     }
@@ -21,7 +21,14 @@ class Single extends React.Component {
     this.setState({ openModal: true })
     console.log(this.props.recipe)
   }
-  handleModal() {
+  // Keep this function here with the binding within the constructor to give an
+  // example of why we use function expressions, opposed to function declarations.
+  // handleModal() {
+  //   this.setState({
+  //     openModal: !this.state.openModal
+  //   })
+  // }
+  handleModal = () => {
     this.setState({
       openModal: !this.state.openModal
     })

@@ -1,24 +1,24 @@
 import { database, auth, storage } from './base';
 import { notify } from 'react-notify-toast';
 
-export function register(email, password) {
+export const register = (email, password) => {
   return auth.createUserWithEmailAndPassword(email, password);
 }
 
-export function login(email, password) {
+export const login = (email, password) => {
   return auth.signInWithEmailAndPassword(email, password);
 }
 
-export function logout() {
+export const logout = () => {
   notify.show('Come back soon! 🖐️', 500);
   return auth.signOut();
 }
 
-export function resetPassword(email) {
+export const resetPassword = (email) => {
   return auth.sendPasswordResetEmail(email);
 }
 
-export function saveRecipe(uid, recipe) {
+export const saveRecipe = (uid, recipe) => {
   const key = database.ref(`users/${uid}/account/recipes`).push().key;
   const data = {
     recipe: {
@@ -37,14 +37,14 @@ export function saveRecipe(uid, recipe) {
   return database.ref(`users/${uid}/account/recipes/` + key).update(data);
 }
 
-export function deleteRecipe(uid, key) {
+export const deleteRecipe = (uid, key) => {
   const ref = database.ref(`users/${uid}/account/recipes/${key}`);
   notify.show('Sayonara! ✌️', 'success', 3000);
   return ref.remove();
 }
 
 
-export function saveUser(user, displayName) {
+export const saveUser = (user, displayName) => {
   notify.show('Hey there newbie! 😄 Start searchin\' to get started!', 'success', 4500);
   return database.ref(`users/${user.uid}/account`)
   .set({
@@ -54,7 +54,7 @@ export function saveUser(user, displayName) {
   })
 }
 
-export function changeProfilePicture(uid, file) {
+export const changeProfilePicture = (uid, file) => {
   const user = auth.currentUser;
   storage.ref(`images/${uid}/`).put(file)
   .then(snap => {
@@ -68,7 +68,7 @@ export function changeProfilePicture(uid, file) {
   })
 }
 
-export function updateSettings(uid, settings) {
+export const updateSettings = (uid, settings) => {
   notify.show('👍', 'success', 2500);
   return database.ref(`users/${uid}/account/settings/`).set(settings);
 }

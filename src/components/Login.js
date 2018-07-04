@@ -1,58 +1,44 @@
 import React from 'react';
-import Form from './Form';
-import { notify } from 'react-notify-toast';
-import { login } from '../auth';
+import Form from './sfc/Form';
+import { loggingIn } from '../helpers';
 
 class Login extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       email: '',
       password: ''
     }
   }
 
-  handleEmail(e) {
+  handleEmail = e => {
     this.setState({
       email: e.target.value
     })
   }
-  handlePassword(e) {
+  handlePassword = e => {
     this.setState({
       password: e.target.value
     })
   }
-  handleLogin(e) {
-    e.preventDefault();
-    const { email, password } = this.state;
-    const { loading } = this.props;
-    loading();
-    login(email, password)
-    .catch(err => {
-      this.props.error(err.message);
-      return;
-    })
-    .then(() => {
-      notify.show('Woo! 🍔😍', 'success', 3000);
-      return loading();
-    })
-  }
 
   render() {
+    const { email, password } = this.state;
+    const { loading, error, location } = this.props;
     return (
       <div>
         <Form
           title={'REACT RECIPES!'}
           subTitle={'Log in to get started'}
           className={'login'}
-          onSubmit={(e) => this.handleLogin(e)}
+          onSubmit={(e) => loggingIn(e, email, password, loading, error)}
           handleEmail={(e) => this.handleEmail(e)}
           handlePassword={(e) => this.handlePassword(e)}
           message={`No account? Create one`}
           redirect={'/register'}
           link={'here!'}
           button={'Log In'}
-          location={this.props.location}
+          location={location}
         />
       </div>
     )

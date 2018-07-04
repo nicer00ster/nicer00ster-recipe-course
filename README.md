@@ -10,8 +10,15 @@ I will be creating a new repo with starter files and stepped solutions.
 
 ### Prerequisites
 
-React
-
+NodeJS
+```
+https://nodejs.org/en/
+```
+React Developer Tools (If you're following the course)
+```
+https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi
+```
+React & PostCSS
 ```
 npm install -g postcss autoprefixer create-react-app
 

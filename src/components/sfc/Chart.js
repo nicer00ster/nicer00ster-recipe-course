@@ -1,44 +1,8 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
-
-
-const fetchChartData = (digest, servings) => {
-  if(servings === undefined) servings = 1;
-
-  let data = [];
-
-  for(var i = 0; i < 3; i++) {
-    data.push(Math.round(digest[i].total/servings));
-  }
-
-  let chartData = {
-    labels: ["Fat (g)", "Carbs (g)", "Protein (g)"],
-    datasets: [{
-      backgroundColor: ['#f7797d', '#fbd786', '#c6ffdd'],
-      data
-    }]
-  };
-
-  let options = {
-    legend: {
-      position: 'bottom',
-      responsive: true,
-      maintainAspectRatio: false,
-      labels: {
-        boxWidth: 30,
-        fontSize: 12,
-        fontFamily: 'Gudea',
-        fontColor: '#1f222e'
-      }
-    }
-  }
-
-  return [chartData, options];
-}
-
+import { fetchChartData } from '../../helpers';
 
 const Chart = props => {
-
   let caloriesInfo = null;
 
   if(props.calories && props.yield) {

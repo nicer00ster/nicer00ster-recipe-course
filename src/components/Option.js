@@ -1,7 +1,6 @@
 import React from 'react';
 import { auth, database } from '../base';
 
-
 class Option extends React.Component {
   constructor() {
     super();

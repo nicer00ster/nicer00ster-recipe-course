@@ -1,19 +1,16 @@
 import React from 'react';
 import Modal from 'react-responsive-modal';
 import Nav from './Nav';
-import Container from './Container';
+import Container from './sfc/Container';
 import search from '../svg/search.svg';
 import { APP_ID, APP_KEY } from '../private.js';
 import { auth, database, storage } from '../base';
 import { logout } from '../auth';
 
 class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.searchRef = React.createRef();
-    this.onOpenModal = this.onOpenModal.bind(this);
-    this.onCloseModal = this.onCloseModal.bind(this);
-    this.onSignOut = this.onSignOut.bind(this);
     this.state = {
       email: '',
       search: '',
@@ -56,12 +53,12 @@ class Dashboard extends React.Component {
     })
     console.log(user);
   }
-  handleSearch(e) {
+  handleSearch = e => {
     // Prevent whitespace in search bar
     let search = e.target.value.trim();
     this.setState({ search })
   }
-  onSearchSubmit(e) {
+  onSearchSubmit = e => {
     const { search, settings } = this.state;
     const { loading } = this.props;
     // 1. Prevent page from reloading
@@ -70,13 +67,12 @@ class Dashboard extends React.Component {
     loading()
     // 3. Fetch the results of the search
 
-    const obj = settings
-      ? settings.reduce((acc, cur, i) => {
-      acc[i] = cur;
-      return acc;
-    }, {})
-      : null;
+    // Convert our array of settings to an object so we can use them
+    // in our parameters in our query.
+    const obj = Object.assign({}, settings);
 
+    // If settings exists, loop over them, join each index of the array together
+    // as a string with &health= and return the string in lowercase.
     const params = obj !== null ? Object.keys(obj).map(key => 'health=' + obj[key]).join('&').toLowerCase() : null;
 
     fetch(`https://api.edamam.com/search?q=${search}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=25&${params}`)
@@ -102,18 +98,19 @@ class Dashboard extends React.Component {
       this.setState({ search: '' })
     })
   }
-  onOpenModal(e) {
+
+  onOpenModal = e => {
     e.preventDefault();
     this.setState({ modalOpen: true })
   }
-  onCloseModal() {
+  onCloseModal = () => {
     this.setState({
       modalOpen: false,
       noResults: false,
       searchResults: ''
     })
   }
-  onSignOut() {
+  onSignOut = () => {
     this.props.loading()
     setTimeout(() => {
       this.props.loading()

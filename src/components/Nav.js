@@ -8,35 +8,34 @@ import signout from '../svg/signout.svg';
 import user from '../svg/user.svg';
 
 class Nav extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       file: '',
-      loadAvatar: null
+      avatar: null
     }
   }
   componentDidMount() {
     auth.currentUser.photoURL
-    ? this.setState({ loadAvatar: auth.currentUser.photoURL })
-    : this.setState({ loadAvatar: user })
+    ? this.setState({ avatar: auth.currentUser.photoURL })
+    : this.setState({ avatar: user })
   }
-  handleChange(e) {
-    const { uid } = this.props.uid;
+  handleChange = e => {
     let reader = new FileReader();
     let file = e.target.files[0];
     if(file) {
       reader.onloadend = () => {
         this.setState({
           file,
-          loadAvatar: reader.result
+          avatar: reader.result
         })
       }
       reader.readAsDataURL(file);
-      changeProfilePicture(uid, file);
+      changeProfilePicture(auth.currentUser.uid, file);
     }
   }
   render() {
-    const { render } = this.state;
+    const { avatar } = this.state;
     return (
       <div className="navbar">
         <div className="navbar__avatar">
@@ -45,7 +44,7 @@ class Nav extends React.Component {
               <h6 className="avatar__change">Change Avatar</h6>
               <img
                 className="user__image"
-                src={render}
+                src={avatar}
                 alt={`Avatar of ${auth.currentUser.displayName}`}/>
               <input
                 onChange={(e) => this.handleChange(e)}

@@ -2,13 +2,13 @@ import React from 'react';
 import Single from './Single';
 
 class Recipe extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       single: false
     }
   }
-  handleView() {
+  handleView = () => {
     this.setState({ single: !this.state.single });
   }
   render() {

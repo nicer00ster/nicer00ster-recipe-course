@@ -16,14 +16,13 @@ class Settings extends React.Component {
       ]
     }
   }
-  componentWillMount = () => {
+  componentWillMount() {
     this.selected = new Set();
   }
   handleSubmit = e => {
      e.preventDefault();
      let settings = [];
      for(const option of this.selected) {
-       console.log(option);
        settings.push(option);
      }
      updateSettings(auth.currentUser.uid, settings)

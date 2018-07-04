@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import Particles from 'react-particles-js';
 import Notifications, { notify } from 'react-notify-toast';
 import Routes from './Router';
-import Loading from './Loading';
+import Loading from './sfc/Loading';
 import { auth, localKey } from '../base';
+import { particleParams } from '../helpers';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.handleLoad = this.handleLoad.bind(this);
-    this.handleError = this.handleError.bind(this);
+  constructor() {
+    super();
     this.state = {
       uid: null,
       authed: false,
@@ -21,14 +20,14 @@ class App extends Component {
   componentDidMount() {
     this.removeListener = auth.onAuthStateChanged(user => {
       if(user) {
-        window.localStorage.setItem(localKey, user.uid);
+        // window.localStorage.setItem(localKey, user.uid); // Uncomment these lines if you happen to need localStorage.
         this.setState({
           authed: true,
           loading: false,
           uid: user.uid
         })
       } else {
-        window.localStorage.removeItem(localKey);
+        // window.localStorage.removeItem(localKey); // This one too.
         this.setState({
           authed: false,
           loading: false,
@@ -41,12 +40,12 @@ class App extends Component {
   componentWillUnmount() {
     this.removeListener();
   }
-  handleLoad() {
+  handleLoad = () => {
     this.setState({
       loading: !this.state.loading
     });
   }
-  handleError(errorMsg) {
+  handleError = (errorMsg) => {
     this.setState({
       hasError: !this.state.hasError,
       errorMsg: errorMsg
@@ -69,61 +68,7 @@ class App extends Component {
     return (
         <div id="particles">
           <Particles
-            params={{
-                "particles": {
-                  "number": {
-                    "value": 100,
-                    "density": {
-                      "enable": true,
-                      "value_area": 800
-                    }
-                  },
-                  "color": {
-                    "value": "#fff"
-                  },
-                  "shape": {
-                    "type": "triangle",
-                    "stroke": {
-                      "width": 0,
-                      "color": "#000000"
-                    },
-                    "polygon": {
-                      "nb_sides": 3
-                    },
-                  },
-                  "opacity": {
-                    "value": 0.5,
-                    "random": true,
-                  },
-                  "size": {
-                    "value": 10,
-                    "random": true,
-                    "anim": {
-                      "enable": true,
-                      "speed": 4,
-                      "size_min": 0.1,
-                      "sync": false
-                    }
-                  },
-                  "line_linked": {
-                    "enable": false,
-                    "distance": 500,
-                    "color": "#ffffff",
-                    "opacity": 0.4,
-                    "width": 2
-                  },
-                  "move": {
-                    "enable": true,
-                    "speed": 2,
-                    "direction": "none",
-                    "random": true,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                  }
-                },
-            }}
-          />
+            params={particleParams} />
           <div className="landing">
             { loading
               ? <Loading />
