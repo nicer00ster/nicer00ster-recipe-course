@@ -32,7 +32,6 @@ class Register extends React.Component {
     return (
       <div>
         <Form
-          title={'REACT RECIPES!'}
           subTitle={'Create an account'}
           className={'account'}
           onSubmit={(e) => createAccount(e, username, email, password, loading)}

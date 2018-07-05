@@ -5,7 +5,7 @@ const Form = props => (
     <div>
       <form onSubmit={props.onSubmit} className={`form__${props.className}`}>
         <div className={`form__${props.className}--title`}>
-          {props.title}
+          REACT RECIPES!
         </div>
         <h4>{props.subTitle}</h4>
         { props.location.pathname === "/register"

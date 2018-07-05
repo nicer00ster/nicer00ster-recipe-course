@@ -26,9 +26,7 @@ class Login extends React.Component {
     const { email, password } = this.state;
     const { loading, error, location } = this.props;
     return (
-      <div>
         <Form
-          title={'REACT RECIPES!'}
           subTitle={'Log in to get started'}
           className={'login'}
           onSubmit={(e) => loggingIn(e, email, password, loading, error)}
@@ -40,7 +38,6 @@ class Login extends React.Component {
           button={'Log In'}
           location={location}
         />
-      </div>
     )
   }
 }
