@@ -2,7 +2,7 @@ import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { fetchChartData } from '../../helpers';
 
-const Chart = props => {
+const Donut = props => {
   let caloriesInfo = null;
 
   if(props.calories && props.yield) {
@@ -36,4 +36,4 @@ const Chart = props => {
   )
 }
 
-export default Chart;
+export default Donut;

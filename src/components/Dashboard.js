@@ -1,30 +1,35 @@
 import React from 'react';
 import Modal from 'react-responsive-modal';
-import Nav from './Nav';
+import Nav from './sfc/Nav';
 import Container from './sfc/Container';
-import search from '../svg/search.svg';
 import { APP_ID, APP_KEY } from '../private.js';
 import { auth, database } from '../base';
-import { logout } from '../auth';
+import { logout, changeProfilePicture } from '../auth';
+import search from '../svg/search.svg';
+import user from '../svg/user.svg';
 
 class Dashboard extends React.Component {
   constructor() {
     super();
     this.searchRef = React.createRef();
     this.state = {
-      email: '',
+      avatar: user,
+      file: '',
       search: '',
       settings: '',
       displayName: '',
-      uid: null,
       searchResults: null,
       noResults: false,
       modalOpen: false,
       bookmarks: null
     }
   }
-
   componentDidMount() {
+    // Check if user has an avatar set, if not render the user.svg
+    if(auth.currentUser.photoURL !== null) {
+      this.setState({ avatar: auth.currentUser.photoURL })
+    }
+
     // Fetching our users data & saved bookmarks
     const user = auth.currentUser;
     const ref = database.ref(`/users/${user.uid}/account/`);
@@ -32,7 +37,6 @@ class Dashboard extends React.Component {
     .then(snap => {
       console.log(snap.val());
       this.setState({
-        uid: user.uid,
         displayName: snap.val().displayName,
         settings: snap.val().settings
       })
@@ -40,18 +44,32 @@ class Dashboard extends React.Component {
     // Fetching the keys for each bookmark to display on dashboard
     const keyRef = database.ref(`/users/${user.uid}/account/recipes`)
     keyRef.on('value', (snap) => {
-      let bookmarkArray = [];
+      let bookmarks = [];
       snap.forEach(child => {
         const item = child.val();
         item.key = child.key;
-        bookmarkArray.push(item);
+        bookmarks.push(item);
       })
-      console.log(bookmarkArray);
+      console.log(bookmarks);
       this.setState({
-        bookmarks: bookmarkArray
+        bookmarks
       })
     })
     console.log(user);
+  }
+  handleAvatar = e => {
+    let reader = new FileReader();
+    let file = e.target.files[0];
+    if(file) {
+      reader.onloadend = () => {
+        this.setState({
+          file,
+          avatar: reader.result
+        })
+      }
+      reader.readAsDataURL(file);
+      changeProfilePicture(this.props.uid, file);
+    }
   }
   handleSearch = e => {
     // Prevent whitespace in search bar
@@ -99,8 +117,7 @@ class Dashboard extends React.Component {
     })
   }
 
-  onOpenModal = e => {
-    e.preventDefault();
+  onOpenModal = () => {
     this.setState({ modalOpen: true })
   }
   onCloseModal = () => {
@@ -118,12 +135,14 @@ class Dashboard extends React.Component {
     }, 1500);
   }
   render() {
+    const { uid } = this.props;
     const {
+      avatar,
+      handleAvatar,
       modalOpen,
       noResults,
       searchResults,
       displayName,
-      uid,
       bookmarks
     } = this.state;
     // Render the container of modal depending on what happens after submitting a search
@@ -139,6 +158,8 @@ class Dashboard extends React.Component {
         <Nav
           signOut={this.onSignOut}
           onOpenModal={this.onOpenModal}
+          avatarURL={avatar}
+          handleAvatar={this.handleAvatar}
           displayName={displayName}
           uid={uid}
         />

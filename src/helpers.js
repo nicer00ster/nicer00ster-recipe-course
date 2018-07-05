@@ -10,7 +10,7 @@ export const createAccount = (e, username, email, password, loading) => {
   .then(res => {
     if(res) {
       loading();
-      saveUser(res.user, username)
+      saveUser(res.user, username);
     }
   })
 }

@@ -45,6 +45,7 @@ const Landing = ({
 
 // Router with protected route (dashboard)
 const Routes = ({
+  uid,
   authed,
   loading,
   error,
@@ -56,10 +57,10 @@ const Routes = ({
         atEnter={{ opacity: 0 }}
         atLeave={{ opacity: 1 }}
         atActive={{ opacity: 1 }}>
-        <Landing authed={authed} error={error} errorMsg={errorMsg} loading={loading} exact path="/" component={Login} />
-        <Landing authed={authed} error={error} errorMsg={errorMsg} loading={loading} exact path="/register" component={Register} />
-        <Protected authed={authed} error={error} errorMsg={errorMsg} loading={loading} exact path="/settings" component={Settings} />
-        <Protected authed={authed} error={error} errorMsg={errorMsg} loading={loading} exact path="/dashboard" component={Dashboard} />
+        <Landing uid={uid} authed={authed} error={error} errorMsg={errorMsg} loading={loading} exact path="/" component={Login} />
+        <Landing uid={uid} authed={authed} error={error} errorMsg={errorMsg} loading={loading} exact path="/register" component={Register} />
+        <Protected uid={uid} authed={authed} error={error} errorMsg={errorMsg} loading={loading} exact path="/settings" component={Settings} />
+        <Protected uid={uid} authed={authed} error={error} errorMsg={errorMsg} loading={loading} exact path="/dashboard" component={Dashboard} />
         <Route render={() => <div>Not Found</div>} />
       </AnimatedSwitch>
     </Router>
