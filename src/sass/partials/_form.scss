@@ -1,4 +1,4 @@
-.form__login, .form__account {
+.form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,7 +9,7 @@
   height: 450px;
   width: 350px;
   box-shadow: 0px .8rem 2rem #111;
-  &--title {
+  &__title {
     color: $green;
     text-shadow: 0 20px 25px #2e2e31, 0 40px 60px #2e2e31;
     font-weight: bold;
@@ -24,7 +24,7 @@
       top: 50%;
       border: 15px solid $green;
       transform: translateX(-50%) translateY(-50%) rotate(-5deg);
-      animation: 1s forwards alternate cubic-bezier(0.9, 0.2, 0.3, 1.0) turnt;
+      animation: 1s forwards alternate-reverse cubic-bezier(0.9, 0.2, 0.3, 1.0) turnt;
     }
     &:before {
       border-color: $pink $orange rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
@@ -39,7 +39,7 @@
     color: #999;
     padding-top: 1rem;
   }
-  &--email, &--password, &--username {
+  &__email, &__password, &__username {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -64,7 +64,7 @@
       }
     }
   }
-  &--submit {
+  &__submit {
     text-transform: uppercase;
     margin: 1rem;
     border-radius: 50px;
@@ -74,6 +74,7 @@
     color: $pink;
     text-transform: uppercase;
     font-size: 11px;
+    outline: none;
     cursor: pointer;
     transition: all .25s;
     &:hover {
@@ -81,7 +82,7 @@
       color: #fff;
     }
   }
-  &--account {
+  &__register {
     color: #fff;
     font-size: 14px;
     & > a {
@@ -92,14 +93,6 @@
         color: $green;
         letter-spacing: 1px;
       }
-    }
-  }
-}
-
-.form__account {
-  &--title {
-    &:before, &:after {
-      animation: 1s forwards reverse cubic-bezier(0.9, 0.2, 0.3, 1.0) turnt;
     }
   }
 }

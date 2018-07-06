@@ -64,7 +64,7 @@
     left: 168px;
     transform: scale(0); } }
 
-.form__login, .form__account {
+.form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -75,13 +75,13 @@
   height: 450px;
   width: 350px;
   box-shadow: 0px .8rem 2rem #111; }
-  .form__login--title, .form__account--title {
+  .form__title {
     color: #c6ffdd;
     text-shadow: 0 20px 25px #2e2e31, 0 40px 60px #2e2e31;
     font-weight: bold;
     font-size: 32px;
     transform: translateX(0%) translateY(-25%); }
-    .form__login--title:before, .form__login--title:after, .form__account--title:before, .form__account--title:after {
+    .form__title:before, .form__title:after {
       content: '';
       padding: .9em .4em;
       position: absolute;
@@ -90,22 +90,22 @@
       top: 50%;
       border: 15px solid #c6ffdd;
       transform: translateX(-50%) translateY(-50%) rotate(-5deg);
-      animation: 1s forwards alternate cubic-bezier(0.9, 0.2, 0.3, 1) turnt; }
-    .form__login--title:before, .form__account--title:before {
+      animation: 1s forwards alternate-reverse cubic-bezier(0.9, 0.2, 0.3, 1) turnt; }
+    .form__title:before {
       border-color: #f7797d #fbd786 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
       z-index: -1; }
-    .form__login--title:after, .form__account--title:after {
+    .form__title:after {
       border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #fbd786 #f7797d;
       box-shadow: 1rem 1rem 2rem rgba(46, 46, 49, 0.6); }
-  .form__login h4, .form__account h4 {
+  .form h4 {
     color: #999;
     padding-top: 1rem; }
-  .form__login--email, .form__login--password, .form__login--username, .form__account--email, .form__account--password, .form__account--username {
+  .form__email, .form__password, .form__username {
     display: flex;
     justify-content: center;
     width: 100%;
     margin: .5rem; }
-    .form__login--email > input, .form__login--password > input, .form__login--username > input, .form__account--email > input, .form__account--password > input, .form__account--username > input {
+    .form__email > input, .form__password > input, .form__username > input {
       outline: none;
       width: 40%;
       height: 20px;
@@ -117,11 +117,11 @@
       text-transform: uppercase;
       font-size: 11px;
       transition: all .25s; }
-      .form__login--email > input:focus, .form__login--password > input:focus, .form__login--username > input:focus, .form__account--email > input:focus, .form__account--password > input:focus, .form__account--username > input:focus {
+      .form__email > input:focus, .form__password > input:focus, .form__username > input:focus {
         border: 2px solid #c6ffdd; }
-      .form__login--email > input:hover, .form__login--password > input:hover, .form__login--username > input:hover, .form__account--email > input:hover, .form__account--password > input:hover, .form__account--username > input:hover {
+      .form__email > input:hover, .form__password > input:hover, .form__username > input:hover {
         background: rgba(0, 0, 0, 0.2); }
-  .form__login--submit, .form__account--submit {
+  .form__submit {
     text-transform: uppercase;
     margin: 1rem;
     border-radius: 50px;
@@ -131,24 +131,22 @@
     color: #f7797d;
     text-transform: uppercase;
     font-size: 11px;
+    outline: none;
     cursor: pointer;
     transition: all .25s; }
-    .form__login--submit:hover, .form__account--submit:hover {
+    .form__submit:hover {
       background: #f7797d;
       color: #fff; }
-  .form__login--account, .form__account--account {
+  .form__register {
     color: #fff;
     font-size: 14px; }
-    .form__login--account > a, .form__account--account > a {
+    .form__register > a {
       text-decoration: none;
       color: #f7797d;
       transition: all .25s; }
-      .form__login--account > a:hover, .form__account--account > a:hover {
+      .form__register > a:hover {
         color: #c6ffdd;
         letter-spacing: 1px; }
-
-.form__account--title:before, .form__account--title:after {
-  animation: 1s forwards reverse cubic-bezier(0.9, 0.2, 0.3, 1) turnt; }
 
 .navbar {
   display: flex;
