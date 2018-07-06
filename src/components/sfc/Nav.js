@@ -1,5 +1,4 @@
 import React from 'react';
-import { auth } from '../../base';
 import { Link } from 'react-router-dom';
 import search from '../../svg/search.svg';
 import settings from '../../svg/settings.svg';

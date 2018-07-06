@@ -34,7 +34,7 @@ export const fetchChartData = (digest, servings) => {
 
   let data = [];
 
-  for(var i = 0; i < 3; i++) {
+  for(let i = 0; i < 3; i++) {
     data.push(Math.round(digest[i].total/servings));
   }
 

@@ -33,7 +33,6 @@ class Register extends React.Component {
       <div>
         <Form
           subTitle={'Create an account'}
-          className={'account'}
           onSubmit={(e) => createAccount(e, username, email, password, loading)}
           handleUsername={(e) => this.handleUsername(e)}
           handleEmail={(e) => this.handleEmail(e)}

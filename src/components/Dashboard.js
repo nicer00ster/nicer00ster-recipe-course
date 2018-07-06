@@ -84,11 +84,9 @@ class Dashboard extends React.Component {
     // 2. Render loading indicator
     loading()
     // 3. Fetch the results of the search
-
     // Convert our array of settings to an object so we can use them
     // in our parameters in our query.
     const obj = Object.assign({}, settings);
-
     // If settings exists, loop over them, join each index of the array together
     // as a string with &health= and return the string in lowercase.
     const params = obj !== null ? Object.keys(obj).map(key => 'health=' + obj[key]).join('&').toLowerCase() : null;
@@ -138,7 +136,6 @@ class Dashboard extends React.Component {
     const { uid } = this.props;
     const {
       avatar,
-      handleAvatar,
       modalOpen,
       noResults,
       searchResults,

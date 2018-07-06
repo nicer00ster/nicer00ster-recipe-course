@@ -9,11 +9,12 @@ class Option extends React.Component {
     }
   }
   componentDidMount() {
-    const { label, selected, toggleCheckbox } = this.props;
+    const { label, toggleCheckbox } = this.props;
     const ref = database.ref(`users/${auth.currentUser.uid}/account/settings`);
     ref.on('value', snap => {
       if(snap.val() !== null) {
-        snap.val().map(val => {
+        snap.val().forEach(val => {
+          console.log(val);
           if(val === label) {
             toggleCheckbox(label);
             this.setState({ checked: true })

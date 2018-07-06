@@ -28,7 +28,6 @@ class Login extends React.Component {
     return (
         <Form
           subTitle={'Log in to get started'}
-          className={'login'}
           onSubmit={(e) => loggingIn(e, email, password, loading, error)}
           handleEmail={(e) => this.handleEmail(e)}
           handlePassword={(e) => this.handlePassword(e)}

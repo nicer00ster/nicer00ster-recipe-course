@@ -16,7 +16,8 @@ const Protected = ({
   }) => {
   return (
     <Switch>
-      <Route { ...rest } render={props => authed === true
+      <Route { ...rest } render={props =>
+        authed === true
         ? <Component { ...props } { ...rest } />
         : <Redirect to={{
           pathname: '/',
@@ -35,7 +36,8 @@ const Landing = ({
   }) => {
   return (
     <Switch>
-      <Route { ...rest } render={props => authed === false
+      <Route { ...rest } render={props =>
+        authed === false
         ? <Component { ...props } { ...rest } />
         : <Redirect to='/dashboard' />
       }/>
