@@ -25,13 +25,12 @@ class Dashboard extends React.Component {
     }
   }
   componentDidMount() {
+    const user = auth.currentUser;
     // Check if user has an avatar set, if not render the user.svg
     if(auth.currentUser.photoURL !== null) {
       this.setState({ avatar: auth.currentUser.photoURL })
     }
-
     // Fetching our users data & saved bookmarks
-    const user = auth.currentUser;
     const ref = database.ref(`/users/${user.uid}/account/`);
     ref.once('value')
     .then(snap => {
@@ -97,9 +96,7 @@ class Dashboard extends React.Component {
     })
     .then(data => {
       if(data['count'] === 0 ) {
-        this.setState({
-          noResults: true,
-        });
+        this.setState({ noResults: true });
         loading();
       } else {
         this.setState({
@@ -114,17 +111,6 @@ class Dashboard extends React.Component {
       this.setState({ search: '' })
     })
   }
-
-  onOpenModal = () => {
-    this.setState({ modalOpen: true })
-  }
-  onCloseModal = () => {
-    this.setState({
-      modalOpen: false,
-      noResults: false,
-      searchResults: ''
-    })
-  }
   onSignOut = () => {
     this.props.loading()
     setTimeout(() => {
@@ -132,6 +118,16 @@ class Dashboard extends React.Component {
       logout();
     }, 1500);
   }
+  onCloseModal = () => {
+   this.setState({
+     modalOpen: false,
+     noResults: false,
+     searchResults: ''
+   });
+ }
+ onOpenModal = () => {
+   this.setState({ modalOpen: true });
+ }
   render() {
     const { uid } = this.props;
     const {
@@ -149,7 +145,6 @@ class Dashboard extends React.Component {
     } else if(searchResults) {
       searchContainer = (<Container uid={uid} recipes={searchResults} />)
     }
-
     return (
       <div className="dashboard">
         <Nav
@@ -161,7 +156,10 @@ class Dashboard extends React.Component {
           uid={uid}
         />
         <div className="bookmarks">
-          {bookmarks ? <Container uid={uid} recipes={bookmarks} /> : null }
+          { bookmarks
+            ? <Container uid={uid} recipes={bookmarks} />
+            : null
+          }
         </div>
         <Modal
           open={modalOpen}
@@ -179,10 +177,10 @@ class Dashboard extends React.Component {
           <form ref={el => this.searchRef = el} onSubmit={(e) => this.onSearchSubmit(e)}>
             <img src={search} alt="Search"/>
             <span>
-              <input onChange={(e) => this.handleSearch(e)} type="search" placeholder="Search"/>
+              <input onChange={(e) => this.handleSearch(e)} type="search" placeholder="Search" />
             </span>
           </form>
-          {searchContainer}
+          { searchContainer }
         </Modal>
       </div>
     )

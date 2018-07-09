@@ -4,7 +4,6 @@ import search from '../../svg/search.svg';
 import settings from '../../svg/settings.svg';
 import signout from '../../svg/signout.svg';
 
-
 const Nav = props =>  (
   <div className="navbar">
     <div className="navbar__avatar">

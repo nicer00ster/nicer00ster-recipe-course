@@ -14,10 +14,6 @@ export const logout = () => {
   return auth.signOut();
 }
 
-export const resetPassword = (email) => {
-  return auth.sendPasswordResetEmail(email);
-}
-
 export const saveRecipe = (uid, recipe) => {
   const key = database.ref(`users/${uid}/account/recipes`).push().key;
   const data = {

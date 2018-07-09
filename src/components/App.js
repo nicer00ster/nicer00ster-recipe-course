@@ -4,7 +4,7 @@ import Notifications, { notify } from 'react-notify-toast';
 import Routes from './Router';
 import Loading from './sfc/Loading';
 import { auth } from '../base';
-import { particleParams } from '../helpers';
+import { particleParams } from '../particles';
 
 class App extends Component {
   constructor() {
