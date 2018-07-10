@@ -19,10 +19,7 @@ const Protected = ({
       <Route { ...rest } render={props =>
         authed === true
         ? <Component { ...props } { ...rest } />
-        : <Redirect to={{
-          pathname: '/',
-          state: { from: props.location }
-        }}/>
+        : <Redirect to="/" />
       }/>
     </Switch>
   )
@@ -39,7 +36,7 @@ const Landing = ({
       <Route { ...rest } render={props =>
         authed === false
         ? <Component { ...props } { ...rest } />
-        : <Redirect to='/dashboard' />
+        : <Redirect to="/dashboard" />
       }/>
     </Switch>
   )
