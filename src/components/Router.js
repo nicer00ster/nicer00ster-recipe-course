@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import { AnimatedSwitch } from 'react-router-transition';
 import Dashboard from './Dashboard';
@@ -36,20 +37,15 @@ const Landing = ({
       <Route { ...rest } render={props =>
         authed === false
         ? <Component { ...props } { ...rest } />
-        : <Redirect to="/dashboard" />
+        : <Redirect to='/dashboard' />
       }/>
     </Switch>
   )
 }
 
 // Router with protected route (dashboard)
-const Routes = ({
-  uid,
-  authed,
-  loading,
-  error,
-  errorMsg
-}) => {
+const Routes = ({ ...props }) => {
+  const { uid, authed, error, errorMsg, loading } = props;
   return (
     <Router>
       <AnimatedSwitch
@@ -64,6 +60,14 @@ const Routes = ({
       </AnimatedSwitch>
     </Router>
   )
+}
+
+Routes.propTypes = {
+  uid: PropTypes.string,
+  authed: PropTypes.bool,
+  error: PropTypes.func,
+  loading: PropTypes.func,
+  errorMsg: PropTypes.string
 }
 
 

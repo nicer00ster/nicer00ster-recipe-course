@@ -7,10 +7,15 @@ import { auth, database } from '../base';
 import { logout, changeProfilePicture } from '../auth';
 import search from '../svg/search.svg';
 import user from '../svg/user.svg';
+import PropTypes from 'prop-types';
 
 class Dashboard extends React.Component {
-  constructor() {
-    super();
+  static propTypes = {
+    uid: PropTypes.string,
+    loading: PropTypes.func
+  }
+  constructor(props) {
+    super(props);
     this.searchRef = React.createRef();
     this.state = {
       avatar: user,
@@ -125,9 +130,9 @@ class Dashboard extends React.Component {
      searchResults: ''
    });
  }
-
- onOpenModal = () => this.setState({ modalOpen: true });
-
+ onOpenModal = () => {
+   this.setState({ modalOpen: true });
+ }
   render() {
     const { uid } = this.props;
     const {
