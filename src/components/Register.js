@@ -11,36 +11,25 @@ class Register extends React.Component {
       password: ''
     }
   }
-  handleUsername = e => {
-    this.setState({
-      username: e.target.value
-    })
-  }
-  handleEmail = e => {
-    this.setState({
-      email: e.target.value
-    })
-  }
-  handlePassword = e => {
-    this.setState({
-      password: e.target.value
-    })
-  }
+  handleUsername = e => this.setState({ username: e.target.value });
+  handleEmail = e => this.setState({ email: e.target.value });
+  handlePassword = e => this.setState({ password: e.target.value });
+
   render() {
     const { username, email ,password } = this.state;
     const { loading } = this.props;
     return (
       <div>
         <Form
-          subTitle={'Create an account'}
+          subTitle="Create an account"
           onSubmit={(e) => createAccount(e, username, email, password, loading)}
           handleUsername={(e) => this.handleUsername(e)}
           handleEmail={(e) => this.handleEmail(e)}
           handlePassword={(e) => this.handlePassword(e)}
-          message={`Already signed up?`}
-          redirect={'/'}
-          link={'Log in!'}
-          button={'Create Account'}
+          message="Already signed up?"
+          link="Log in!"
+          redirect="/"
+          button="Create Account"
           location={this.props.location}
         />
       </div>

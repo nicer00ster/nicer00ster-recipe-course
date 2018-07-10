@@ -125,9 +125,9 @@ class Dashboard extends React.Component {
      searchResults: ''
    });
  }
- onOpenModal = () => {
-   this.setState({ modalOpen: true });
- }
+
+ onOpenModal = () => this.setState({ modalOpen: true });
+
   render() {
     const { uid } = this.props;
     const {
