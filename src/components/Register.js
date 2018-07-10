@@ -1,15 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import Form from './sfc/Form';
 import { createAccount } from '../helpers';
+import Form from './sfc/Form';
 
 class Register extends React.Component {
-  static propTypes = {
-    loading: PropTypes.func,
-    location: PropTypes.object
-  }
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       username: '',
       email: '',
@@ -22,20 +17,20 @@ class Register extends React.Component {
 
   render() {
     const { username, email ,password } = this.state;
-    const { loading, location } = this.props;
+    const { loading } = this.props;
     return (
       <div>
         <Form
-          subTitle={'Create an account'}
+          subTitle="Create an account"
           onSubmit={(e) => createAccount(e, username, email, password, loading)}
           handleUsername={(e) => this.handleUsername(e)}
           handleEmail={(e) => this.handleEmail(e)}
           handlePassword={(e) => this.handlePassword(e)}
-          message={`Already signed up?`}
-          redirect={'/'}
-          link={'Log in!'}
-          button={'Create Account'}
-          location={location}
+          message="Already signed up?"
+          link="Log in!"
+          redirect="/"
+          button="Create Account"
+          location={this.props.location}
         />
       </div>
     )

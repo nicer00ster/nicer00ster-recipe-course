@@ -1,18 +1,9 @@
 import React from 'react';
 import Single from './sfc/Single';
-import PropTypes from 'prop-types';
 
 class Recipe extends React.Component {
-  static propTypes = {
-    recipe: PropTypes.shape({
-      label: PropTypes.string,
-      image: PropTypes.string,
-      source: PropTypes.string
-    }),
-    uid: PropTypes.string
-  }
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       single: false
     }
