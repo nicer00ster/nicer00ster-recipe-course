@@ -1,6 +1,7 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { fetchChartData } from '../../helpers';
+import PropTypes from 'prop-types';
 
 const Donut = props => {
   let caloriesInfo = null;
@@ -25,7 +26,6 @@ const Donut = props => {
    );
   }
 
-
   return (
     <div className="single__facts">
       <h3 className = "nutrition">{props.yield ? "Nutrition Per Serving" : "Nutrition (entire recipe)"}</h3>
@@ -35,5 +35,11 @@ const Donut = props => {
     </div>
   )
 }
+
+Donut.propTypes = {
+  calories: PropTypes.number,
+  yield: PropTypes.number,
+  digest: PropTypes.array
+};
 
 export default Donut;

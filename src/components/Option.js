@@ -1,9 +1,14 @@
 import React from 'react';
 import { auth, database } from '../base';
+import PropTypes from 'prop-types';
 
 class Option extends React.Component {
-  constructor() {
-    super();
+  static PropTypes = {
+    label: PropTypes.string,
+    toggleCheckbox: PropTypes.func
+  }
+  constructor(props) {
+    super(props);
     this.state = {
       checked: false
     }

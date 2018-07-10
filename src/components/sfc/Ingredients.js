@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Ingredients = props => (
     <ul className="single__ingredients">
@@ -14,8 +15,13 @@ const Ingredients = props => (
         )
       })}
     </ul>
+);
 
-
-)
+Ingredients.propTypes = {
+  recipe: PropTypes.shape({
+    yield: PropTypes.number,
+    ingredients: PropTypes.array
+  })
+}
 
 export default Ingredients;

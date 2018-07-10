@@ -1,8 +1,9 @@
 import React from 'react';
-import { saveRecipe, deleteRecipe } from '../../auth';
+import Modal from 'react-responsive-modal';
+import PropTypes from 'prop-types';
 import Donut from './Donut';
 import Ingredients from './Ingredients';
-import Modal from 'react-responsive-modal';
+import { saveRecipe, deleteRecipe } from '../../auth';
 import bookmark from '../../svg/bookmark.svg';
 import facebook from '../../svg/facebook.svg';
 import twitter from '../../svg/twitter.svg';
@@ -47,6 +48,21 @@ const Single = ({ recipe, uid, single, closeModal }) => (
         </div>
       </Modal>
     </div>
-)
+);
+
+Single.propTypes = {
+  recipe: PropTypes.shape({
+    yield: PropTypes.number,
+    calories: PropTypes.number,
+    key: PropTypes.string,
+    label: PropTypes.string,
+    image: PropTypes.string,
+    url: PropTypes.string,
+    digest: PropTypes.array,
+  }),
+  uid: PropTypes.string,
+  single: PropTypes.bool,
+  closeModal: PropTypes.func
+}
 
 export default Single;

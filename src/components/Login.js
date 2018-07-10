@@ -1,26 +1,23 @@
 import React from 'react';
 import Form from './sfc/Form';
 import { loggingIn } from '../helpers';
+import PropTypes from 'prop-types';
 
 class Login extends React.Component {
-  constructor() {
-    super();
+  static propTypes = {
+    loading: PropTypes.func,
+    error: PropTypes.func,
+    location: PropTypes.object
+  }
+  constructor(props) {
+    super(props);
     this.state = {
       email: '',
       password: ''
     }
   }
-
-  handleEmail = e => {
-    this.setState({
-      email: e.target.value
-    })
-  }
-  handlePassword = e => {
-    this.setState({
-      password: e.target.value
-    })
-  }
+  handleEmail = e => this.setState({ email: e.target.value });
+  handlePassword = e =>this.setState({ password: e.target.value });
 
   render() {
     const { email, password } = this.state;

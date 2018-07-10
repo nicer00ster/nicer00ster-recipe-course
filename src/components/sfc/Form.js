@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Form = props => (
     <div>
@@ -26,5 +27,17 @@ const Form = props => (
       </form>
     </div>
 )
+
+Form.propTypes = {
+  onSubmit: PropTypes.func,
+  handleUsername: PropTypes.func,
+  handleEmail: PropTypes.func,
+  handlePassword: PropTypes.func,
+  location: PropTypes.object,
+  button: PropTypes.string,
+  message: PropTypes.string,
+  redirect: PropTypes.string,
+  link: PropTypes.string
+}
 
 export default Form;

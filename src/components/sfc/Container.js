@@ -1,6 +1,6 @@
 import React from 'react';
 import Recipe from '../Recipe';
-
+import PropTypes from 'prop-types';
 
 const Container = props => (
   <div className="recipes__container">
@@ -16,5 +16,9 @@ const Container = props => (
       })}
   </div>
 )
+
+Container.propTypes = {
+  recipes: PropTypes.array
+};
 
 export default Container;

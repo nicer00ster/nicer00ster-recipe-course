@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import search from '../../svg/search.svg';
 import settings from '../../svg/settings.svg';
 import signout from '../../svg/signout.svg';
+import PropTypes from 'prop-types';
 
 const Nav = props =>  (
   <div className="navbar">
@@ -39,6 +40,14 @@ const Nav = props =>  (
       </Link>
     </div>
   </div>
-)
+);
+
+Nav.propTypes = {
+  avatarURL: PropTypes.string,
+  displayName: PropTypes.string,
+  handleAvatar: PropTypes.func,
+  onOpenModal: PropTypes.func,
+  signOut: PropTypes.func,
+}
 
 export default Nav;

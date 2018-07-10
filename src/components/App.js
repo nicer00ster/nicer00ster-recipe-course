@@ -7,8 +7,8 @@ import { auth } from '../base';
 import { particleParams } from '../particles';
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       uid: null,
       authed: false,

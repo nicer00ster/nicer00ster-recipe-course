@@ -1,11 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Option from './Option';
 import { auth } from '../base';
 import { updateSettings } from '../auth';
 
 class Settings extends React.Component {
-  constructor() {
-    super();
+  static propTypes = {
+    goBack: PropTypes.func
+  }
+  constructor(props) {
+    super(props);
     this.state = {
       filters: [
         'Vegetarian',
