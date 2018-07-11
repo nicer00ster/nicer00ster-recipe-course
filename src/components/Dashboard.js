@@ -32,7 +32,7 @@ class Dashboard extends React.Component {
   componentDidMount() {
     const user = auth.currentUser;
     // Check if user has an avatar set, if not render the user.svg
-    if(auth.currentUser.photoURL !== null) {
+    if(user && auth.currentUser.photoURL !== null) {
       this.setState({ avatar: auth.currentUser.photoURL })
     }
     // Fetching our users data & saved bookmarks

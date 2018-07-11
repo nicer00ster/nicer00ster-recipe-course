@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Doughnut } from 'react-chartjs-2';
 import { fetchChartData } from '../../helpers';
-import PropTypes from 'prop-types';
 
 const Donut = props => {
   let caloriesInfo = null;

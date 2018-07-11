@@ -19,19 +19,11 @@ class App extends Component {
   }
   componentDidMount() {
     this.removeListener = auth.onAuthStateChanged(user => {
-      if(user) {
-        this.setState({
-          authed: true,
-          loading: false,
-          uid: user.uid
-        })
-      } else {
-        this.setState({
-          authed: false,
-          loading: false,
-          uid: null
-        })
-      }
+      this.setState({
+        authed: !!user,
+        loading: false,
+        uid: user && user.uid ? user.uid : null
+      })
       return;
     })
   }
@@ -39,9 +31,7 @@ class App extends Component {
     this.removeListener();
   }
   handleLoad = () => {
-    this.setState({
-      loading: !this.state.loading
-    });
+    this.setState(prevState => ({ loading: !prevState.loading }));
   }
   handleError = (errorMsg) => {
     this.setState({
