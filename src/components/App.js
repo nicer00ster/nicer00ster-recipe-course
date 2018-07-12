@@ -33,7 +33,7 @@ class App extends Component {
   handleLoad = () => {
     this.setState(prevState => ({ loading: !prevState.loading }));
   }
-  handleError = (errorMsg) => {
+  handleError = errorMsg => {
     this.setState({
       hasError: !this.state.hasError,
       errorMsg: errorMsg

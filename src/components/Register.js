@@ -22,7 +22,7 @@ class Register extends React.Component {
 
   render() {
     const { username, email ,password } = this.state;
-    const { loading, location } = this.props;
+    const { loading, location, error } = this.props;
     return (
       <div>
         <Form
@@ -31,7 +31,7 @@ class Register extends React.Component {
           redirect="/"
           link="Log in!"
           button="Create Account"
-          onSubmit={(e) => createAccount(e, username, email, password, loading)}
+          onSubmit={(e) => createAccount(e, username, email, password, loading, error )}
           handleUsername={(e) => this.handleUsername(e)}
           handleEmail={(e) => this.handleEmail(e)}
           handlePassword={(e) => this.handlePassword(e)}

@@ -1,11 +1,11 @@
 import { register, saveUser, login } from './auth';
 import { notify } from 'react-notify-toast';
 
-export const createAccount = (e, username, email, password, loading) => {
+export const createAccount = (e, username, email, password, loading, error) => {
   e.preventDefault();
   register(email, password)
   .catch(err => {
-    this.props.error(err.message);
+    error(err.message);
   })
   .then(res => {
     if(res) {
