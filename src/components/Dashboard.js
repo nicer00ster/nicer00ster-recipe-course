@@ -17,6 +17,7 @@ class Dashboard extends React.Component {
   }
   constructor(props) {
     super(props);
+    this.show = notify.createShowQueue();
     this.searchRef = React.createRef();
     this.state = {
       avatar: user,
@@ -74,9 +75,9 @@ class Dashboard extends React.Component {
       }
       reader.readAsDataURL(file);
       changeProfilePicture(this.props.uid, file);
-      notify.show('Lookin\' sexy! 😘', 'success', 3000);
+      this.show('Lookin\' sexy! 😘', 'success', 3000);
     } else {
-      notify.show('Only .JPEG, .PNG, and .GIF files allowed! 🍩', 'warning', 3000);
+      this.show('Only .JPEG, .PNG, and .GIF files allowed! 💩', 'error', 3000);
     }
   }
   handleSearch = e => {
@@ -135,7 +136,7 @@ class Dashboard extends React.Component {
    });
  }
  onOpenModal = () =>  this.setState({ modalOpen: true });
- 
+
   render() {
     const { uid } = this.props;
     const {

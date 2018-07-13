@@ -6,7 +6,7 @@ export const register = (email, password) => auth.createUserWithEmailAndPassword
 export const login = (email, password) => auth.signInWithEmailAndPassword(email, password);
 
 export const logout = () => {
-  notify.show('Come back soon! 🖐️', 500);
+  notify.show('Come back soon! 🖐️', 'success', 500);
   return auth.signOut();
 };
 

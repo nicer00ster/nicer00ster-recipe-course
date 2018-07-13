@@ -62,7 +62,7 @@ class App extends Component {
               ? <Loading />
               : null }
             { hasError
-              ? notify.show(`Oh no! 😱 ${errorMsg}`, 'error', 3500)
+              ? notify.show(`Oh no! 😱 ${errorMsg}`, 'error', 3000)
               : null }
               <Notifications options={{ zIndex: 9999, fontSize: '32px' }}/>
               <Routes
