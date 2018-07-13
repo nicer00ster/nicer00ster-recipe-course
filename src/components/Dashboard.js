@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from 'react-responsive-modal';
 import Nav from './sfc/Nav';
 import Container from './sfc/Container';
+import { notify } from 'react-notify-toast';
 import { APP_ID, APP_KEY } from '../private.js';
 import { auth, database } from '../base';
 import { logout, changeProfilePicture } from '../auth';
@@ -64,7 +65,7 @@ class Dashboard extends React.Component {
   handleAvatar = e => {
     let reader = new FileReader();
     let file = e.target.files[0];
-    if(file) {
+    if(/\.(jpe?g|png|gif)$/i.test(file.name)) {
       reader.onloadend = () => {
         this.setState({
           file,
@@ -73,6 +74,9 @@ class Dashboard extends React.Component {
       }
       reader.readAsDataURL(file);
       changeProfilePicture(this.props.uid, file);
+      notify.show('Lookin\' sexy! 😘', 'success', 3000);
+    } else {
+      notify.show('Only .JPEG, .PNG, and .GIF files allowed! 🍩', 'warning', 3000);
     }
   }
   handleSearch = e => {
@@ -130,9 +134,8 @@ class Dashboard extends React.Component {
      searchResults: ''
    });
  }
- onOpenModal = () => {
-   this.setState({ modalOpen: true });
- }
+ onOpenModal = () =>  this.setState({ modalOpen: true });
+ 
   render() {
     const { uid } = this.props;
     const {

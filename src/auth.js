@@ -52,7 +52,6 @@ export const changeProfilePicture = (uid, file) => {
     snap.ref.getDownloadURL()
     .then(url => {
       user.updateProfile({ photoURL: url });
-      notify.show('Lookin\' sexy! 😘', 'success', 3000);
     })
   })
 };
