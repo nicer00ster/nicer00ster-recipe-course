@@ -5,6 +5,7 @@ import Container from './sfc/Container';
 import { notify } from 'react-notify-toast';
 import { APP_ID, APP_KEY } from '../private.js';
 import { auth, database } from '../base';
+import { convertParams } from '../helpers';
 import { logout, changeProfilePicture } from '../auth';
 import search from '../svg/search.svg';
 import user from '../svg/user.svg';
@@ -91,16 +92,9 @@ class Dashboard extends React.Component {
     // 1. Prevent page from reloading
     e.preventDefault();
     // 2. Render loading indicator
-    loading()
+    loading();
     // 3. Fetch the results of the search
-    // Convert our array of settings to an object so we can use them
-    // in our parameters in our query.
-    const obj = Object.assign({}, settings);
-    // If settings exists, loop over them, join each index of the array together
-    // as a string with &health= and return the string in lowercase.
-    const params = obj !== null ? Object.keys(obj).map(key => 'health=' + obj[key]).join('&').toLowerCase() : null;
-
-    fetch(`https://api.edamam.com/search?q=${search}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=25&${params}`)
+    fetch(`https://api.edamam.com/search?q=${search}&app_id=${APP_ID}&app_key=${APP_KEY}&from=0&to=25&${convertParams(settings)}`)
     .then(res => {
       return res.json();
     })

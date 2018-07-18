@@ -1,6 +1,16 @@
 import { register, saveUser, login } from './auth';
 import { notify } from 'react-notify-toast';
 
+export const convertParams = array => {
+  let obj = Object.assign({}, array);
+
+  const params = obj !== null
+    ? Object.keys(obj).map(key => 'health=' + obj[key]).join('&').toLowerCase()
+    : null;
+
+  return params;
+}
+
 export const createAccount = (e, username, email, password, loading, error) => {
   e.preventDefault();
   register(email, password)

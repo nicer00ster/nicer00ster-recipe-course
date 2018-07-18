@@ -3,7 +3,7 @@ import { auth, database } from '../base';
 import PropTypes from 'prop-types';
 
 class Option extends React.Component {
-  static PropTypes = {
+  static propTypes = {
     label: PropTypes.string,
     toggleCheckbox: PropTypes.func
   }
